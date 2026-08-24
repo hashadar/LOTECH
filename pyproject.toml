@@ -1,0 +1,23 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "lotech-dq"
+version = "0.1.0"
+description = "LO:TECH market data quality take-home analysis"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+  "polars>=1.0",
+  "matplotlib>=3.8",
+  "httpx>=0.27",
+  "numpy>=1.26",
+  "tzdata>=2024.1",
+]
+
+[project.optional-dependencies]
+dev = ["ipython"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
