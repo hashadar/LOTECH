@@ -1,0 +1,163 @@
+{
+  "columns_resolved": {
+    "bid_price": "bid_price",
+    "ask_price": "ask_price",
+    "bid_size": "bid_qty",
+    "ask_size": "ask_qty"
+  },
+  "rows": 6988,
+  "window": {
+    "ingress_min": "2026-08-14 04:00:01.317624+00:00",
+    "ingress_max": "2026-08-14 10:13:52.425353+00:00"
+  },
+  "instrument": [
+    "WETH-USDso:SPOT"
+  ],
+  "microprice_ok": 5448,
+  "microprice_undefined": 1540,
+  "undefined_pct": 22.037779049799656,
+  "undefined_reasons": [
+    {
+      "reason": "null:bid_price+bid_qty",
+      "n": 1540
+    }
+  ],
+  "spread_median_defined": 0.5699999999999363,
+  "spread_max_defined": 5.0499999999999545,
+  "spread_min_defined": 0.009999999999763531,
+  "gaps_over_60s": 8,
+  "max_gap_s": 105.649896,
+  "ask_only_runs": 10,
+  "ask_only_longest_run": 1513,
+  "ask_only_median_run": 1.0,
+  "ask_only_run_lengths": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    3,
+    7,
+    11,
+    1513
+  ],
+  "ask_only_runs_detail": [
+    {
+      "n": 1513,
+      "start": "2026-08-14 08:42:30.159061+00:00",
+      "end": "2026-08-14 10:13:52.425353+00:00"
+    },
+    {
+      "n": 11,
+      "start": "2026-08-14 08:42:03.165408+00:00",
+      "end": "2026-08-14 08:42:11.455192+00:00"
+    },
+    {
+      "n": 7,
+      "start": "2026-08-14 08:41:21.764343+00:00",
+      "end": "2026-08-14 08:41:22.756557+00:00"
+    },
+    {
+      "n": 3,
+      "start": "2026-08-14 06:52:42.213342+00:00",
+      "end": "2026-08-14 06:52:42.298612+00:00"
+    },
+    {
+      "n": 1,
+      "start": "2026-08-14 06:52:42.301686+00:00",
+      "end": "2026-08-14 06:52:42.301686+00:00"
+    },
+    {
+      "n": 1,
+      "start": "2026-08-14 06:52:42.301741+00:00",
+      "end": "2026-08-14 06:52:42.301741+00:00"
+    },
+    {
+      "n": 1,
+      "start": "2026-08-14 06:52:42.299972+00:00",
+      "end": "2026-08-14 06:52:42.299972+00:00"
+    },
+    {
+      "n": 1,
+      "start": "2026-08-14 06:52:42.298698+00:00",
+      "end": "2026-08-14 06:52:42.298698+00:00"
+    },
+    {
+      "n": 1,
+      "start": "2026-08-14 06:52:42.299919+00:00",
+      "end": "2026-08-14 06:52:42.299919+00:00"
+    },
+    {
+      "n": 1,
+      "start": "2026-08-14 06:52:42.300388+00:00",
+      "end": "2026-08-14 06:52:42.300388+00:00"
+    }
+  ],
+  "vanishing_bid_evidence": {
+    "last_two_sided_row": {
+      "ingress_ts": "2026-08-14 08:42:30.158930+00:00",
+      "bid_price": 1870.7400000000002,
+      "bid_qty": 4.5031,
+      "ask_price": 1871.63,
+      "ask_qty": 4.4826
+    },
+    "first_ask_only_row": {
+      "ingress_ts": "2026-08-14 08:42:30.159061+00:00",
+      "bid_price": null,
+      "bid_qty": null,
+      "ask_price": 1871.63,
+      "ask_qty": 4.4826
+    },
+    "boundary_delta_us": 131,
+    "ask_identical_across_boundary": true,
+    "bid_price_null_n": 1540,
+    "bid_qty_null_n": 1540,
+    "bid_price_null_only": 0,
+    "bid_qty_null_only": 0,
+    "bid_qty_zero_n": 0,
+    "ask_price_null_n": 0,
+    "ask_qty_null_n": 0,
+    "ask_qty_zero_n": 0,
+    "run_rows": 1513,
+    "run_ask_price_changes": 1512,
+    "run_distinct_ask_prices": 550,
+    "run_distinct_ask_qtys": 7,
+    "run_ask_price_min": 1870.11,
+    "run_ask_price_max": 1976.0,
+    "run_max_ingress_gap_s": 18.905207,
+    "run_duration_s": 5482.266292
+  },
+  "crossed": [],
+  "profile_findings": [
+    {
+      "file": "B_dreamdex_weth_top_of_book.parquet",
+      "check_id": "null_clock_transaction_ts",
+      "severity": "high",
+      "classification": "pipeline",
+      "metric": {
+        "column": "transaction_ts",
+        "nulls": 6988,
+        "null_pct": 100.0,
+        "rows": 6988
+      },
+      "notes": "transaction_ts null on 100.0000% of rows (> 1.0% alert threshold)."
+    },
+    {
+      "file": "B_dreamdex_weth_top_of_book.parquet",
+      "check_id": "null_clock_publish_ts",
+      "severity": "high",
+      "classification": "pipeline",
+      "metric": {
+        "column": "publish_ts",
+        "nulls": 6988,
+        "null_pct": 100.0,
+        "rows": 6988
+      },
+      "notes": "publish_ts null on 100.0000% of rows (> 1.0% alert threshold)."
+    }
+  ],
+  "figure": "B_microprice.png",
+  "series_artefact": "B_microprice_series.parquet",
+  "definition": "microprice = (ask_qty * bid_price + bid_qty * ask_price) / (bid_qty + ask_qty); size-weighted mid. Undefined when any price or size is null, either size is negative, bid_qty+ask_qty <= 0, or the book is crossed. Never forward-filled."
+}

@@ -1,0 +1,227 @@
+{
+  "window": {
+    "transaction_ts_min": "2026-05-23 12:00:00.979000+00:00",
+    "transaction_ts_max": "2026-05-23 12:59:59.684000+00:00",
+    "ingress_min": "2026-05-23 12:00:00.982933+00:00",
+    "ingress_max": "2026-05-23 12:59:59.685319+00:00",
+    "from_s": 1779537600,
+    "to_s": 1779541199,
+    "hour_from": 1779537600,
+    "hour_to": 1779541199
+  },
+  "static": {
+    "instrument": "BTC-USDT:PERP:LINEAR",
+    "exchange_symbol": "BTC_USDT",
+    "quantity_multiplier": 0.0001,
+    "scale": null,
+    "qty_step_size": "1",
+    "price_tick_size": "0.1",
+    "trading_state": "TRADING"
+  },
+  "static_dtypes": {
+    "quantity_multiplier": "Float64",
+    "price_tick_size": "String",
+    "qty_step_size": "String",
+    "scale": "Int64"
+  },
+  "static_clocks": {
+    "rows": 1,
+    "parquet_schema_columns": [
+      "instrument",
+      "ingress_ts",
+      "publish_ts",
+      "snapshot",
+      "scale",
+      "exchange_symbol",
+      "trading_state",
+      "outcome",
+      "quantity_multiplier",
+      "price_tick_size",
+      "qty_step_size",
+      "min_order_qty",
+      "max_order_qty",
+      "min_order_value",
+      "expiry_time",
+      "strike",
+      "present",
+      "other_data"
+    ],
+    "clocks": {
+      "ingress_ts": {
+        "status": "present",
+        "dtype": "Int64",
+        "nulls": 0,
+        "null_pct": 0.0
+      },
+      "transaction_ts": {
+        "status": "absent",
+        "dtype": null,
+        "nulls": null,
+        "null_pct": null
+      },
+      "publish_ts": {
+        "status": "present_and_all_null",
+        "dtype": "Int64",
+        "nulls": 1,
+        "null_pct": 100.0
+      }
+    }
+  },
+  "static_findings": [
+    {
+      "file": "H_gateio_btcusdt_perp_instrument_static.parquet",
+      "check_id": "missing_column_transaction_ts",
+      "severity": "high",
+      "classification": "pipeline",
+      "metric": {
+        "column": "transaction_ts",
+        "expected_columns": [
+          "ingress_ts",
+          "transaction_ts",
+          "publish_ts"
+        ]
+      },
+      "notes": "Column transaction_ts is absent from the schema, not present-and-null."
+    },
+    {
+      "file": "H_gateio_btcusdt_perp_instrument_static.parquet",
+      "check_id": "null_clock_publish_ts",
+      "severity": "high",
+      "classification": "pipeline",
+      "metric": {
+        "column": "publish_ts",
+        "nulls": 1,
+        "null_pct": 100.0,
+        "rows": 1
+      },
+      "notes": "publish_ts null on 100.0000% of rows (> 1.0% alert threshold)."
+    }
+  ],
+  "volumes": {
+    "qty_col": "qty",
+    "price_col": "price",
+    "quantity_multiplier": 0.0001,
+    "n_trades": 9359,
+    "vol_contracts": 8959318.0,
+    "vol_base": 895.9318000000001,
+    "vol_quote": 66923451.09224,
+    "units": {
+      "vol_contracts": "native contracts (sum of qty)",
+      "vol_base": "base asset (qty * quantity_multiplier)",
+      "vol_quote": "quote currency (qty * quantity_multiplier * price)"
+    }
+  },
+  "volume_by_side": [
+    {
+      "side": "Buy",
+      "contracts": 4467142.0,
+      "quote": 33368223.04320011,
+      "trades": 4611
+    },
+    {
+      "side": "Sell",
+      "contracts": 4492176.0,
+      "quote": 33555228.049040005,
+      "trades": 4748
+    }
+  ],
+  "public_compare": {
+    "candles": [
+      {
+        "o": "74750.4",
+        "v": 8959318,
+        "t": 1779537600,
+        "c": "74722.3",
+        "l": "74620",
+        "h": "74762.2",
+        "sum": "66923451.09224"
+      }
+    ],
+    "error": null,
+    "vol_contracts": 8959318.0,
+    "vol_quote": 66923451.09224,
+    "vol_contracts_diff": 0.0,
+    "vol_quote_diff": 0.0,
+    "vol_contracts_pct_diff": 0.0,
+    "vol_quote_pct_diff": 0.0
+  },
+  "side_counts": [
+    {
+      "side": "Buy",
+      "count": 4611
+    },
+    {
+      "side": "Sell",
+      "count": 4748
+    }
+  ],
+  "neg_qty": 0,
+  "zero_qty": 0,
+  "qty_all_integral": true,
+  "trade_id": {
+    "rows": 9359,
+    "distinct": 9359,
+    "duplicate_groups": 0
+  },
+  "gap_s": {
+    "median": 0.013,
+    "max": 14.035,
+    "over_60s": 0
+  },
+  "profile_findings": [
+    {
+      "file": "H_gateio_btcusdt_perp_trades.parquet",
+      "check_id": "non_monotonic_publish_ts",
+      "severity": "medium",
+      "classification": "pipeline",
+      "metric": {
+        "backward_jumps": 8,
+        "rows": 9359,
+        "worst_step_ms": -21.0,
+        "median_backward_step_ms": -2.5,
+        "within_1ms": 3
+      },
+      "notes": "8 backward jumps in publish_ts (stored order)."
+    },
+    {
+      "file": "H_gateio_btcusdt_perp_trades.parquet",
+      "check_id": "clock_skew_ingress_ts_transaction_ts",
+      "severity": "info",
+      "classification": "unclear",
+      "metric": {
+        "ingress": "ingress_ts",
+        "venue": "transaction_ts",
+        "venue_unit_hint": "datetime",
+        "n": 9359,
+        "median_s": 0.001821,
+        "p50_s": 0.001821,
+        "p99_s": 0.029727999999999997,
+        "min_s": 0.000601,
+        "max_s": 0.378812,
+        "negative_count": 0,
+        "negative_pct": 0.0
+      },
+      "notes": "Ingress vs venue clock skew within expected capture delay."
+    },
+    {
+      "file": "H_gateio_btcusdt_perp_trades.parquet",
+      "check_id": "clock_skew_ingress_ts_publish_ts",
+      "severity": "info",
+      "classification": "unclear",
+      "metric": {
+        "ingress": "ingress_ts",
+        "venue": "publish_ts",
+        "venue_unit_hint": "datetime",
+        "n": 9359,
+        "median_s": 0.0012,
+        "p50_s": 0.0012,
+        "p99_s": 0.022085,
+        "min_s": 0.00033,
+        "max_s": 0.378803,
+        "negative_count": 0,
+        "negative_pct": 0.0
+      },
+      "notes": "Ingress vs venue clock skew within expected capture delay."
+    }
+  ]
+}

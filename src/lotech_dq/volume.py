@@ -1,9 +1,31 @@
 from __future__ import annotations
 
+from collections.abc import Iterable
+from decimal import Decimal
 from typing import Any
 
 import httpx
 import polars as pl
+
+
+def exact_sum(values: Iterable[Any]) -> Decimal:
+    """Exact sum via each value's shortest round-trip decimal string.
+
+    Float addition of a few hundred eight-decimal quantities loses the last digit, which is
+    the digit at which a reconciliation has to demonstrate a difference of exactly zero.
+    """
+    total = Decimal(0)
+    for value in values:
+        total += Decimal(str(value))
+    return total
+
+
+def exact_dot(left: Iterable[Any], right: Iterable[Any]) -> Decimal:
+    """Exact sum of pairwise products, for notional from quantity and price."""
+    total = Decimal(0)
+    for x, y in zip(left, right, strict=True):
+        total += Decimal(str(x)) * Decimal(str(y))
+    return total
 
 
 def select_static_row(static: pl.DataFrame, asof_ts: int | None = None) -> dict[str, Any]:

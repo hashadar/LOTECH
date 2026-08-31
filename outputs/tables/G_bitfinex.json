@@ -1,0 +1,691 @@
+{
+  "rows": 642,
+  "instrument": [
+    "BTC-USD:SPOT"
+  ],
+  "window": {
+    "tx_min": "2026-05-23 12:00:00.913000+00:00",
+    "tx_max": "2026-05-23 12:09:50.190000+00:00",
+    "ingress_min": "2026-05-23 12:00:00.955447+00:00",
+    "ingress_max": "2026-05-23 12:09:50.273849+00:00",
+    "duration_s": 589.277
+  },
+  "price": {
+    "min": 74783.0,
+    "max": 74854.0,
+    "median": 74810.0
+  },
+  "qty_sign": {
+    "neg_qty": 0,
+    "pos_qty": 642,
+    "zero_qty": 0
+  },
+  "side_counts": [
+    {
+      "side": "Buy",
+      "count": 390
+    },
+    {
+      "side": "Sell",
+      "count": 252
+    }
+  ],
+  "side_qty_consistency": {
+    "unique_sides": [
+      "buy",
+      "sell"
+    ],
+    "sell_with_pos_qty": 252,
+    "buy_with_neg_qty": 0
+  },
+  "volume": {
+    "qty_sum_all_rows": 10.89697542,
+    "qty_sum_deduped": 5.44848771,
+    "overstatement_factor": 2.0,
+    "qty_min": 1e-08,
+    "qty_max": 0.14300691
+  },
+  "public_compare": {
+    "venue": "bitfinex",
+    "symbol": "tBTCUSD",
+    "endpoints": {
+      "trades": "https://api-pub.bitfinex.com/v2/trades/tBTCUSD/hist",
+      "candles": "https://api-pub.bitfinex.com/v2/candles/trade:1m:tBTCUSD/hist"
+    },
+    "query_ms": {
+      "window_start": 1779537600913,
+      "window_end": 1779538190190,
+      "padded_start": 1779537599913,
+      "padded_end": 1779538191190,
+      "wide_start": 1779537540913,
+      "wide_end": 1779538250190
+    },
+    "requests": [
+      {
+        "url": "https://api-pub.bitfinex.com/v2/trades/tBTCUSD/hist",
+        "params": {
+          "limit": 1000,
+          "sort": 1,
+          "start": 1779537599913,
+          "end": 1779538191190
+        },
+        "attempt": 1,
+        "status": 200,
+        "elapsed_s": 0.495,
+        "rows": 321
+      },
+      {
+        "url": "https://api-pub.bitfinex.com/v2/candles/trade:1m:tBTCUSD/hist",
+        "params": {
+          "limit": 20,
+          "sort": 1,
+          "start": 1779537599913,
+          "end": 1779538191190
+        },
+        "attempt": 1,
+        "status": 200,
+        "elapsed_s": 0.557,
+        "rows": 10
+      },
+      {
+        "url": "https://api-pub.bitfinex.com/v2/trades/tBTCUSD/hist",
+        "params": {
+          "limit": 1000,
+          "sort": 1,
+          "start": 1779537540913,
+          "end": 1779538250190
+        },
+        "attempt": 1,
+        "status": 200,
+        "elapsed_s": 0.35,
+        "rows": 384
+      }
+    ],
+    "error": null,
+    "venue_trades": 321,
+    "venue_vol_base": "5.44848771",
+    "venue_vol_base_signed": "4.49135679",
+    "venue_notional_quote": "407630.10018880",
+    "venue_candle_vol_base": "5.44848771",
+    "trades": 321,
+    "vol_base": "5.44848771",
+    "vol_base_signed": "4.49135679",
+    "notional_quote": "407630.10018880",
+    "trades_diff": 0,
+    "vol_base_diff": "0",
+    "vol_base_signed_diff": "0",
+    "notional_quote_diff": "0",
+    "candle_vol_base_diff": "0",
+    "all_diffs_zero": true,
+    "as_delivered": {
+      "trades": 642,
+      "trades_diff": 321,
+      "vol_base": "10.89697542",
+      "vol_base_diff": "5.44848771",
+      "vol_base_pct_diff": 100.0,
+      "overstatement_factor": 2.0
+    },
+    "id_sets": {
+      "file_distinct": 321,
+      "venue": 321,
+      "file_only": 0,
+      "venue_only": 0,
+      "identical": true
+    },
+    "per_trade": {
+      "matched": 321,
+      "price_exact": 321,
+      "price_max_abs_diff": 0.0,
+      "qty_exact": 321,
+      "qty_max_abs_diff": 0.0,
+      "side_agree": 321
+    },
+    "sign_convention": {
+      "cross_tab": [
+        {
+          "side": "buy",
+          "pub_side": "buy",
+          "len": 195
+        },
+        {
+          "side": "sell",
+          "pub_side": "sell",
+          "len": 126
+        }
+      ],
+      "venue_positive_amount": 195,
+      "venue_negative_amount": 126,
+      "venue_zero_amount": 0
+    },
+    "transaction_ts_vs_venue_mts": {
+      "identical": 277,
+      "file_earlier_by_1ms": 44,
+      "file_later": 0,
+      "max_abs_diff_ms": 1,
+      "distribution_ms": [
+        {
+          "d_ms": -1,
+          "count": 44
+        },
+        {
+          "d_ms": 0,
+          "count": 277
+        }
+      ]
+    },
+    "guards": {
+      "wide_rows": 384,
+      "wide_before_window": 42,
+      "wide_after_window": 21,
+      "wide_inside_window": 321,
+      "limit_cap_hit": false,
+      "venue_duplicate_trade_ids": 0,
+      "narrow_query_rows": 321,
+      "narrow_agrees_with_clipped_wide": true,
+      "candles": 10,
+      "candle_span_start_ms": 1779537600000,
+      "candle_span_end_ms": 1779538200000,
+      "venue_trades_in_candle_span_outside_window": 0,
+      "venue_volume_in_candle_span_outside_window": "0.00000000"
+    },
+    "units": {
+      "vol_base": "BTC: venue sum(abs(AMOUNT)), file sum(qty) deduplicated on trade_id",
+      "vol_base_signed": "BTC: venue sum(AMOUNT), file sum(qty) signed by side",
+      "notional_quote": "USD: sum(abs(AMOUNT) * PRICE)",
+      "candle_vol_base": "BTC: sum of 1m candle VOLUME over the candle span"
+    }
+  },
+  "gap_s": {
+    "median": 0.0,
+    "p99": 17.171,
+    "max": 38.083,
+    "zero_gaps": 338,
+    "over_60s": 0
+  },
+  "gap_s_deduped": {
+    "median": 0.0065,
+    "p99": 21.169,
+    "max": 38.083,
+    "zero_gaps": 17,
+    "over_60s": 0
+  },
+  "duplicates": {
+    "distinct_trade_ids": 321,
+    "duplicate_groups": 321,
+    "excess_rows": 321,
+    "group_sizes": [
+      {
+        "n": 2,
+        "count": 321
+      }
+    ],
+    "groups_with_identical_price": 321,
+    "groups_with_identical_qty": 321,
+    "groups_with_identical_side": 321,
+    "groups_with_identical_transaction_ts": 321,
+    "groups_with_identical_publish_ts": 0,
+    "groups_with_identical_ingress_ts": 0,
+    "pair_separation_ms": {
+      "ingress_median": 50.545,
+      "ingress_min": 15.07,
+      "ingress_max": 105.078,
+      "publish_median": 49.0,
+      "publish_min": 15.0,
+      "publish_max": 104.0
+    },
+    "verdict": "every group carries identical economics and identical venue time but two distinct publish_ts and ingress_ts, so the venue republished, it did not retrade"
+  },
+  "mechanism": {
+    "pairs": 321,
+    "quantities_ms": {
+      "pub_lag_ms": {
+        "min": 15.0,
+        "p25": 35.0,
+        "median": 49.0,
+        "p75": 61.0,
+        "max": 104.0,
+        "sd": 17.664041456923165
+      },
+      "ing_lag_ms": {
+        "min": 15.07,
+        "p25": 36.68,
+        "median": 50.545,
+        "p75": 60.68,
+        "max": 105.078,
+        "sd": 17.645524997529943
+      },
+      "pub1_minus_tx_ms": {
+        "min": 1.0,
+        "p25": 1.0,
+        "median": 2.0,
+        "p75": 2.0,
+        "max": 5.0,
+        "sd": 0.6704429651136664
+      },
+      "pub2_minus_tx_ms": {
+        "min": 18.0,
+        "p25": 37.0,
+        "median": 51.0,
+        "p75": 63.0,
+        "max": 106.0,
+        "sd": 17.629345093088823
+      },
+      "cap_lag1_ms": {
+        "min": 15.544,
+        "p25": 16.303,
+        "median": 16.742,
+        "p75": 17.248,
+        "max": 41.447,
+        "sd": 2.062685711737245
+      },
+      "cap_lag2_ms": {
+        "min": 15.474,
+        "p25": 16.275,
+        "median": 16.637,
+        "p75": 17.184,
+        "max": 43.364000000000004,
+        "sd": 3.532759589958525
+      }
+    },
+    "capture_path": {
+      "cap_lag1_median_ms": 16.742,
+      "cap_lag2_median_ms": 16.637,
+      "median_difference_ms": -0.105
+    },
+    "publish_lag_shape": {
+      "n": 321,
+      "support_min_ms": 15.0,
+      "support_max_ms": 104.0,
+      "mean_ms": 48.940809968847354,
+      "median_ms": 49.0,
+      "sd_population_ms": 17.63650591180045,
+      "sd_sample_ms": 17.664041456923165,
+      "uniform_sd_over_same_support_ms": 25.69208697893835,
+      "sd_ratio_vs_uniform": 0.6864567260051067,
+      "pearson_skew": -0.010068326138179491,
+      "deciles_observed": [
+        15.0,
+        25.0,
+        31.0,
+        39.0,
+        44.0,
+        49.0,
+        54.0,
+        58.0,
+        63.0,
+        70.0,
+        104.0
+      ],
+      "deciles_if_uniform": [
+        15.0,
+        23.9,
+        32.8,
+        41.7,
+        50.6,
+        59.5,
+        68.4,
+        77.3,
+        86.2,
+        95.1,
+        104.0
+      ],
+      "histogram_5ms": [
+        {
+          "lo": 10,
+          "hi": 15,
+          "n": 0
+        },
+        {
+          "lo": 15,
+          "hi": 20,
+          "n": 14
+        },
+        {
+          "lo": 20,
+          "hi": 25,
+          "n": 18
+        },
+        {
+          "lo": 25,
+          "hi": 30,
+          "n": 23
+        },
+        {
+          "lo": 30,
+          "hi": 35,
+          "n": 23
+        },
+        {
+          "lo": 35,
+          "hi": 40,
+          "n": 19
+        },
+        {
+          "lo": 40,
+          "hi": 45,
+          "n": 33
+        },
+        {
+          "lo": 45,
+          "hi": 50,
+          "n": 31
+        },
+        {
+          "lo": 50,
+          "hi": 55,
+          "n": 35
+        },
+        {
+          "lo": 55,
+          "hi": 60,
+          "n": 34
+        },
+        {
+          "lo": 60,
+          "hi": 65,
+          "n": 35
+        },
+        {
+          "lo": 65,
+          "hi": 70,
+          "n": 23
+        },
+        {
+          "lo": 70,
+          "hi": 75,
+          "n": 8
+        },
+        {
+          "lo": 75,
+          "hi": 80,
+          "n": 7
+        },
+        {
+          "lo": 80,
+          "hi": 85,
+          "n": 4
+        },
+        {
+          "lo": 85,
+          "hi": 90,
+          "n": 9
+        },
+        {
+          "lo": 90,
+          "hi": 95,
+          "n": 4
+        },
+        {
+          "lo": 95,
+          "hi": 100,
+          "n": 0
+        },
+        {
+          "lo": 100,
+          "hi": 105,
+          "n": 1
+        },
+        {
+          "lo": 105,
+          "hi": 110,
+          "n": 0
+        }
+      ]
+    },
+    "grid_snapping": {
+      "mod_5ms": {
+        "possible_residues": 5,
+        "pub1_residues_used": 5,
+        "pub2_residues_used": 5
+      },
+      "mod_10ms": {
+        "possible_residues": 10,
+        "pub1_residues_used": 10,
+        "pub2_residues_used": 10
+      },
+      "mod_20ms": {
+        "possible_residues": 20,
+        "pub1_residues_used": 20,
+        "pub2_residues_used": 20
+      },
+      "mod_25ms": {
+        "possible_residues": 25,
+        "pub1_residues_used": 25,
+        "pub2_residues_used": 25
+      },
+      "mod_50ms": {
+        "possible_residues": 50,
+        "pub1_residues_used": 50,
+        "pub2_residues_used": 50
+      },
+      "mod_100ms": {
+        "possible_residues": 100,
+        "pub1_residues_used": 96,
+        "pub2_residues_used": 93
+      }
+    },
+    "coverage_by_minute": [
+      {
+        "minute": 0,
+        "pairs": 64,
+        "min_lag_ms": 16.0,
+        "median_lag_ms": 44.5,
+        "max_lag_ms": 90.0
+      },
+      {
+        "minute": 1,
+        "pairs": 30,
+        "min_lag_ms": 19.0,
+        "median_lag_ms": 33.0,
+        "max_lag_ms": 73.0
+      },
+      {
+        "minute": 2,
+        "pairs": 62,
+        "min_lag_ms": 15.0,
+        "median_lag_ms": 46.5,
+        "max_lag_ms": 70.0
+      },
+      {
+        "minute": 3,
+        "pairs": 28,
+        "min_lag_ms": 17.0,
+        "median_lag_ms": 57.0,
+        "max_lag_ms": 70.0
+      },
+      {
+        "minute": 4,
+        "pairs": 14,
+        "min_lag_ms": 19.0,
+        "median_lag_ms": 53.0,
+        "max_lag_ms": 61.0
+      },
+      {
+        "minute": 5,
+        "pairs": 30,
+        "min_lag_ms": 24.0,
+        "median_lag_ms": 50.5,
+        "max_lag_ms": 104.0
+      },
+      {
+        "minute": 6,
+        "pairs": 21,
+        "min_lag_ms": 24.0,
+        "median_lag_ms": 46.0,
+        "max_lag_ms": 66.0
+      },
+      {
+        "minute": 7,
+        "pairs": 21,
+        "min_lag_ms": 20.0,
+        "median_lag_ms": 59.0,
+        "max_lag_ms": 70.0
+      },
+      {
+        "minute": 8,
+        "pairs": 23,
+        "min_lag_ms": 22.0,
+        "median_lag_ms": 57.0,
+        "max_lag_ms": 90.0
+      },
+      {
+        "minute": 9,
+        "pairs": 28,
+        "min_lag_ms": 26.0,
+        "median_lag_ms": 74.5,
+        "max_lag_ms": 91.0
+      }
+    ],
+    "minutes_covered": 10,
+    "minutes_in_window": 10,
+    "queueing": {
+      "trades_in_preceding_1s_min": 1,
+      "trades_in_preceding_1s_median": 3,
+      "trades_in_preceding_1s_max": 16,
+      "corr_pub_lag_vs_trade_rate": 0.05506244226280713
+    },
+    "corr_pub_lag_vs_position": 0.377198384713269,
+    "corr_pub_lag_vs_ingress_lag": 0.9786835079290309,
+    "first_copy": {
+      "pub1_minus_tx_ms_counts": [
+        {
+          "pub1_minus_tx_ms": 1,
+          "count": 103
+        },
+        {
+          "pub1_minus_tx_ms": 2,
+          "count": 186
+        },
+        {
+          "pub1_minus_tx_ms": 3,
+          "count": 28
+        },
+        {
+          "pub1_minus_tx_ms": 4,
+          "count": 2
+        },
+        {
+          "pub1_minus_tx_ms": 5,
+          "count": 2
+        }
+      ],
+      "pub2_minus_tx_min_ms": 18.0,
+      "second_copies_before_match": 0
+    },
+    "interleaving": {
+      "consecutive_pairs": 320,
+      "second_copy_after_next_first_copy": 195,
+      "pub2_backward_steps_ordered_by_pub1": 83,
+      "ing2_backward_steps_ordered_by_ing1": 86
+    },
+    "verdict": "the two copies separate on the venue's publish clock, not on ours: capture latency is the same on both, so the venue emitted the trade twice and a single capture path recorded both. REST exposes only the final persisted record, so the te and tu frames themselves cannot be observed; the timing identifies them"
+  },
+  "ordering": {
+    "sorted_by_file": {
+      "ingress_ts": 178,
+      "transaction_ts": 0,
+      "publish_ts": 178
+    },
+    "sorted_by_ingress_ts": {
+      "ingress_ts": 0,
+      "transaction_ts": 142,
+      "publish_ts": 0
+    },
+    "sorted_by_transaction_ts": {
+      "ingress_ts": 178,
+      "transaction_ts": 0,
+      "publish_ts": 178
+    },
+    "sorted_by_publish_ts": {
+      "ingress_ts": 8,
+      "transaction_ts": 140,
+      "publish_ts": 0
+    }
+  },
+  "clock_resolution": {
+    "ingress_ts": 465,
+    "transaction_ts": 1,
+    "publish_ts": 1
+  },
+  "findings": [
+    {
+      "file": "G_bitfinex_btcusd_trades.parquet",
+      "check_id": "non_monotonic_ingress_ts",
+      "severity": "high",
+      "classification": "pipeline",
+      "metric": {
+        "backward_jumps": 178,
+        "rows": 642,
+        "worst_step_ms": -90.18900000000001,
+        "median_backward_step_ms": -46.5435,
+        "within_1ms": 0
+      },
+      "notes": "178 backward jumps in ingress_ts (stored order)."
+    },
+    {
+      "file": "G_bitfinex_btcusd_trades.parquet",
+      "check_id": "non_monotonic_publish_ts",
+      "severity": "high",
+      "classification": "pipeline",
+      "metric": {
+        "backward_jumps": 178,
+        "rows": 642,
+        "worst_step_ms": -90.0,
+        "median_backward_step_ms": -46.5,
+        "within_1ms": 2
+      },
+      "notes": "178 backward jumps in publish_ts (stored order)."
+    },
+    {
+      "file": "G_bitfinex_btcusd_trades.parquet",
+      "check_id": "duplicate_keys_instrument_trade_id",
+      "severity": "medium",
+      "classification": "pipeline",
+      "metric": {
+        "duplicate_groups": 321,
+        "extra_rows": 321
+      },
+      "notes": "Duplicate key groups on ['instrument', 'trade_id']."
+    },
+    {
+      "file": "G_bitfinex_btcusd_trades.parquet",
+      "check_id": "clock_skew_ingress_ts_transaction_ts",
+      "severity": "info",
+      "classification": "unclear",
+      "metric": {
+        "ingress": "ingress_ts",
+        "venue": "transaction_ts",
+        "venue_unit_hint": "datetime",
+        "n": 642,
+        "median_s": 0.034548999999999996,
+        "p50_s": 0.034566,
+        "p99_s": 0.106818,
+        "min_s": 0.016651,
+        "max_s": 0.123279,
+        "negative_count": 0,
+        "negative_pct": 0.0
+      },
+      "notes": "Ingress vs venue clock skew within expected capture delay."
+    },
+    {
+      "file": "G_bitfinex_btcusd_trades.parquet",
+      "check_id": "clock_skew_ingress_ts_publish_ts",
+      "severity": "info",
+      "classification": "unclear",
+      "metric": {
+        "ingress": "ingress_ts",
+        "venue": "publish_ts",
+        "venue_unit_hint": "datetime",
+        "n": 642,
+        "median_s": 0.0166865,
+        "p50_s": 0.01669,
+        "p99_s": 0.030912,
+        "min_s": 0.015474,
+        "max_s": 0.043364,
+        "negative_count": 0,
+        "negative_pct": 0.0
+      },
+      "notes": "Ingress vs venue clock skew within expected capture delay."
+    }
+  ]
+}

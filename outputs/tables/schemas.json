@@ -1,0 +1,348 @@
+{
+  "A_hkex_2800_top_of_book.parquet": {
+    "rows": 109544,
+    "schema": {
+      "instrument": "String",
+      "ingress_ts": "Datetime(time_unit='us', time_zone='UTC')",
+      "transaction_ts": "Datetime(time_unit='us', time_zone='UTC')",
+      "publish_ts": "Datetime(time_unit='us', time_zone='UTC')",
+      "seq_id": "Int64",
+      "bid_price": "Float64",
+      "bid_qty": "Float64",
+      "ask_price": "Float64",
+      "ask_qty": "Float64"
+    },
+    "sample": [
+      {
+        "instrument": "S|2800-HKD:SPOT",
+        "ingress_ts": "2026-08-13 01:00:00.119287+00:00",
+        "transaction_ts": "2026-08-13 01:00:00.082890+00:00",
+        "publish_ts": "2026-08-13 01:00:00.082890+00:00",
+        "seq_id": 59955444,
+        "bid_price": 24.88,
+        "bid_qty": 1000.0,
+        "ask_price": null,
+        "ask_qty": null
+      },
+      {
+        "instrument": "S|2800-HKD:SPOT",
+        "ingress_ts": "2026-08-13 01:00:00.135932+00:00",
+        "transaction_ts": "2026-08-13 01:00:00.102130+00:00",
+        "publish_ts": "2026-08-13 01:00:00.102130+00:00",
+        "seq_id": 59955588,
+        "bid_price": 25.32,
+        "bid_qty": 16000.0,
+        "ask_price": null,
+        "ask_qty": null
+      }
+    ]
+  },
+  "A_hkex_2800_trades.parquet": {
+    "rows": 9666,
+    "schema": {
+      "instrument": "String",
+      "ingress_ts": "Datetime(time_unit='us', time_zone='UTC')",
+      "transaction_ts": "Datetime(time_unit='us', time_zone='UTC')",
+      "publish_ts": "Datetime(time_unit='us', time_zone='UTC')",
+      "trade_id": "String",
+      "price": "Float64",
+      "qty": "Float64",
+      "side": "String",
+      "other_data": "String"
+    },
+    "sample": [
+      {
+        "instrument": "S|2800-HKD:SPOT",
+        "ingress_ts": "2026-08-13 01:20:03.835334+00:00",
+        "transaction_ts": "2026-08-13 01:20:03.781810+00:00",
+        "publish_ts": "2026-08-13 01:20:03.781810+00:00",
+        "trade_id": "2",
+        "price": 25.8,
+        "qty": 2000.0,
+        "side": "Buy",
+        "other_data": null
+      },
+      {
+        "instrument": "S|2800-HKD:SPOT",
+        "ingress_ts": "2026-08-13 01:20:03.835334+00:00",
+        "transaction_ts": "2026-08-13 01:20:03.781810+00:00",
+        "publish_ts": "2026-08-13 01:20:03.781810+00:00",
+        "trade_id": "3",
+        "price": 25.8,
+        "qty": 8000.0,
+        "side": "Buy",
+        "other_data": null
+      }
+    ]
+  },
+  "B_dreamdex_weth_top_of_book.parquet": {
+    "rows": 6988,
+    "schema": {
+      "instrument": "String",
+      "ingress_ts": "Datetime(time_unit='us', time_zone='UTC')",
+      "transaction_ts": "Datetime(time_unit='us', time_zone='UTC')",
+      "publish_ts": "Datetime(time_unit='us', time_zone='UTC')",
+      "seq_id": "Int64",
+      "bid_price": "Float64",
+      "bid_qty": "Float64",
+      "ask_price": "Float64",
+      "ask_qty": "Float64"
+    },
+    "sample": [
+      {
+        "instrument": "WETH-USDso:SPOT",
+        "ingress_ts": "2026-08-14 04:00:01.317624+00:00",
+        "transaction_ts": null,
+        "publish_ts": null,
+        "seq_id": 7696820,
+        "bid_price": 1880.21,
+        "bid_qty": 0.1872,
+        "ask_price": 1881.56,
+        "ask_qty": 0.0773
+      },
+      {
+        "instrument": "WETH-USDso:SPOT",
+        "ingress_ts": "2026-08-14 04:00:01.317664+00:00",
+        "transaction_ts": null,
+        "publish_ts": null,
+        "seq_id": 7696824,
+        "bid_price": 1878.2599999999998,
+        "bid_qty": 0.4993,
+        "ask_price": 1881.56,
+        "ask_qty": 0.0773
+      }
+    ]
+  },
+  "C_nasdaq_top_of_book_20_symbols.parquet": {
+    "rows": 3752799,
+    "schema": {
+      "instrument": "String",
+      "ingress_ts": "Datetime(time_unit='us', time_zone='UTC')",
+      "transaction_ts": "Datetime(time_unit='us', time_zone='UTC')",
+      "publish_ts": "Datetime(time_unit='us', time_zone='UTC')",
+      "seq_id": "Int64",
+      "bid_price": "Float64",
+      "bid_qty": "Float64",
+      "ask_price": "Float64",
+      "ask_qty": "Float64"
+    },
+    "sample": [
+      {
+        "instrument": "MSFT-USD:SPOT",
+        "ingress_ts": "2026-08-13 14:00:00.002693+00:00",
+        "transaction_ts": "2026-08-13 13:59:59.878000+00:00",
+        "publish_ts": "2026-08-13 13:59:59.878000+00:00",
+        "seq_id": 24747839,
+        "bid_price": 498.55,
+        "bid_qty": 400.0,
+        "ask_price": 498.75,
+        "ask_qty": 40.0
+      },
+      {
+        "instrument": "MSFT-USD:SPOT",
+        "ingress_ts": "2026-08-13 14:00:00.002693+00:00",
+        "transaction_ts": "2026-08-13 13:59:59.882000+00:00",
+        "publish_ts": "2026-08-13 13:59:59.882000+00:00",
+        "seq_id": 24747868,
+        "bid_price": 498.55,
+        "bid_qty": 400.0,
+        "ask_price": 498.75,
+        "ask_qty": 80.0
+      }
+    ]
+  },
+  "D_binance_btcusdt_orderbook_incremental.parquet": {
+    "rows": 17994,
+    "schema": {
+      "instrument": "String",
+      "ingress_ts": "Datetime(time_unit='us', time_zone='UTC')",
+      "transaction_ts": "Datetime(time_unit='us', time_zone='UTC')",
+      "publish_ts": "Datetime(time_unit='us', time_zone='UTC')",
+      "seq_id": "Int64",
+      "bid_prices": "List(Float64)",
+      "bid_qtys": "List(Float64)",
+      "ask_prices": "List(Float64)",
+      "ask_qtys": "List(Float64)",
+      "snapshot": "Boolean"
+    },
+    "sample": [
+      {
+        "instrument": "BTC-USDT:SPOT",
+        "ingress_ts": "2026-08-13 14:00:00.014628+00:00",
+        "transaction_ts": null,
+        "publish_ts": "2026-08-13 14:00:00.014362+00:00",
+        "seq_id": 98501504585,
+        "snapshot": false,
+        "bid_prices__len": 16,
+        "bid_qtys__len": 16,
+        "ask_prices__len": 13,
+        "ask_qtys__len": 13
+      },
+      {
+        "instrument": "BTC-USDT:SPOT",
+        "ingress_ts": "2026-08-13 14:00:00.114674+00:00",
+        "transaction_ts": null,
+        "publish_ts": "2026-08-13 14:00:00.114310+00:00",
+        "seq_id": 98501504623,
+        "snapshot": false,
+        "bid_prices__len": 7,
+        "bid_qtys__len": 7,
+        "ask_prices__len": 16,
+        "ask_qtys__len": 16
+      }
+    ]
+  },
+  "F_binance_ethusdt_top_of_book.parquet": {
+    "rows": 235270,
+    "schema": {
+      "instrument": "String",
+      "ingress_ts": "Datetime(time_unit='us', time_zone='UTC')",
+      "seq_id": "Int64",
+      "bid_price": "Float64",
+      "bid_qty": "Float64",
+      "ask_price": "Float64",
+      "ask_qty": "Float64"
+    },
+    "sample": [
+      {
+        "instrument": "ETH-USDT:SPOT",
+        "ingress_ts": "2026-08-13 02:00:00.256719+00:00",
+        "seq_id": 79705719101,
+        "bid_price": 1878.09,
+        "bid_qty": 15.0941,
+        "ask_price": 1878.1,
+        "ask_qty": 71.8363
+      },
+      {
+        "instrument": "ETH-USDT:SPOT",
+        "ingress_ts": "2026-08-13 02:00:00.258191+00:00",
+        "seq_id": 79705719109,
+        "bid_price": 1878.09,
+        "bid_qty": 6.9921,
+        "ask_price": 1878.1,
+        "ask_qty": 71.8363
+      }
+    ]
+  },
+  "G_bitfinex_btcusd_trades.parquet": {
+    "rows": 642,
+    "schema": {
+      "instrument": "String",
+      "ingress_ts": "Int64",
+      "transaction_ts": "Int64",
+      "publish_ts": "Int64",
+      "trade_id": "String",
+      "price": "Float64",
+      "qty": "Float64",
+      "side": "String",
+      "other_data": "String"
+    },
+    "sample": [
+      {
+        "instrument": "BTC-USD:SPOT",
+        "ingress_ts": 1779537600955447,
+        "transaction_ts": 1779537600913000,
+        "publish_ts": 1779537600914000,
+        "trade_id": "1922482898",
+        "price": 74831.0,
+        "qty": 0.0001,
+        "side": "Sell",
+        "other_data": null
+      },
+      {
+        "instrument": "BTC-USD:SPOT",
+        "ingress_ts": 1779537600990134,
+        "transaction_ts": 1779537600913000,
+        "publish_ts": 1779537600963000,
+        "trade_id": "1922482898",
+        "price": 74831.0,
+        "qty": 0.0001,
+        "side": "Sell",
+        "other_data": null
+      }
+    ]
+  },
+  "H_gateio_btcusdt_perp_trades.parquet": {
+    "rows": 9359,
+    "schema": {
+      "instrument": "String",
+      "ingress_ts": "Int64",
+      "transaction_ts": "Int64",
+      "publish_ts": "Int64",
+      "trade_id": "String",
+      "price": "Float64",
+      "qty": "Float64",
+      "side": "String",
+      "other_data": "String"
+    },
+    "sample": [
+      {
+        "instrument": "BTC-USDT:PERP:LINEAR",
+        "ingress_ts": 1779537600982933,
+        "transaction_ts": 1779537600979000,
+        "publish_ts": 1779537600981000,
+        "trade_id": "752792374",
+        "price": 74750.4,
+        "qty": 40.0,
+        "side": "Sell",
+        "other_data": null
+      },
+      {
+        "instrument": "BTC-USDT:PERP:LINEAR",
+        "ingress_ts": 1779537601119644,
+        "transaction_ts": 1779537601118000,
+        "publish_ts": 1779537601119000,
+        "trade_id": "752792375",
+        "price": 74750.7,
+        "qty": 1963.0,
+        "side": "Buy",
+        "other_data": null
+      }
+    ]
+  },
+  "H_gateio_btcusdt_perp_instrument_static.parquet": {
+    "rows": 1,
+    "schema": {
+      "instrument": "String",
+      "ingress_ts": "Int64",
+      "publish_ts": "Int64",
+      "snapshot": "Boolean",
+      "scale": "Int64",
+      "exchange_symbol": "String",
+      "trading_state": "String",
+      "outcome": "String",
+      "quantity_multiplier": "Float64",
+      "price_tick_size": "String",
+      "qty_step_size": "String",
+      "min_order_qty": "Float64",
+      "max_order_qty": "Float64",
+      "min_order_value": "Float64",
+      "expiry_time": "Int64",
+      "strike": "Float64",
+      "present": "Boolean",
+      "other_data": "String"
+    },
+    "sample": [
+      {
+        "instrument": "BTC-USDT:PERP:LINEAR",
+        "ingress_ts": 1779534002212668,
+        "publish_ts": null,
+        "snapshot": true,
+        "scale": null,
+        "exchange_symbol": "BTC_USDT",
+        "trading_state": "TRADING",
+        "outcome": null,
+        "quantity_multiplier": 0.0001,
+        "price_tick_size": "0.1",
+        "qty_step_size": "1",
+        "min_order_qty": 1.0,
+        "max_order_qty": 12000000.0,
+        "min_order_value": null,
+        "expiry_time": null,
+        "strike": null,
+        "present": true,
+        "other_data": null
+      }
+    ]
+  }
+}

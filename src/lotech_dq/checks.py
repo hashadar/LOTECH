@@ -104,21 +104,64 @@ def to_datetime(df: pl.DataFrame, col: str) -> pl.DataFrame:
     return df.with_columns(pl.col(col).cast(pl.Datetime(time_unit="us")).alias(out_col))
 
 
-def monotonic_backwards(df: pl.DataFrame, col: str) -> Finding | None:
+def monotonic_backwards(
+    df: pl.DataFrame,
+    col: str,
+    partition_by: str | None = None,
+) -> Finding | None:
+    """Backward steps in `col` over the frame's stored order.
+
+    The frame is never sorted on `col`: sorting the column being differenced makes the
+    check vacuous. When `partition_by` is given the diff is taken within each partition,
+    still in stored order.
+    """
     if col not in df.columns or df.height < 2:
         return None
-    diffs = df.select(pl.col(col).diff().alias("d"))
-    bad = int(diffs.filter(pl.col("d") < 0).height)
+    if partition_by is not None and partition_by in df.columns:
+        diffs = df.select(pl.col(col).diff().over(partition_by).alias("d"))
+        check_id = f"non_monotonic_{col}_over_{partition_by}"
+        scope = f" within {partition_by}"
+    else:
+        diffs = df.select(pl.col(col).diff().alias("d"))
+        check_id = f"non_monotonic_{col}"
+        scope = ""
+    bad_frame = diffs.filter(pl.col("d") < 0)
+    bad = int(bad_frame.height)
     if bad == 0:
         return None
+    metric: dict[str, Any] = {"backward_jumps": bad, "rows": df.height}
+    if partition_by is not None and partition_by in df.columns:
+        metric["partition_by"] = partition_by
+    if str(df.schema[col]).startswith("Datetime"):
+        ms = bad_frame.select(pl.col("d").dt.total_microseconds() / 1000.0)["d"]
+        metric["worst_step_ms"] = float(ms.min())  # type: ignore[arg-type]
+        metric["median_backward_step_ms"] = float(ms.median())  # type: ignore[arg-type]
+        metric["within_1ms"] = int(bad_frame.select(
+            (pl.col("d").dt.total_microseconds() >= -1000).sum()
+        ).item())
+    else:
+        metric["worst_step"] = bad_frame.select(pl.col("d").min()).item()
+        metric["median_backward_step"] = bad_frame.select(pl.col("d").median()).item()
     return Finding(
         file="",
-        check_id=f"non_monotonic_{col}",
+        check_id=check_id,
         severity="medium" if bad < 10 else "high",
         classification="pipeline",
-        metric={"backward_jumps": bad, "rows": df.height},
-        notes=f"{bad} backward jumps in {col}.",
+        metric=metric,
+        notes=f"{bad} backward jumps in {col}{scope} (stored order).",
     )
+
+
+def _seconds_expr(df: pl.DataFrame, col: str, diff_expr: pl.Expr) -> pl.Expr | None:
+    """Convert a diff of `col` into float seconds, whatever the column's storage."""
+    dtype = df.schema[col]
+    if str(dtype).startswith("Datetime"):
+        return diff_expr.dt.total_microseconds() / 1_000_000.0
+    unit = infer_ts_unit(df[col])
+    divisor = {"s": 1.0, "ms": 1e3, "us": 1e6, "ns": 1e9}.get(unit)
+    if divisor is None:
+        return None
+    return diff_expr.cast(pl.Float64) / divisor
 
 
 def duplicate_rows(df: pl.DataFrame, keys: list[str]) -> Finding | None:
@@ -140,27 +183,45 @@ def duplicate_rows(df: pl.DataFrame, keys: list[str]) -> Finding | None:
     )
 
 
-def gap_stats(df: pl.DataFrame, col: str, large_gap_quantile: float = 0.999) -> dict[str, Any]:
+def gap_stats(
+    df: pl.DataFrame,
+    col: str,
+    partition_by: str | None = None,
+    large_gap_threshold_s: float = 60.0,
+) -> dict[str, Any]:
+    """Inter-row gaps in `col`, in seconds, over the frame's stored order.
+
+    Never sorts on `col`, so a backward step is observable rather than sorted away.
+    `partition_by` gives per-instrument gaps on a multiplexed file, where the
+    unpartitioned figure is an inter-message interval across symbols.
+    `large_gap_threshold_s` is absolute: a quantile of the same distribution would
+    return a fixed fraction of the rows regardless of the data.
+    """
     if col not in df.columns or df.height < 3:
         return {}
-    gaps = (
-        df.sort(col)
-        .select(pl.col(col).diff().alias("gap"))
-        .drop_nulls()
-        .with_columns(pl.col("gap").cast(pl.Float64))
+    partitioned = partition_by is not None and partition_by in df.columns
+    diff_expr = (
+        pl.col(col).diff().over(partition_by) if partitioned else pl.col(col).diff()
     )
+    sec_expr = _seconds_expr(df, col, diff_expr)
+    if sec_expr is None:
+        return {}
+    gaps = df.select(sec_expr.alias("gap_s")).drop_nulls()
     if gaps.is_empty():
         return {}
-    q = float(gaps.select(pl.col("gap").quantile(large_gap_quantile)).item())
-    med = float(gaps.select(pl.col("gap").median()).item())
-    mx = float(gaps.select(pl.col("gap").max()).item())
-    large = int(gaps.filter(pl.col("gap") > q).height) if q > 0 else 0
+    neg = int(gaps.filter(pl.col("gap_s") < 0).height)
     return {
-        "median_gap": med,
-        f"p{int(large_gap_quantile * 1000)}_gap": q,
-        "max_gap": mx,
-        "large_gap_count": large,
-        "unit_hint": infer_ts_unit(df[col]),
+        "gap_unit": "s",
+        "partition_by": partition_by if partitioned else None,
+        "n_gaps": gaps.height,
+        "median_gap_s": float(gaps.select(pl.col("gap_s").median()).item()),
+        "p999_gap_s": float(gaps.select(pl.col("gap_s").quantile(0.999)).item()),
+        "max_gap_s": float(gaps.select(pl.col("gap_s").max()).item()),
+        "min_gap_s": float(gaps.select(pl.col("gap_s").min()).item()),
+        "large_gap_threshold_s": large_gap_threshold_s,
+        "large_gap_count": int(gaps.filter(pl.col("gap_s") > large_gap_threshold_s).height),
+        "negative_gap_count": neg,
+        "source_unit_hint": infer_ts_unit(df[col]),
     }
 
 
@@ -296,15 +357,92 @@ def spread_stats(
     }
 
 
-def profile_frame(df: pl.DataFrame, file_label: str) -> dict[str, Any]:
+EXPECTED_COLUMNS = ("ingress_ts", "transaction_ts", "publish_ts")
+UNIQUE_KEY_CANDIDATES = (["trade_id"], ["seq_id"])
+PARTITION_CANDIDATES = ("instrument", "symbol")
+
+
+def missing_columns(
+    df: pl.DataFrame,
+    expected: tuple[str, ...] = EXPECTED_COLUMNS,
+) -> list[Finding]:
+    """Absent columns other venues populate. A null-rate check cannot see these."""
+    out: list[Finding] = []
+    for col in expected:
+        if col in df.columns:
+            continue
+        out.append(
+            Finding(
+                file="",
+                check_id=f"missing_column_{col}",
+                severity="high",
+                classification="pipeline",
+                metric={"column": col, "expected_columns": list(expected)},
+                notes=f"Column {col} is absent from the schema, not present-and-null.",
+            )
+        )
+    return out
+
+
+def null_rate_findings(
+    df: pl.DataFrame,
+    expected: tuple[str, ...] = EXPECTED_COLUMNS,
+    threshold_pct: float = 1.0,
+) -> list[Finding]:
+    out: list[Finding] = []
+    n = df.height
+    if n == 0:
+        return out
+    for col in expected:
+        if col not in df.columns:
+            continue
+        nulls = int(df[col].null_count())
+        pct = nulls / n * 100.0
+        if pct <= threshold_pct:
+            continue
+        out.append(
+            Finding(
+                file="",
+                check_id=f"null_clock_{col}",
+                severity="high" if pct > 50 else "medium",
+                classification="pipeline",
+                metric={"column": col, "nulls": nulls, "null_pct": pct, "rows": n},
+                notes=f"{col} null on {pct:.4f}% of rows (> {threshold_pct}% alert threshold).",
+            )
+        )
+    return out
+
+
+def profile_frame(
+    df: pl.DataFrame,
+    file_label: str,
+    expected_columns: tuple[str, ...] = EXPECTED_COLUMNS,
+    unique_keys: tuple[list[str], ...] = UNIQUE_KEY_CANDIDATES,
+) -> dict[str, Any]:
     ts_cols = _present(df, TS_CANDIDATES)
+    partition = next((c for c in PARTITION_CANDIDATES if c in df.columns), None)
+    multiplexed = partition is not None and int(df[partition].n_unique()) > 1
+
     findings: list[Finding] = []
+    findings.extend(missing_columns(df, expected_columns))
+    findings.extend(null_rate_findings(df, expected_columns))
     findings.extend(price_size_anomalies(df))
     findings.extend(tob_crossed_locked(df))
     for col in ts_cols:
         f = monotonic_backwards(df, col)
         if f:
-            f.file = file_label
+            findings.append(f)
+        if multiplexed:
+            fp = monotonic_backwards(df, col, partition_by=partition)
+            if fp:
+                findings.append(fp)
+    for keys in unique_keys:
+        keys_here = [k for k in keys if k in df.columns]
+        if not keys_here:
+            continue
+        scoped = ([partition] if partition else []) + keys_here
+        f = duplicate_rows(df, scoped)
+        if f:
             findings.append(f)
 
     for f in findings:
@@ -312,10 +450,20 @@ def profile_frame(df: pl.DataFrame, file_label: str) -> dict[str, Any]:
             f.file = file_label
 
     gaps = {col: gap_stats(df, col) for col in ts_cols}
+    if multiplexed:
+        gaps.update(
+            {
+                f"{col}__over_{partition}": gap_stats(df, col, partition_by=partition)
+                for col in ts_cols
+            }
+        )
     return {
         "file": file_label,
         "rows": df.height,
         "columns": df.columns,
+        "expected_columns": list(expected_columns),
+        "absent_columns": [c for c in expected_columns if c not in df.columns],
+        "partition_column": partition if multiplexed else None,
         "schema": schema_profile(df),
         "nulls": null_report(df),
         "distinct": distinct_counts(df),

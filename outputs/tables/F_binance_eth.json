@@ -1,0 +1,98 @@
+{
+  "rows": 235270,
+  "instrument": [
+    "ETH-USDT:SPOT"
+  ],
+  "ingress_min": "2026-08-13 02:00:00.256719+00:00",
+  "ingress_max": "2026-08-13 03:59:59.695409+00:00",
+  "clock_columns": {
+    "parquet_schema_columns": [
+      "instrument",
+      "ingress_ts",
+      "seq_id",
+      "bid_price",
+      "bid_qty",
+      "ask_price",
+      "ask_qty"
+    ],
+    "expected": [
+      "ingress_ts",
+      "transaction_ts",
+      "publish_ts"
+    ],
+    "absent_from_parquet_schema": [
+      "transaction_ts",
+      "publish_ts"
+    ],
+    "note": "absent from the schema, not present-and-null: a null-rate alert cannot fire on these"
+  },
+  "crossed_locked": [],
+  "quote_tightness": {
+    "crossed": 0,
+    "locked": 0,
+    "one_tick_rows": 229411,
+    "one_tick_pct": 97.50966974114846,
+    "tick_size": 0.01
+  },
+  "gap_ms": {
+    "median": 0.013000000000000001,
+    "p99": 663.967,
+    "max": 3169.022,
+    "over_1000ms": 1073,
+    "over_5000ms": 0
+  },
+  "seq_id": {
+    "gaps_gt_1": 161291,
+    "backward": 36,
+    "step_median": 3.0,
+    "step_p99": 59.0,
+    "step_max": 253,
+    "distinct": 235270
+  },
+  "identical_consecutive_quotes": 0,
+  "consecutive_pairs": 235269,
+  "consecutive_prices_unchanged": 228443,
+  "consecutive_prices_unchanged_pct": 97.09864027984987,
+  "duplicate_quote_groups": 14678,
+  "duplicate_quote_rows": 36185,
+  "duplicate_quote_excess_rows": 21507,
+  "duplicate_quote_largest_group": 35,
+  "spread": {
+    "median": 0.009999999999990905,
+    "min": 0.009999999999990905,
+    "p99": 0.049999999999954525,
+    "max": 0.8900000000001
+  },
+  "profile_findings": [
+    {
+      "file": "F_binance_ethusdt_top_of_book.parquet",
+      "check_id": "missing_column_transaction_ts",
+      "severity": "high",
+      "classification": "pipeline",
+      "metric": {
+        "column": "transaction_ts",
+        "expected_columns": [
+          "ingress_ts",
+          "transaction_ts",
+          "publish_ts"
+        ]
+      },
+      "notes": "Column transaction_ts is absent from the schema, not present-and-null."
+    },
+    {
+      "file": "F_binance_ethusdt_top_of_book.parquet",
+      "check_id": "missing_column_publish_ts",
+      "severity": "high",
+      "classification": "pipeline",
+      "metric": {
+        "column": "publish_ts",
+        "expected_columns": [
+          "ingress_ts",
+          "transaction_ts",
+          "publish_ts"
+        ]
+      },
+      "notes": "Column publish_ts is absent from the schema, not present-and-null."
+    }
+  ]
+}
