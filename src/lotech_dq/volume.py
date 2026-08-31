@@ -7,6 +7,8 @@ from typing import Any
 import httpx
 import polars as pl
 
+from lotech_dq import cache as venue_cache
+
 
 def exact_sum(values: Iterable[Any]) -> Decimal:
     """Exact sum via each value's shortest round-trip decimal string.
@@ -110,10 +112,16 @@ def fetch_gate_candle(
     if to_s is not None:
         params["to"] = to_s
     url = "https://api.gateio.ws/api/v4/futures/usdt/candlesticks"
+    cache_key = venue_cache.key_for_request(url, params)
+    cached = venue_cache.load("gateio", cache_key)
+    if cached is not None:
+        return cached
+
     with httpx.Client(timeout=30.0) as client:
         r = client.get(url, params=params)
         r.raise_for_status()
         data = r.json()
+    venue_cache.save("gateio", cache_key, data)
     # Gate returns list of objects or arrays depending on version
     if not data:
         return []

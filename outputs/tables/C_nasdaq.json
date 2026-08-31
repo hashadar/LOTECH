@@ -135,14 +135,14 @@
           "symbols": 3
         },
         {
-          "minute": "2026-08-13 14:46:00+00:00",
-          "n": 38,
-          "symbols": 3
-        },
-        {
           "minute": "2026-08-13 15:16:00+00:00",
           "n": 38,
           "symbols": 1
+        },
+        {
+          "minute": "2026-08-13 14:46:00+00:00",
+          "n": 38,
+          "symbols": 3
         }
       ],
       "crosses_in_first_minute": 27
@@ -177,8 +177,8 @@
           "len": 16
         },
         {
-          "instrument": "AAPL-USD:SPOT",
-          "ask_price": 303.75,
+          "instrument": "TSLA-USD:SPOT",
+          "ask_price": 334.43,
           "len": 15
         }
       ]

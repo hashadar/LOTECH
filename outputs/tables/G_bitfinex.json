@@ -22,12 +22,12 @@
   },
   "side_counts": [
     {
-      "side": "Buy",
-      "count": 390
-    },
-    {
       "side": "Sell",
       "count": 252
+    },
+    {
+      "side": "Buy",
+      "count": 390
     }
   ],
   "side_qty_consistency": {
@@ -69,10 +69,10 @@
           "start": 1779537599913,
           "end": 1779538191190
         },
-        "attempt": 1,
+        "attempt": 0,
         "status": 200,
-        "elapsed_s": 0.495,
-        "rows": 321
+        "rows": 321,
+        "source": "fixture"
       },
       {
         "url": "https://api-pub.bitfinex.com/v2/candles/trade:1m:tBTCUSD/hist",
@@ -82,10 +82,10 @@
           "start": 1779537599913,
           "end": 1779538191190
         },
-        "attempt": 1,
+        "attempt": 0,
         "status": 200,
-        "elapsed_s": 0.557,
-        "rows": 10
+        "rows": 10,
+        "source": "fixture"
       },
       {
         "url": "https://api-pub.bitfinex.com/v2/trades/tBTCUSD/hist",
@@ -95,10 +95,10 @@
           "start": 1779537540913,
           "end": 1779538250190
         },
-        "attempt": 1,
+        "attempt": 0,
         "status": 200,
-        "elapsed_s": 0.35,
-        "rows": 384
+        "rows": 384,
+        "source": "fixture"
       }
     ],
     "error": null,
