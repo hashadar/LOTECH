@@ -1,0 +1,2961 @@
+{
+  "coverage": {
+    "tob_tx_min": "2026-08-13 01:00:00.082890+00:00",
+    "tob_tx_max": "2026-08-13 08:08:12.709010+00:00",
+    "trades_tx_min": "2026-08-13 01:20:03.781810+00:00",
+    "trades_tx_max": "2026-08-13 08:08:12.709010+00:00",
+    "trades_ingress_min": "2026-08-13 01:07:20.409329+00:00",
+    "trades_ingress_max": "2026-08-13 08:08:12.743779+00:00",
+    "tob_rows": 109544,
+    "trade_rows": 9666,
+    "trades_null_transaction_ts": 1513,
+    "trades_null_transaction_ts_pct": 15.652803641630458,
+    "instruments_tob": [
+      "S|2800-HKD:SPOT"
+    ],
+    "instruments_trades": [
+      "S|2800-HKD:SPOT"
+    ],
+    "tob_null_bid_rows": [
+      {
+        "transaction_ts": "2026-08-13 01:30:02.943550+00:00",
+        "bid_price": null,
+        "ask_price": 26.0
+      }
+    ],
+    "tob_null_ask_rows": [
+      {
+        "transaction_ts": "2026-08-13 01:00:00.082890+00:00",
+        "bid_price": 24.88,
+        "ask_price": null
+      },
+      {
+        "transaction_ts": "2026-08-13 01:00:00.102130+00:00",
+        "bid_price": 25.32,
+        "ask_price": null
+      }
+    ]
+  },
+  "gap_summary": {
+    "n_gaps": 109543,
+    "median_s": 0.00061,
+    "p99_s": 3.4152299999999998,
+    "max_s": 1500.99386,
+    "gaps_over_60s": 12,
+    "gaps_over_300s": 5,
+    "gaps_over_300s_rows": [
+      {
+        "from_ts": "2026-08-13 01:20:03.782040+00:00",
+        "to_ts": "2026-08-13 01:30:00.002550+00:00",
+        "gap_s": 596.22051
+      },
+      {
+        "from_ts": "2026-08-13 03:59:59.494730+00:00",
+        "to_ts": "2026-08-13 04:05:00.007010+00:00",
+        "gap_s": 300.51228
+      },
+      {
+        "from_ts": "2026-08-13 04:05:00.007010+00:00",
+        "to_ts": "2026-08-13 04:30:01.000870+00:00",
+        "gap_s": 1500.99386
+      },
+      {
+        "from_ts": "2026-08-13 04:37:18.786520+00:00",
+        "to_ts": "2026-08-13 04:42:45.582680+00:00",
+        "gap_s": 326.79616
+      },
+      {
+        "from_ts": "2026-08-13 04:42:45.582680+00:00",
+        "to_ts": "2026-08-13 04:59:00.000470+00:00",
+        "gap_s": 974.41779
+      }
+    ]
+  },
+  "crossed_locked": [
+    {
+      "file": "",
+      "check_id": "crossed_book",
+      "severity": "high",
+      "classification": "pipeline",
+      "metric": {
+        "crossed": 71,
+        "crossed_pct": 0.06481591367615779,
+        "bid_col": "bid_price",
+        "ask_col": "ask_price"
+      },
+      "notes": "Bid above ask on top of book."
+    },
+    {
+      "file": "",
+      "check_id": "locked_book",
+      "severity": "low",
+      "classification": "market",
+      "metric": {
+        "locked": 112,
+        "locked_pct": 0.10224482157365736,
+        "bid_col": "bid_price",
+        "ask_col": "ask_price"
+      },
+      "notes": "Bid equals ask (locked). Often market microstructure on equities."
+    }
+  ],
+  "crossed_locked_detail": {
+    "two_sided_rows": 109541,
+    "crossed_n": 71,
+    "crossed_pct": 0.06481591367615779,
+    "locked_n": 112,
+    "locked_pct": 0.10224482157365736,
+    "crossed_distinct_quote_states": 30,
+    "crossed_rows_per_state_top": [
+      {
+        "transaction_ts": "2026-08-13 03:36:36.099430+00:00",
+        "bid_price": 26.1,
+        "bid_qty": 6.0,
+        "ask_price": 24.0,
+        "ask_qty": 5.0,
+        "n": 13,
+        "inversion": 2.1000000000000014
+      },
+      {
+        "transaction_ts": "2026-08-13 06:35:54.022180+00:00",
+        "bid_price": 25.94,
+        "bid_qty": 110.0,
+        "ask_price": 25.86,
+        "ask_qty": 4.0,
+        "n": 11,
+        "inversion": 0.08000000000000185
+      },
+      {
+        "transaction_ts": "2026-08-13 02:03:20.711420+00:00",
+        "bid_price": 25.94,
+        "bid_qty": 50.0,
+        "ask_price": 25.92,
+        "ask_qty": 1.0,
+        "n": 5,
+        "inversion": 0.019999999999999574
+      },
+      {
+        "transaction_ts": "2026-08-13 02:56:06.563970+00:00",
+        "bid_price": 26.1,
+        "bid_qty": 6.0,
+        "ask_price": 25.92,
+        "ask_qty": 1.0,
+        "n": 5,
+        "inversion": 0.17999999999999972
+      },
+      {
+        "transaction_ts": "2026-08-13 07:56:29.585670+00:00",
+        "bid_price": 25.9,
+        "bid_qty": 80.0,
+        "ask_price": 25.86,
+        "ask_qty": 4.0,
+        "n": 4,
+        "inversion": 0.03999999999999915
+      },
+      {
+        "transaction_ts": "2026-08-13 06:26:55.093360+00:00",
+        "bid_price": 25.94,
+        "bid_qty": 110.0,
+        "ask_price": 25.88,
+        "ask_qty": 100.0,
+        "n": 3,
+        "inversion": 0.060000000000002274
+      },
+      {
+        "transaction_ts": "2026-08-13 05:07:00.980830+00:00",
+        "bid_price": 25.98,
+        "bid_qty": 80.0,
+        "ask_price": 25.92,
+        "ask_qty": 4.0,
+        "n": 2,
+        "inversion": 0.05999999999999872
+      },
+      {
+        "transaction_ts": "2026-08-13 01:57:38.100250+00:00",
+        "bid_price": 25.94,
+        "bid_qty": 50.0,
+        "ask_price": 25.0,
+        "ask_qty": 2.0,
+        "n": 2,
+        "inversion": 0.9400000000000013
+      },
+      {
+        "transaction_ts": "2026-08-13 01:49:52.098000+00:00",
+        "bid_price": 25.86,
+        "bid_qty": 80.0,
+        "ask_price": 25.0,
+        "ask_qty": 2.0,
+        "n": 2,
+        "inversion": 0.8599999999999994
+      },
+      {
+        "transaction_ts": "2026-08-13 03:23:39.758690+00:00",
+        "bid_price": 26.1,
+        "bid_qty": 6.0,
+        "ask_price": 25.6,
+        "ask_qty": 5.0,
+        "n": 2,
+        "inversion": 0.5
+      }
+    ],
+    "inversion": {
+      "median": 0.17999999999999972,
+      "max": 2.1000000000000014,
+      "min": 0.019999999999999574,
+      "one_tick_0_02": 8,
+      "le_0_10": 30,
+      "histogram": [
+        {
+          "value": 2.1,
+          "n": 13
+        },
+        {
+          "value": 0.08,
+          "n": 13
+        },
+        {
+          "value": 0.18,
+          "n": 10
+        },
+        {
+          "value": 0.02,
+          "n": 8
+        },
+        {
+          "value": 0.06,
+          "n": 5
+        },
+        {
+          "value": 0.6,
+          "n": 5
+        },
+        {
+          "value": 0.04,
+          "n": 4
+        },
+        {
+          "value": 0.94,
+          "n": 3
+        },
+        {
+          "value": 0.5,
+          "n": 3
+        },
+        {
+          "value": 0.3,
+          "n": 2
+        },
+        {
+          "value": 0.86,
+          "n": 2
+        },
+        {
+          "value": 0.88,
+          "n": 1
+        },
+        {
+          "value": 0.36,
+          "n": 1
+        },
+        {
+          "value": 0.8,
+          "n": 1
+        }
+      ]
+    },
+    "ask_price_distribution": [
+      {
+        "value": 25.92,
+        "n": 18
+      },
+      {
+        "value": 25.86,
+        "n": 17
+      },
+      {
+        "value": 24.0,
+        "n": 13
+      },
+      {
+        "value": 25.0,
+        "n": 10
+      },
+      {
+        "value": 25.6,
+        "n": 5
+      },
+      {
+        "value": 25.88,
+        "n": 3
+      },
+      {
+        "value": 25.96,
+        "n": 2
+      },
+      {
+        "value": 25.5,
+        "n": 2
+      },
+      {
+        "value": 25.74,
+        "n": 1
+      }
+    ],
+    "ask_qty_distribution": [
+      {
+        "value": 5.0,
+        "n": 24
+      },
+      {
+        "value": 4.0,
+        "n": 19
+      },
+      {
+        "value": 1.0,
+        "n": 15
+      },
+      {
+        "value": 2.0,
+        "n": 7
+      },
+      {
+        "value": 100.0,
+        "n": 4
+      },
+      {
+        "value": 37.0,
+        "n": 1
+      },
+      {
+        "value": 322.0,
+        "n": 1
+      }
+    ],
+    "bid_price_range": [
+      25.6,
+      26.1
+    ],
+    "ask_price_range": [
+      24.0,
+      25.96
+    ],
+    "ask_is_25_00_n": 10,
+    "ask_qty_1_or_2_n": 22,
+    "ask_qty_max": 322.0,
+    "crossed_by_session_phase": [
+      {
+        "value": "continuous",
+        "n": 71
+      }
+    ],
+    "locked_by_session_phase": [
+      {
+        "value": "closing_auction",
+        "n": 74
+      },
+      {
+        "value": "opening_auction",
+        "n": 38
+      }
+    ],
+    "locked_before_open": 38,
+    "locked_after_close": 74,
+    "session_boundaries_utc": {
+      "opening_auction_end": "2026-08-13T01:30:00Z",
+      "lunch_start": "2026-08-13T04:00:00Z",
+      "lunch_end": "2026-08-13T05:00:00Z",
+      "closing_auction_start": "2026-08-13T08:00:00Z"
+    },
+    "crossed_state_sample": [
+      {
+        "transaction_ts": "2026-08-13 01:48:13.066780+00:00",
+        "ingress_ts": "2026-08-13 01:48:13.104201+00:00",
+        "bid_price": 25.8,
+        "ask_price": 25.0,
+        "bid_qty": 80.0,
+        "ask_qty": 1.0,
+        "inversion": 0.8000000000000007
+      },
+      {
+        "transaction_ts": "2026-08-13 01:48:43.909810+00:00",
+        "ingress_ts": "2026-08-13 01:48:43.953593+00:00",
+        "bid_price": 25.6,
+        "ask_price": 25.0,
+        "bid_qty": 315.0,
+        "ask_qty": 1.0,
+        "inversion": 0.6000000000000014
+      },
+      {
+        "transaction_ts": "2026-08-13 01:49:24.055350+00:00",
+        "ingress_ts": "2026-08-13 01:49:24.092845+00:00",
+        "bid_price": 25.6,
+        "ask_price": 25.0,
+        "bid_qty": 315.0,
+        "ask_qty": 2.0,
+        "inversion": 0.6000000000000014
+      },
+      {
+        "transaction_ts": "2026-08-13 01:49:52.098000+00:00",
+        "ingress_ts": "2026-08-13 01:49:52.129890+00:00",
+        "bid_price": 25.86,
+        "ask_price": 25.0,
+        "bid_qty": 80.0,
+        "ask_qty": 2.0,
+        "inversion": 0.8599999999999994
+      },
+      {
+        "transaction_ts": "2026-08-13 01:49:52.098000+00:00",
+        "ingress_ts": "2026-08-13 01:50:45.375878+00:00",
+        "bid_price": 25.86,
+        "ask_price": 25.0,
+        "bid_qty": 80.0,
+        "ask_qty": 2.0,
+        "inversion": 0.8599999999999994
+      },
+      {
+        "transaction_ts": "2026-08-13 01:54:31.407710+00:00",
+        "ingress_ts": "2026-08-13 01:54:31.441470+00:00",
+        "bid_price": 25.6,
+        "ask_price": 25.0,
+        "bid_qty": 315.0,
+        "ask_qty": 2.0,
+        "inversion": 0.6000000000000014
+      },
+      {
+        "transaction_ts": "2026-08-13 01:54:39.782010+00:00",
+        "ingress_ts": "2026-08-13 01:54:39.820901+00:00",
+        "bid_price": 25.88,
+        "ask_price": 25.0,
+        "bid_qty": 80.0,
+        "ask_qty": 2.0,
+        "inversion": 0.879999999999999
+      },
+      {
+        "transaction_ts": "2026-08-13 01:57:38.100250+00:00",
+        "ingress_ts": "2026-08-13 01:57:38.136333+00:00",
+        "bid_price": 25.94,
+        "ask_price": 25.0,
+        "bid_qty": 50.0,
+        "ask_qty": 2.0,
+        "inversion": 0.9400000000000013
+      }
+    ]
+  },
+  "stale_reemission": {
+    "distinct_quote_states": 109427,
+    "states_emitted_more_than_once": 80,
+    "extra_rows_from_repeats": 117,
+    "repeat_rows_over_60s_late": 54,
+    "repeat_rows_over_60s_late_and_crossed": 39,
+    "crossed_rows_that_are_late_reemissions": 39,
+    "crossed_rows_total": 71,
+    "skew_over_60s_rows": 55,
+    "skew_over_60s_distinct_transaction_ts": 19,
+    "skew_max_s": 5333.363136,
+    "skew_median_s": 0.033081,
+    "skew_tail_by_venue_ts": [
+      {
+        "transaction_ts": "2026-08-13 03:36:36.099430+00:00",
+        "n": 12,
+        "max_skew_s": 5333.363136,
+        "bid_price": 26.1,
+        "ask_price": 24.0
+      },
+      {
+        "transaction_ts": "2026-08-13 06:35:54.022180+00:00",
+        "n": 10,
+        "max_skew_s": 4457.367894,
+        "bid_price": 25.94,
+        "ask_price": 25.86
+      },
+      {
+        "transaction_ts": "2026-08-13 05:28:49.251500+00:00",
+        "n": 4,
+        "max_skew_s": 1837.126319,
+        "bid_price": 25.98,
+        "ask_price": 26.0
+      },
+      {
+        "transaction_ts": "2026-08-13 02:03:20.711420+00:00",
+        "n": 4,
+        "max_skew_s": 1577.5061309999999,
+        "bid_price": 25.94,
+        "ask_price": 25.92
+      },
+      {
+        "transaction_ts": "2026-08-13 02:56:06.563970+00:00",
+        "n": 4,
+        "max_skew_s": 1452.955483,
+        "bid_price": 26.1,
+        "ask_price": 25.92
+      },
+      {
+        "transaction_ts": "2026-08-13 04:05:00.007010+00:00",
+        "n": 3,
+        "max_skew_s": 1061.7923309999999,
+        "bid_price": 25.94,
+        "ask_price": 25.96
+      },
+      {
+        "transaction_ts": "2026-08-13 07:56:29.585670+00:00",
+        "n": 3,
+        "max_skew_s": 1058.287885,
+        "bid_price": 25.9,
+        "ask_price": 25.86
+      },
+      {
+        "transaction_ts": "2026-08-13 04:42:45.582680+00:00",
+        "n": 2,
+        "max_skew_s": 725.74132,
+        "bid_price": 25.94,
+        "ask_price": 25.96
+      },
+      {
+        "transaction_ts": "2026-08-13 02:34:14.281500+00:00",
+        "n": 2,
+        "max_skew_s": 622.045927,
+        "bid_price": 25.88,
+        "ask_price": 25.92
+      },
+      {
+        "transaction_ts": "2026-08-13 06:26:55.093360+00:00",
+        "n": 2,
+        "max_skew_s": 496.34007099999997,
+        "bid_price": 25.94,
+        "ask_price": 25.88
+      },
+      {
+        "transaction_ts": "2026-08-13 05:07:00.980830+00:00",
+        "n": 1,
+        "max_skew_s": 447.304873,
+        "bid_price": 25.98,
+        "ask_price": 25.92
+      },
+      {
+        "transaction_ts": "2026-08-13 06:08:22.628300+00:00",
+        "n": 1,
+        "max_skew_s": 363.07293699999997,
+        "bid_price": 25.96,
+        "ask_price": 26.0
+      },
+      {
+        "transaction_ts": "2026-08-13 03:23:39.758690+00:00",
+        "n": 1,
+        "max_skew_s": 352.472824,
+        "bid_price": 26.1,
+        "ask_price": 25.6
+      },
+      {
+        "transaction_ts": "2026-08-13 01:39:59.993020+00:00",
+        "n": 1,
+        "max_skew_s": 285.928535,
+        "bid_price": 25.8,
+        "ask_price": 26.0
+      },
+      {
+        "transaction_ts": "2026-08-13 01:33:17.312010+00:00",
+        "n": 1,
+        "max_skew_s": 178.16455299999998,
+        "bid_price": 25.6,
+        "ask_price": 25.88
+      },
+      {
+        "transaction_ts": "2026-08-13 02:47:44.139060+00:00",
+        "n": 1,
+        "max_skew_s": 159.770398,
+        "bid_price": 25.9,
+        "ask_price": 25.6
+      },
+      {
+        "transaction_ts": "2026-08-13 05:17:40.901610+00:00",
+        "n": 1,
+        "max_skew_s": 154.69331,
+        "bid_price": 25.98,
+        "ask_price": 26.0
+      },
+      {
+        "transaction_ts": "2026-08-13 06:02:41.073070+00:00",
+        "n": 1,
+        "max_skew_s": 151.35182799999998,
+        "bid_price": 25.94,
+        "ask_price": 26.0
+      },
+      {
+        "transaction_ts": "2026-08-13 01:57:38.100250+00:00",
+        "n": 1,
+        "max_skew_s": 123.27226999999999,
+        "bid_price": 25.94,
+        "ask_price": 25.0
+      }
+    ],
+    "skew_tail_ingress_hours": [
+      {
+        "value": 4,
+        "n": 13
+      },
+      {
+        "value": 7,
+        "n": 8
+      },
+      {
+        "value": 2,
+        "n": 8
+      },
+      {
+        "value": 3,
+        "n": 7
+      },
+      {
+        "value": 6,
+        "n": 7
+      },
+      {
+        "value": 5,
+        "n": 7
+      },
+      {
+        "value": 1,
+        "n": 3
+      },
+      {
+        "value": 8,
+        "n": 2
+      }
+    ],
+    "cluster_schedules": [
+      {
+        "transaction_ts": "2026-08-13 03:36:36.099430+00:00",
+        "emissions": 13,
+        "first_ingress": "2026-08-13 03:36:36.140704+00:00",
+        "last_ingress": "2026-08-13 05:05:29.462566+00:00",
+        "max_lag_s": 5333.321862,
+        "interval_s_median": 451.2813705,
+        "interval_s_min": 345.676695,
+        "interval_s_max": 554.044545,
+        "crossed_rows": 13,
+        "rows": [
+          {
+            "ingress_ts": "2026-08-13 03:36:36.140704+00:00",
+            "bid_price": 26.1,
+            "ask_price": 24.0,
+            "bid_qty": 6.0,
+            "ask_qty": 5.0,
+            "lag_s": 0.0,
+            "interval_s": null
+          },
+          {
+            "ingress_ts": "2026-08-13 03:44:31.893031+00:00",
+            "bid_price": 26.1,
+            "ask_price": 24.0,
+            "bid_qty": 6.0,
+            "ask_qty": 5.0,
+            "lag_s": 475.752327,
+            "interval_s": 475.752327
+          },
+          {
+            "ingress_ts": "2026-08-13 03:50:17.569726+00:00",
+            "bid_price": 26.1,
+            "ask_price": 24.0,
+            "bid_qty": 6.0,
+            "ask_qty": 5.0,
+            "lag_s": 821.4290219999999,
+            "interval_s": 345.676695
+          },
+          {
+            "ingress_ts": "2026-08-13 03:59:31.614271+00:00",
+            "bid_price": 26.1,
+            "ask_price": 24.0,
+            "bid_qty": 6.0,
+            "ask_qty": 5.0,
+            "lag_s": 1375.473567,
+            "interval_s": 554.044545
+          },
+          {
+            "ingress_ts": "2026-08-13 04:05:38.818136+00:00",
+            "bid_price": 26.1,
+            "ask_price": 24.0,
+            "bid_qty": 6.0,
+            "ask_qty": 5.0,
+            "lag_s": 1742.677432,
+            "interval_s": 367.203865
+          },
+          {
+            "ingress_ts": "2026-08-13 04:14:32.115802+00:00",
+            "bid_price": 26.1,
+            "ask_price": 24.0,
+            "bid_qty": 6.0,
+            "ask_qty": 5.0,
+            "lag_s": 2275.975098,
+            "interval_s": 533.2976659999999
+          },
+          {
+            "ingress_ts": "2026-08-13 04:20:39.851413+00:00",
+            "bid_price": 26.1,
+            "ask_price": 24.0,
+            "bid_qty": 6.0,
+            "ask_qty": 5.0,
+            "lag_s": 2643.710709,
+            "interval_s": 367.735611
+          },
+          {
+            "ingress_ts": "2026-08-13 04:29:32.169192+00:00",
+            "bid_price": 26.1,
+            "ask_price": 24.0,
+            "bid_qty": 6.0,
+            "ask_qty": 5.0,
+            "lag_s": 3176.028488,
+            "interval_s": 532.317779
+          },
+          {
+            "ingress_ts": "2026-08-13 04:36:52.883384+00:00",
+            "bid_price": 26.1,
+            "ask_price": 24.0,
+            "bid_qty": 6.0,
+            "ask_qty": 5.0,
+            "lag_s": 3616.74268,
+            "interval_s": 440.71419199999997
+          },
+          {
+            "ingress_ts": "2026-08-13 04:44:34.731933+00:00",
+            "bid_price": 26.1,
+            "ask_price": 24.0,
+            "bid_qty": 6.0,
+            "ask_qty": 5.0,
+            "lag_s": 4078.5912289999997,
+            "interval_s": 461.848549
+          },
+          {
+            "ingress_ts": "2026-08-13 04:52:26.468141+00:00",
+            "bid_price": 26.1,
+            "ask_price": 24.0,
+            "bid_qty": 6.0,
+            "ask_qty": 5.0,
+            "lag_s": 4550.327437,
+            "interval_s": 471.736208
+          },
+          {
+            "ingress_ts": "2026-08-13 04:59:34.759047+00:00",
+            "bid_price": 26.1,
+            "ask_price": 24.0,
+            "bid_qty": 6.0,
+            "ask_qty": 5.0,
+            "lag_s": 4978.618343,
+            "interval_s": 428.290906
+          },
+          {
+            "ingress_ts": "2026-08-13 05:05:29.462566+00:00",
+            "bid_price": 26.1,
+            "ask_price": 24.0,
+            "bid_qty": 6.0,
+            "ask_qty": 5.0,
+            "lag_s": 5333.321862,
+            "interval_s": 354.703519
+          }
+        ]
+      },
+      {
+        "transaction_ts": "2026-08-13 06:35:54.022180+00:00",
+        "emissions": 11,
+        "first_ingress": "2026-08-13 06:35:54.056699+00:00",
+        "last_ingress": "2026-08-13 07:50:11.390074+00:00",
+        "max_lag_s": 4457.333375,
+        "interval_s_median": 429.2870205,
+        "interval_s_min": 347.065287,
+        "interval_s_max": 552.73857,
+        "crossed_rows": 11,
+        "rows": [
+          {
+            "ingress_ts": "2026-08-13 06:35:54.056699+00:00",
+            "bid_price": 25.94,
+            "ask_price": 25.86,
+            "bid_qty": 110.0,
+            "ask_qty": 4.0,
+            "lag_s": 0.0,
+            "interval_s": null
+          },
+          {
+            "ingress_ts": "2026-08-13 06:44:24.121889+00:00",
+            "bid_price": 25.94,
+            "ask_price": 25.86,
+            "bid_qty": 110.0,
+            "ask_qty": 4.0,
+            "lag_s": 510.06519,
+            "interval_s": 510.06519
+          },
+          {
+            "ingress_ts": "2026-08-13 06:50:11.187176+00:00",
+            "bid_price": 25.94,
+            "ask_price": 25.86,
+            "bid_qty": 110.0,
+            "ask_qty": 4.0,
+            "lag_s": 857.1304769999999,
+            "interval_s": 347.065287
+          },
+          {
+            "ingress_ts": "2026-08-13 06:59:23.925746+00:00",
+            "bid_price": 25.94,
+            "ask_price": 25.86,
+            "bid_qty": 110.0,
+            "ask_qty": 4.0,
+            "lag_s": 1409.869047,
+            "interval_s": 552.73857
+          },
+          {
+            "ingress_ts": "2026-08-13 07:05:11.299945+00:00",
+            "bid_price": 25.94,
+            "ask_price": 25.86,
+            "bid_qty": 110.0,
+            "ask_qty": 4.0,
+            "lag_s": 1757.243246,
+            "interval_s": 347.374199
+          },
+          {
+            "ingress_ts": "2026-08-13 07:14:23.711841+00:00",
+            "bid_price": 25.94,
+            "ask_price": 25.86,
+            "bid_qty": 110.0,
+            "ask_qty": 4.0,
+            "lag_s": 2309.655142,
+            "interval_s": 552.411896
+          },
+          {
+            "ingress_ts": "2026-08-13 07:20:11.842327+00:00",
+            "bid_price": 25.94,
+            "ask_price": 25.86,
+            "bid_qty": 110.0,
+            "ask_qty": 4.0,
+            "lag_s": 2657.785628,
+            "interval_s": 348.13048599999996
+          },
+          {
+            "ingress_ts": "2026-08-13 07:29:23.107713+00:00",
+            "bid_price": 25.94,
+            "ask_price": 25.86,
+            "bid_qty": 110.0,
+            "ask_qty": 4.0,
+            "lag_s": 3209.0510139999997,
+            "interval_s": 551.2653859999999
+          },
+          {
+            "ingress_ts": "2026-08-13 07:35:11.002078+00:00",
+            "bid_price": 25.94,
+            "ask_price": 25.86,
+            "bid_qty": 110.0,
+            "ask_qty": 4.0,
+            "lag_s": 3556.945379,
+            "interval_s": 347.894365
+          },
+          {
+            "ingress_ts": "2026-08-13 07:44:22.881223+00:00",
+            "bid_price": 25.94,
+            "ask_price": 25.86,
+            "bid_qty": 110.0,
+            "ask_qty": 4.0,
+            "lag_s": 4108.824524,
+            "interval_s": 551.879145
+          },
+          {
+            "ingress_ts": "2026-08-13 07:50:11.390074+00:00",
+            "bid_price": 25.94,
+            "ask_price": 25.86,
+            "bid_qty": 110.0,
+            "ask_qty": 4.0,
+            "lag_s": 4457.333375,
+            "interval_s": 348.508851
+          }
+        ]
+      },
+      {
+        "transaction_ts": "2026-08-13 05:28:49.251500+00:00",
+        "emissions": 6,
+        "first_ingress": "2026-08-13 05:28:49.285251+00:00",
+        "last_ingress": "2026-08-13 05:59:26.377819+00:00",
+        "max_lag_s": 1837.092568,
+        "interval_s_median": 345.765194,
+        "interval_s_min": 38.227821999999996,
+        "interval_s_max": 554.378334,
+        "crossed_rows": 0,
+        "rows": [
+          {
+            "ingress_ts": "2026-08-13 05:28:49.285251+00:00",
+            "bid_price": 25.98,
+            "ask_price": 26.0,
+            "bid_qty": 80.0,
+            "ask_qty": 275.0,
+            "lag_s": 0.0,
+            "interval_s": null
+          },
+          {
+            "ingress_ts": "2026-08-13 05:29:27.513073+00:00",
+            "bid_price": 25.98,
+            "ask_price": 26.0,
+            "bid_qty": 80.0,
+            "ask_qty": 275.0,
+            "lag_s": 38.227821999999996,
+            "interval_s": 38.227821999999996
+          },
+          {
+            "ingress_ts": "2026-08-13 05:35:13.278267+00:00",
+            "bid_price": 25.98,
+            "ask_price": 26.0,
+            "bid_qty": 80.0,
+            "ask_qty": 275.0,
+            "lag_s": 383.99301599999995,
+            "interval_s": 345.765194
+          },
+          {
+            "ingress_ts": "2026-08-13 05:44:26.389707+00:00",
+            "bid_price": 25.98,
+            "ask_price": 26.0,
+            "bid_qty": 80.0,
+            "ask_qty": 275.0,
+            "lag_s": 937.1044559999999,
+            "interval_s": 553.11144
+          },
+          {
+            "ingress_ts": "2026-08-13 05:50:11.999485+00:00",
+            "bid_price": 25.98,
+            "ask_price": 26.0,
+            "bid_qty": 80.0,
+            "ask_qty": 275.0,
+            "lag_s": 1282.714234,
+            "interval_s": 345.609778
+          },
+          {
+            "ingress_ts": "2026-08-13 05:59:26.377819+00:00",
+            "bid_price": 25.98,
+            "ask_price": 26.0,
+            "bid_qty": 80.0,
+            "ask_qty": 275.0,
+            "lag_s": 1837.092568,
+            "interval_s": 554.378334
+          }
+        ]
+      },
+      {
+        "transaction_ts": "2026-08-13 02:03:20.711420+00:00",
+        "emissions": 5,
+        "first_ingress": "2026-08-13 02:03:20.746101+00:00",
+        "last_ingress": "2026-08-13 02:29:38.217551+00:00",
+        "max_lag_s": 1577.47145,
+        "interval_s_median": 447.42033499999997,
+        "interval_s_min": 133.181708,
+        "interval_s_max": 549.449072,
+        "crossed_rows": 5,
+        "rows": [
+          {
+            "ingress_ts": "2026-08-13 02:03:20.746101+00:00",
+            "bid_price": 25.94,
+            "ask_price": 25.92,
+            "bid_qty": 50.0,
+            "ask_qty": 1.0,
+            "lag_s": 0.0,
+            "interval_s": null
+          },
+          {
+            "ingress_ts": "2026-08-13 02:05:33.927809+00:00",
+            "bid_price": 25.94,
+            "ask_price": 25.92,
+            "bid_qty": 50.0,
+            "ask_qty": 1.0,
+            "lag_s": 133.181708,
+            "interval_s": 133.181708
+          },
+          {
+            "ingress_ts": "2026-08-13 02:14:38.973543+00:00",
+            "bid_price": 25.94,
+            "ask_price": 25.92,
+            "bid_qty": 50.0,
+            "ask_qty": 1.0,
+            "lag_s": 678.227442,
+            "interval_s": 545.0457339999999
+          },
+          {
+            "ingress_ts": "2026-08-13 02:20:28.768479+00:00",
+            "bid_price": 25.94,
+            "ask_price": 25.92,
+            "bid_qty": 50.0,
+            "ask_qty": 1.0,
+            "lag_s": 1028.022378,
+            "interval_s": 349.794936
+          },
+          {
+            "ingress_ts": "2026-08-13 02:29:38.217551+00:00",
+            "bid_price": 25.94,
+            "ask_price": 25.92,
+            "bid_qty": 50.0,
+            "ask_qty": 1.0,
+            "lag_s": 1577.47145,
+            "interval_s": 549.449072
+          }
+        ]
+      },
+      {
+        "transaction_ts": "2026-08-13 02:56:06.563970+00:00",
+        "emissions": 5,
+        "first_ingress": "2026-08-13 02:56:06.612411+00:00",
+        "last_ingress": "2026-08-13 03:20:19.519453+00:00",
+        "max_lag_s": 1452.907042,
+        "interval_s_median": 346.480488,
+        "interval_s_min": 207.933514,
+        "interval_s_max": 552.012552,
+        "crossed_rows": 5,
+        "rows": [
+          {
+            "ingress_ts": "2026-08-13 02:56:06.612411+00:00",
+            "bid_price": 26.1,
+            "ask_price": 25.92,
+            "bid_qty": 6.0,
+            "ask_qty": 1.0,
+            "lag_s": 0.0,
+            "interval_s": null
+          },
+          {
+            "ingress_ts": "2026-08-13 02:59:34.545925+00:00",
+            "bid_price": 26.1,
+            "ask_price": 25.92,
+            "bid_qty": 6.0,
+            "ask_qty": 1.0,
+            "lag_s": 207.933514,
+            "interval_s": 207.933514
+          },
+          {
+            "ingress_ts": "2026-08-13 03:05:21.292377+00:00",
+            "bid_price": 26.1,
+            "ask_price": 25.92,
+            "bid_qty": 6.0,
+            "ask_qty": 1.0,
+            "lag_s": 554.6799659999999,
+            "interval_s": 346.746452
+          },
+          {
+            "ingress_ts": "2026-08-13 03:14:33.304929+00:00",
+            "bid_price": 26.1,
+            "ask_price": 25.92,
+            "bid_qty": 6.0,
+            "ask_qty": 1.0,
+            "lag_s": 1106.6925179999998,
+            "interval_s": 552.012552
+          },
+          {
+            "ingress_ts": "2026-08-13 03:20:19.519453+00:00",
+            "bid_price": 26.1,
+            "ask_price": 25.92,
+            "bid_qty": 6.0,
+            "ask_qty": 1.0,
+            "lag_s": 1452.907042,
+            "interval_s": 346.214524
+          }
+        ]
+      }
+    ]
+  },
+  "trade_vs_tob": {
+    "transaction_ts_join": {
+      "join_key": "transaction_ts",
+      "joinable_trades": 8153,
+      "matched": 8153,
+      "unmatched": 0,
+      "inside_spread": 8151,
+      "above_ask": 1,
+      "below_bid": 2,
+      "trade_through_strict": 3,
+      "trade_through_strict_pct": 0.0367962713111738,
+      "trade_through_crossing_tolerant": 2,
+      "trade_through_crossing_tolerant_pct": 0.02453084754078253,
+      "matched_on_crossed_quote": 1,
+      "matched_on_locked_quote": 40,
+      "trade_through_rows": [
+        {
+          "trade_id": "1018",
+          "transaction_ts": "2026-08-13 01:38:24.537270+00:00",
+          "publish_ts": "2026-08-13 01:38:24.537270+00:00",
+          "price": 25.9,
+          "qty": 15000.0,
+          "bid_price": 25.92,
+          "ask_price": 25.94,
+          "quote_crossed": false,
+          "quote_locked": false
+        },
+        {
+          "trade_id": "1070",
+          "transaction_ts": "2026-08-13 01:39:15.370850+00:00",
+          "publish_ts": "2026-08-13 01:39:15.370850+00:00",
+          "price": 25.94,
+          "qty": 500.0,
+          "bid_price": 25.9,
+          "ask_price": 25.92,
+          "quote_crossed": false,
+          "quote_locked": false
+        },
+        {
+          "trade_id": "9555",
+          "transaction_ts": "2026-08-13 07:56:29.713190+00:00",
+          "publish_ts": "2026-08-13 07:56:29.713190+00:00",
+          "price": 25.86,
+          "qty": 4000.0,
+          "bid_price": 25.9,
+          "ask_price": 25.86,
+          "quote_crossed": true,
+          "quote_locked": false
+        }
+      ]
+    },
+    "publish_ts_join": {
+      "join_key": "publish_ts",
+      "joinable_trades": 9666,
+      "matched": 9666,
+      "unmatched": 0,
+      "inside_spread": 9605,
+      "above_ask": 6,
+      "below_bid": 58,
+      "trade_through_strict": 64,
+      "trade_through_strict_pct": 0.6621146285950755,
+      "trade_through_crossing_tolerant": 61,
+      "trade_through_crossing_tolerant_pct": 0.6310780053796814,
+      "matched_on_crossed_quote": 8,
+      "matched_on_locked_quote": 41,
+      "trade_through_rows": [
+        {
+          "trade_id": "1",
+          "transaction_ts": null,
+          "publish_ts": "2026-08-13 01:07:20.356290+00:00",
+          "price": 25.88,
+          "qty": 1301.0,
+          "bid_price": 25.8,
+          "ask_price": 25.8,
+          "quote_crossed": false,
+          "quote_locked": true
+        },
+        {
+          "trade_id": "194",
+          "transaction_ts": null,
+          "publish_ts": "2026-08-13 01:31:13.884210+00:00",
+          "price": 25.54,
+          "qty": 20.0,
+          "bid_price": 25.82,
+          "ask_price": 25.84,
+          "quote_crossed": false,
+          "quote_locked": false
+        },
+        {
+          "trade_id": "271",
+          "transaction_ts": null,
+          "publish_ts": "2026-08-13 01:32:17.186610+00:00",
+          "price": 25.82,
+          "qty": 114.0,
+          "bid_price": 25.84,
+          "ask_price": 25.86,
+          "quote_crossed": false,
+          "quote_locked": false
+        },
+        {
+          "trade_id": "955",
+          "transaction_ts": null,
+          "publish_ts": "2026-08-13 01:37:26.026990+00:00",
+          "price": 25.88,
+          "qty": 100.0,
+          "bid_price": 25.9,
+          "ask_price": 25.92,
+          "quote_crossed": false,
+          "quote_locked": false
+        },
+        {
+          "trade_id": "993",
+          "transaction_ts": null,
+          "publish_ts": "2026-08-13 01:37:59.276660+00:00",
+          "price": 25.68,
+          "qty": 75.0,
+          "bid_price": 25.92,
+          "ask_price": 25.94,
+          "quote_crossed": false,
+          "quote_locked": false
+        },
+        {
+          "trade_id": "1018",
+          "transaction_ts": "2026-08-13 01:38:24.537270+00:00",
+          "publish_ts": "2026-08-13 01:38:24.537270+00:00",
+          "price": 25.9,
+          "qty": 15000.0,
+          "bid_price": 25.92,
+          "ask_price": 25.94,
+          "quote_crossed": false,
+          "quote_locked": false
+        },
+        {
+          "trade_id": "1070",
+          "transaction_ts": "2026-08-13 01:39:15.370850+00:00",
+          "publish_ts": "2026-08-13 01:39:15.370850+00:00",
+          "price": 25.94,
+          "qty": 500.0,
+          "bid_price": 25.9,
+          "ask_price": 25.92,
+          "quote_crossed": false,
+          "quote_locked": false
+        },
+        {
+          "trade_id": "1211",
+          "transaction_ts": null,
+          "publish_ts": "2026-08-13 01:40:16.570850+00:00",
+          "price": 25.9,
+          "qty": 18.0,
+          "bid_price": 25.92,
+          "ask_price": 25.94,
+          "quote_crossed": false,
+          "quote_locked": false
+        },
+        {
+          "trade_id": "1276",
+          "transaction_ts": null,
+          "publish_ts": "2026-08-13 01:41:04.908140+00:00",
+          "price": 25.72,
+          "qty": 5.0,
+          "bid_price": 25.92,
+          "ask_price": 25.94,
+          "quote_crossed": false,
+          "quote_locked": false
+        },
+        {
+          "trade_id": "1480",
+          "transaction_ts": null,
+          "publish_ts": "2026-08-13 01:45:07.929530+00:00",
+          "price": 25.7,
+          "qty": 75.0,
+          "bid_price": 25.86,
+          "ask_price": 25.88,
+          "quote_crossed": false,
+          "quote_locked": false
+        },
+        {
+          "trade_id": "1674",
+          "transaction_ts": null,
+          "publish_ts": "2026-08-13 01:47:37.791420+00:00",
+          "price": 25.66,
+          "qty": 400.0,
+          "bid_price": 25.86,
+          "ask_price": 25.88,
+          "quote_crossed": false,
+          "quote_locked": false
+        },
+        {
+          "trade_id": "2256",
+          "transaction_ts": null,
+          "publish_ts": "2026-08-13 01:55:40.412730+00:00",
+          "price": 25.9,
+          "qty": 8.0,
+          "bid_price": 25.92,
+          "ask_price": 25.94,
+          "quote_crossed": false,
+          "quote_locked": false
+        },
+        {
+          "trade_id": "2361",
+          "transaction_ts": null,
+          "publish_ts": "2026-08-13 01:57:22.126430+00:00",
+          "price": 25.72,
+          "qty": 41.0,
+          "bid_price": 25.92,
+          "ask_price": 25.94,
+          "quote_crossed": false,
+          "quote_locked": false
+        },
+        {
+          "trade_id": "2526",
+          "transaction_ts": null,
+          "publish_ts": "2026-08-13 02:00:36.306900+00:00",
+          "price": 25.74,
+          "qty": 5.0,
+          "bid_price": 25.94,
+          "ask_price": 25.96,
+          "quote_crossed": false,
+          "quote_locked": false
+        },
+        {
+          "trade_id": "2691",
+          "transaction_ts": null,
+          "publish_ts": "2026-08-13 02:02:25.575620+00:00",
+          "price": 25.72,
+          "qty": 8.0,
+          "bid_price": 25.9,
+          "ask_price": 25.92,
+          "quote_crossed": false,
+          "quote_locked": false
+        },
+        {
+          "trade_id": "2754",
+          "transaction_ts": null,
+          "publish_ts": "2026-08-13 02:03:19.967730+00:00",
+          "price": 25.0,
+          "qty": 1.0,
+          "bid_price": 25.94,
+          "ask_price": 25.0,
+          "quote_crossed": true,
+          "quote_locked": false
+        },
+        {
+          "trade_id": "2755",
+          "transaction_ts": null,
+          "publish_ts": "2026-08-13 02:03:20.711420+00:00",
+          "price": 25.0,
+          "qty": 1.0,
+          "bid_price": 25.94,
+          "ask_price": 25.92,
+          "quote_crossed": true,
+          "quote_locked": false
+        },
+        {
+          "trade_id": "2933",
+          "transaction_ts": null,
+          "publish_ts": "2026-08-13 02:07:05.567440+00:00",
+          "price": 25.6,
+          "qty": 20.0,
+          "bid_price": 25.9,
+          "ask_price": 25.92,
+          "quote_crossed": false,
+          "quote_locked": false
+        },
+        {
+          "trade_id": "3577",
+          "transaction_ts": null,
+          "publish_ts": "2026-08-13 02:23:03.978320+00:00",
+          "price": 25.68,
+          "qty": 8.0,
+          "bid_price": 25.88,
+          "ask_price": 25.9,
+          "quote_crossed": false,
+          "quote_locked": false
+        },
+        {
+          "trade_id": "3782",
+          "transaction_ts": null,
+          "publish_ts": "2026-08-13 02:26:56.282630+00:00",
+          "price": 25.7,
+          "qty": 240.0,
+          "bid_price": 25.88,
+          "ask_price": 25.9,
+          "quote_crossed": false,
+          "quote_locked": false
+        },
+        {
+          "trade_id": "4039",
+          "transaction_ts": null,
+          "publish_ts": "2026-08-13 02:34:13.559160+00:00",
+          "price": 25.86,
+          "qty": 37.0,
+          "bid_price": 25.9,
+          "ask_price": 25.92,
+          "quote_crossed": false,
+          "quote_locked": false
+        },
+        {
+          "trade_id": "4040",
+          "transaction_ts": null,
+          "publish_ts": "2026-08-13 02:34:14.281500+00:00",
+          "price": 25.94,
+          "qty": 50.0,
+          "bid_price": 25.88,
+          "ask_price": 25.92,
+          "quote_crossed": false,
+          "quote_locked": false
+        },
+        {
+          "trade_id": "4042",
+          "transaction_ts": null,
+          "publish_ts": "2026-08-13 02:34:28.065850+00:00",
+          "price": 25.7,
+          "qty": 8.0,
+          "bid_price": 25.9,
+          "ask_price": 25.92,
+          "quote_crossed": false,
+          "quote_locked": false
+        },
+        {
+          "trade_id": "4073",
+          "transaction_ts": null,
+          "publish_ts": "2026-08-13 02:37:44.589800+00:00",
+          "price": 25.68,
+          "qty": 8.0,
+          "bid_price": 25.88,
+          "ask_price": 25.9,
+          "quote_crossed": false,
+          "quote_locked": false
+        },
+        {
+          "trade_id": "4112",
+          "transaction_ts": null,
+          "publish_ts": "2026-08-13 02:39:28.796970+00:00",
+          "price": 25.68,
+          "qty": 75.0,
+          "bid_price": 25.9,
+          "ask_price": 25.92,
+          "quote_crossed": false,
+          "quote_locked": false
+        },
+        {
+          "trade_id": "4417",
+          "transaction_ts": null,
+          "publish_ts": "2026-08-13 02:56:06.563970+00:00",
+          "price": 25.6,
+          "qty": 5.0,
+          "bid_price": 26.1,
+          "ask_price": 25.92,
+          "quote_crossed": true,
+          "quote_locked": false
+        },
+        {
+          "trade_id": "4422",
+          "transaction_ts": null,
+          "publish_ts": "2026-08-13 02:57:48.748140+00:00",
+          "price": 25.74,
+          "qty": 8.0,
+          "bid_price": 25.94,
+          "ask_price": 25.96,
+          "quote_crossed": false,
+          "quote_locked": false
+        },
+        {
+          "trade_id": "4423",
+          "transaction_ts": null,
+          "publish_ts": "2026-08-13 02:59:17.484750+00:00",
+          "price": 25.74,
+          "qty": 445.0,
+          "bid_price": 25.94,
+          "ask_price": 25.96,
+          "quote_crossed": false,
+          "quote_locked": false
+        },
+        {
+          "trade_id": "4463",
+          "transaction_ts": null,
+          "publish_ts": "2026-08-13 03:02:31.544550+00:00",
+          "price": 25.8,
+          "qty": 34.0,
+          "bid_price": 25.94,
+          "ask_price": 25.96,
+          "quote_crossed": false,
+          "quote_locked": false
+        },
+        {
+          "trade_id": "4464",
+          "transaction_ts": null,
+          "publish_ts": "2026-08-13 03:02:32.288940+00:00",
+          "price": 25.74,
+          "qty": 8.0,
+          "bid_price": 25.94,
+          "ask_price": 25.96,
+          "quote_crossed": false,
+          "quote_locked": false
+        },
+        {
+          "trade_id": "4644",
+          "transaction_ts": null,
+          "publish_ts": "2026-08-13 03:14:17.052450+00:00",
+          "price": 25.74,
+          "qty": 8.0,
+          "bid_price": 25.92,
+          "ask_price": 25.94,
+          "quote_crossed": false,
+          "quote_locked": false
+        },
+        {
+          "trade_id": "4875",
+          "transaction_ts": null,
+          "publish_ts": "2026-08-13 03:22:45.441780+00:00",
+          "price": 25.62,
+          "qty": 20.0,
+          "bid_price": 25.92,
+          "ask_price": 25.94,
+          "quote_crossed": false,
+          "quote_locked": false
+        },
+        {
+          "trade_id": "4878",
+          "transaction_ts": null,
+          "publish_ts": "2026-08-13 03:24:11.963630+00:00",
+          "price": 25.72,
+          "qty": 8.0,
+          "bid_price": 25.92,
+          "ask_price": 25.94,
+          "quote_crossed": false,
+          "quote_locked": false
+        },
+        {
+          "trade_id": "5059",
+          "transaction_ts": null,
+          "publish_ts": "2026-08-13 03:31:59.967870+00:00",
+          "price": 25.74,
+          "qty": 266.0,
+          "bid_price": 25.94,
+          "ask_price": 25.96,
+          "quote_crossed": false,
+          "quote_locked": false
+        },
+        {
+          "trade_id": "5060",
+          "transaction_ts": null,
+          "publish_ts": "2026-08-13 03:32:05.214700+00:00",
+          "price": 25.74,
+          "qty": 8.0,
+          "bid_price": 25.94,
+          "ask_price": 25.96,
+          "quote_crossed": false,
+          "quote_locked": false
+        },
+        {
+          "trade_id": "5061",
+          "transaction_ts": null,
+          "publish_ts": "2026-08-13 03:32:44.339380+00:00",
+          "price": 25.9,
+          "qty": 236.0,
+          "bid_price": 25.94,
+          "ask_price": 25.96,
+          "quote_crossed": false,
+          "quote_locked": false
+        },
+        {
+          "trade_id": "5114",
+          "transaction_ts": null,
+          "publish_ts": "2026-08-13 03:38:30.019200+00:00",
+          "price": 25.64,
+          "qty": 20.0,
+          "bid_price": 25.94,
+          "ask_price": 25.96,
+          "quote_crossed": false,
+          "quote_locked": false
+        },
+        {
+          "trade_id": "5115",
+          "transaction_ts": null,
+          "publish_ts": "2026-08-13 03:39:08.830680+00:00",
+          "price": 25.64,
+          "qty": 20.0,
+          "bid_price": 25.94,
+          "ask_price": 25.96,
+          "quote_crossed": false,
+          "quote_locked": false
+        },
+        {
+          "trade_id": "5234",
+          "transaction_ts": null,
+          "publish_ts": "2026-08-13 03:52:02.488870+00:00",
+          "price": 25.64,
+          "qty": 20.0,
+          "bid_price": 25.94,
+          "ask_price": 25.96,
+          "quote_crossed": false,
+          "quote_locked": false
+        },
+        {
+          "trade_id": "5238",
+          "transaction_ts": null,
+          "publish_ts": "2026-08-13 03:59:06.254000+00:00",
+          "price": 25.74,
+          "qty": 5.0,
+          "bid_price": 25.94,
+          "ask_price": 25.96,
+          "quote_crossed": false,
+          "quote_locked": false
+        },
+        {
+          "trade_id": "5489",
+          "transaction_ts": null,
+          "publish_ts": "2026-08-13 05:04:18.079360+00:00",
+          "price": 25.94,
+          "qty": 159.0,
+          "bid_price": 25.96,
+          "ask_price": 25.98,
+          "quote_crossed": false,
+          "quote_locked": false
+        },
+        {
+          "trade_id": "5588",
+          "transaction_ts": null,
+          "publish_ts": "2026-08-13 05:06:56.042010+00:00",
+          "price": 24.0,
+          "qty": 5.0,
+          "bid_price": 26.1,
+          "ask_price": 25.92,
+          "quote_crossed": true,
+          "quote_locked": false
+        },
+        {
+          "trade_id": "5589",
+          "transaction_ts": null,
+          "publish_ts": "2026-08-13 05:06:58.566990+00:00",
+          "price": 25.92,
+          "qty": 1.0,
+          "bid_price": 25.98,
+          "ask_price": 26.0,
+          "quote_crossed": false,
+          "quote_locked": false
+        },
+        {
+          "trade_id": "5590",
+          "transaction_ts": null,
+          "publish_ts": "2026-08-13 05:07:00.980830+00:00",
+          "price": 26.1,
+          "qty": 6.0,
+          "bid_price": 25.98,
+          "ask_price": 25.92,
+          "quote_crossed": true,
+          "quote_locked": false
+        },
+        {
+          "trade_id": "5699",
+          "transaction_ts": null,
+          "publish_ts": "2026-08-13 05:12:34.227760+00:00",
+          "price": 25.74,
+          "qty": 75.0,
+          "bid_price": 26.0,
+          "ask_price": 26.02,
+          "quote_crossed": false,
+          "quote_locked": false
+        },
+        {
+          "trade_id": "5702",
+          "transaction_ts": null,
+          "publish_ts": "2026-08-13 05:13:15.365410+00:00",
+          "price": 25.8,
+          "qty": 8.0,
+          "bid_price": 26.0,
+          "ask_price": 26.02,
+          "quote_crossed": false,
+          "quote_locked": false
+        },
+        {
+          "trade_id": "5715",
+          "transaction_ts": null,
+          "publish_ts": "2026-08-13 05:16:28.566810+00:00",
+          "price": 25.86,
+          "qty": 8.0,
+          "bid_price": 26.0,
+          "ask_price": 26.02,
+          "quote_crossed": false,
+          "quote_locked": false
+        },
+        {
+          "trade_id": "5717",
+          "transaction_ts": null,
+          "publish_ts": "2026-08-13 05:17:24.388670+00:00",
+          "price": 25.92,
+          "qty": 4.0,
+          "bid_price": 26.0,
+          "ask_price": 26.02,
+          "quote_crossed": false,
+          "quote_locked": false
+        },
+        {
+          "trade_id": "5718",
+          "transaction_ts": null,
+          "publish_ts": "2026-08-13 05:17:25.283070+00:00",
+          "price": 25.96,
+          "qty": 222.0,
+          "bid_price": 25.98,
+          "ask_price": 25.96,
+          "quote_crossed": true,
+          "quote_locked": false
+        },
+        {
+          "trade_id": "5719",
+          "transaction_ts": null,
+          "publish_ts": "2026-08-13 05:17:26.036320+00:00",
+          "price": 25.96,
+          "qty": 100.0,
+          "bid_price": 25.98,
+          "ask_price": 26.0,
+          "quote_crossed": false,
+          "quote_locked": false
+        },
+        {
+          "trade_id": "5757",
+          "transaction_ts": null,
+          "publish_ts": "2026-08-13 05:21:31.996780+00:00",
+          "price": 25.7,
+          "qty": 20.0,
+          "bid_price": 26.0,
+          "ask_price": 26.02,
+          "quote_crossed": false,
+          "quote_locked": false
+        },
+        {
+          "trade_id": "6148",
+          "transaction_ts": null,
+          "publish_ts": "2026-08-13 05:52:04.327140+00:00",
+          "price": 25.72,
+          "qty": 8.0,
+          "bid_price": 25.92,
+          "ask_price": 25.94,
+          "quote_crossed": false,
+          "quote_locked": false
+        },
+        {
+          "trade_id": "6346",
+          "transaction_ts": null,
+          "publish_ts": "2026-08-13 06:01:25.932180+00:00",
+          "price": 25.62,
+          "qty": 20.0,
+          "bid_price": 25.92,
+          "ask_price": 25.94,
+          "quote_crossed": false,
+          "quote_locked": false
+        },
+        {
+          "trade_id": "6584",
+          "transaction_ts": null,
+          "publish_ts": "2026-08-13 06:13:13.734450+00:00",
+          "price": 25.92,
+          "qty": 176.0,
+          "bid_price": 25.94,
+          "ask_price": 25.96,
+          "quote_crossed": false,
+          "quote_locked": false
+        },
+        {
+          "trade_id": "6813",
+          "transaction_ts": null,
+          "publish_ts": "2026-08-13 06:29:21.105990+00:00",
+          "price": 25.68,
+          "qty": 8.0,
+          "bid_price": 25.88,
+          "ask_price": 25.9,
+          "quote_crossed": false,
+          "quote_locked": false
+        },
+        {
+          "trade_id": "7197",
+          "transaction_ts": null,
+          "publish_ts": "2026-08-13 06:36:18.659970+00:00",
+          "price": 25.66,
+          "qty": 8.0,
+          "bid_price": 25.86,
+          "ask_price": 25.88,
+          "quote_crossed": false,
+          "quote_locked": false
+        },
+        {
+          "trade_id": "8809",
+          "transaction_ts": null,
+          "publish_ts": "2026-08-13 07:14:08.338560+00:00",
+          "price": 25.64,
+          "qty": 8.0,
+          "bid_price": 25.84,
+          "ask_price": 25.86,
+          "quote_crossed": false,
+          "quote_locked": false
+        },
+        {
+          "trade_id": "9120",
+          "transaction_ts": null,
+          "publish_ts": "2026-08-13 07:27:01.913180+00:00",
+          "price": 25.66,
+          "qty": 400.0,
+          "bid_price": 25.86,
+          "ask_price": 25.88,
+          "quote_crossed": false,
+          "quote_locked": false
+        },
+        {
+          "trade_id": "9152",
+          "transaction_ts": null,
+          "publish_ts": "2026-08-13 07:31:03.517080+00:00",
+          "price": 25.66,
+          "qty": 43.0,
+          "bid_price": 25.86,
+          "ask_price": 25.88,
+          "quote_crossed": false,
+          "quote_locked": false
+        },
+        {
+          "trade_id": "9439",
+          "transaction_ts": null,
+          "publish_ts": "2026-08-13 07:45:49.398970+00:00",
+          "price": 25.58,
+          "qty": 120.0,
+          "bid_price": 25.86,
+          "ask_price": 25.88,
+          "quote_crossed": false,
+          "quote_locked": false
+        },
+        {
+          "trade_id": "9500",
+          "transaction_ts": null,
+          "publish_ts": "2026-08-13 07:52:48.774490+00:00",
+          "price": 25.68,
+          "qty": 8.0,
+          "bid_price": 25.88,
+          "ask_price": 25.9,
+          "quote_crossed": false,
+          "quote_locked": false
+        },
+        {
+          "trade_id": "9553",
+          "transaction_ts": null,
+          "publish_ts": "2026-08-13 07:56:28.661570+00:00",
+          "price": 25.94,
+          "qty": 10.0,
+          "bid_price": 25.86,
+          "ask_price": 25.88,
+          "quote_crossed": false,
+          "quote_locked": false
+        },
+        {
+          "trade_id": "9554",
+          "transaction_ts": null,
+          "publish_ts": "2026-08-13 07:56:29.585670+00:00",
+          "price": 25.94,
+          "qty": 100.0,
+          "bid_price": 25.9,
+          "ask_price": 25.86,
+          "quote_crossed": true,
+          "quote_locked": false
+        },
+        {
+          "trade_id": "9555",
+          "transaction_ts": "2026-08-13 07:56:29.713190+00:00",
+          "publish_ts": "2026-08-13 07:56:29.713190+00:00",
+          "price": 25.86,
+          "qty": 4000.0,
+          "bid_price": 25.9,
+          "ask_price": 25.86,
+          "quote_crossed": true,
+          "quote_locked": false
+        }
+      ]
+    },
+    "publish_ts_join_split": {
+      "has_venue_time": {
+        "join_key": "publish_ts|has_transaction_ts",
+        "joinable_trades": 8153,
+        "matched": 8153,
+        "unmatched": 0,
+        "inside_spread": 8151,
+        "above_ask": 1,
+        "below_bid": 2,
+        "trade_through_strict": 3,
+        "trade_through_strict_pct": 0.0367962713111738,
+        "trade_through_crossing_tolerant": 2,
+        "trade_through_crossing_tolerant_pct": 0.02453084754078253,
+        "matched_on_crossed_quote": 1,
+        "matched_on_locked_quote": 40,
+        "trade_through_rows": [
+          {
+            "trade_id": "1018",
+            "transaction_ts": "2026-08-13 01:38:24.537270+00:00",
+            "publish_ts": "2026-08-13 01:38:24.537270+00:00",
+            "price": 25.9,
+            "qty": 15000.0,
+            "bid_price": 25.92,
+            "ask_price": 25.94,
+            "quote_crossed": false,
+            "quote_locked": false
+          },
+          {
+            "trade_id": "1070",
+            "transaction_ts": "2026-08-13 01:39:15.370850+00:00",
+            "publish_ts": "2026-08-13 01:39:15.370850+00:00",
+            "price": 25.94,
+            "qty": 500.0,
+            "bid_price": 25.9,
+            "ask_price": 25.92,
+            "quote_crossed": false,
+            "quote_locked": false
+          },
+          {
+            "trade_id": "9555",
+            "transaction_ts": "2026-08-13 07:56:29.713190+00:00",
+            "publish_ts": "2026-08-13 07:56:29.713190+00:00",
+            "price": 25.86,
+            "qty": 4000.0,
+            "bid_price": 25.9,
+            "ask_price": 25.86,
+            "quote_crossed": true,
+            "quote_locked": false
+          }
+        ]
+      },
+      "missing_venue_time": {
+        "join_key": "publish_ts|null_transaction_ts",
+        "joinable_trades": 1513,
+        "matched": 1513,
+        "unmatched": 0,
+        "inside_spread": 1454,
+        "above_ask": 5,
+        "below_bid": 56,
+        "trade_through_strict": 61,
+        "trade_through_strict_pct": 4.03172504957039,
+        "trade_through_crossing_tolerant": 59,
+        "trade_through_crossing_tolerant_pct": 3.8995373430270988,
+        "matched_on_crossed_quote": 7,
+        "matched_on_locked_quote": 1,
+        "trade_through_rows": [
+          {
+            "trade_id": "1",
+            "transaction_ts": null,
+            "publish_ts": "2026-08-13 01:07:20.356290+00:00",
+            "price": 25.88,
+            "qty": 1301.0,
+            "bid_price": 25.8,
+            "ask_price": 25.8,
+            "quote_crossed": false,
+            "quote_locked": true
+          },
+          {
+            "trade_id": "194",
+            "transaction_ts": null,
+            "publish_ts": "2026-08-13 01:31:13.884210+00:00",
+            "price": 25.54,
+            "qty": 20.0,
+            "bid_price": 25.82,
+            "ask_price": 25.84,
+            "quote_crossed": false,
+            "quote_locked": false
+          },
+          {
+            "trade_id": "271",
+            "transaction_ts": null,
+            "publish_ts": "2026-08-13 01:32:17.186610+00:00",
+            "price": 25.82,
+            "qty": 114.0,
+            "bid_price": 25.84,
+            "ask_price": 25.86,
+            "quote_crossed": false,
+            "quote_locked": false
+          },
+          {
+            "trade_id": "955",
+            "transaction_ts": null,
+            "publish_ts": "2026-08-13 01:37:26.026990+00:00",
+            "price": 25.88,
+            "qty": 100.0,
+            "bid_price": 25.9,
+            "ask_price": 25.92,
+            "quote_crossed": false,
+            "quote_locked": false
+          },
+          {
+            "trade_id": "993",
+            "transaction_ts": null,
+            "publish_ts": "2026-08-13 01:37:59.276660+00:00",
+            "price": 25.68,
+            "qty": 75.0,
+            "bid_price": 25.92,
+            "ask_price": 25.94,
+            "quote_crossed": false,
+            "quote_locked": false
+          },
+          {
+            "trade_id": "1211",
+            "transaction_ts": null,
+            "publish_ts": "2026-08-13 01:40:16.570850+00:00",
+            "price": 25.9,
+            "qty": 18.0,
+            "bid_price": 25.92,
+            "ask_price": 25.94,
+            "quote_crossed": false,
+            "quote_locked": false
+          },
+          {
+            "trade_id": "1276",
+            "transaction_ts": null,
+            "publish_ts": "2026-08-13 01:41:04.908140+00:00",
+            "price": 25.72,
+            "qty": 5.0,
+            "bid_price": 25.92,
+            "ask_price": 25.94,
+            "quote_crossed": false,
+            "quote_locked": false
+          },
+          {
+            "trade_id": "1480",
+            "transaction_ts": null,
+            "publish_ts": "2026-08-13 01:45:07.929530+00:00",
+            "price": 25.7,
+            "qty": 75.0,
+            "bid_price": 25.86,
+            "ask_price": 25.88,
+            "quote_crossed": false,
+            "quote_locked": false
+          },
+          {
+            "trade_id": "1674",
+            "transaction_ts": null,
+            "publish_ts": "2026-08-13 01:47:37.791420+00:00",
+            "price": 25.66,
+            "qty": 400.0,
+            "bid_price": 25.86,
+            "ask_price": 25.88,
+            "quote_crossed": false,
+            "quote_locked": false
+          },
+          {
+            "trade_id": "2256",
+            "transaction_ts": null,
+            "publish_ts": "2026-08-13 01:55:40.412730+00:00",
+            "price": 25.9,
+            "qty": 8.0,
+            "bid_price": 25.92,
+            "ask_price": 25.94,
+            "quote_crossed": false,
+            "quote_locked": false
+          },
+          {
+            "trade_id": "2361",
+            "transaction_ts": null,
+            "publish_ts": "2026-08-13 01:57:22.126430+00:00",
+            "price": 25.72,
+            "qty": 41.0,
+            "bid_price": 25.92,
+            "ask_price": 25.94,
+            "quote_crossed": false,
+            "quote_locked": false
+          },
+          {
+            "trade_id": "2526",
+            "transaction_ts": null,
+            "publish_ts": "2026-08-13 02:00:36.306900+00:00",
+            "price": 25.74,
+            "qty": 5.0,
+            "bid_price": 25.94,
+            "ask_price": 25.96,
+            "quote_crossed": false,
+            "quote_locked": false
+          },
+          {
+            "trade_id": "2691",
+            "transaction_ts": null,
+            "publish_ts": "2026-08-13 02:02:25.575620+00:00",
+            "price": 25.72,
+            "qty": 8.0,
+            "bid_price": 25.9,
+            "ask_price": 25.92,
+            "quote_crossed": false,
+            "quote_locked": false
+          },
+          {
+            "trade_id": "2754",
+            "transaction_ts": null,
+            "publish_ts": "2026-08-13 02:03:19.967730+00:00",
+            "price": 25.0,
+            "qty": 1.0,
+            "bid_price": 25.94,
+            "ask_price": 25.0,
+            "quote_crossed": true,
+            "quote_locked": false
+          },
+          {
+            "trade_id": "2755",
+            "transaction_ts": null,
+            "publish_ts": "2026-08-13 02:03:20.711420+00:00",
+            "price": 25.0,
+            "qty": 1.0,
+            "bid_price": 25.94,
+            "ask_price": 25.92,
+            "quote_crossed": true,
+            "quote_locked": false
+          },
+          {
+            "trade_id": "2933",
+            "transaction_ts": null,
+            "publish_ts": "2026-08-13 02:07:05.567440+00:00",
+            "price": 25.6,
+            "qty": 20.0,
+            "bid_price": 25.9,
+            "ask_price": 25.92,
+            "quote_crossed": false,
+            "quote_locked": false
+          },
+          {
+            "trade_id": "3577",
+            "transaction_ts": null,
+            "publish_ts": "2026-08-13 02:23:03.978320+00:00",
+            "price": 25.68,
+            "qty": 8.0,
+            "bid_price": 25.88,
+            "ask_price": 25.9,
+            "quote_crossed": false,
+            "quote_locked": false
+          },
+          {
+            "trade_id": "3782",
+            "transaction_ts": null,
+            "publish_ts": "2026-08-13 02:26:56.282630+00:00",
+            "price": 25.7,
+            "qty": 240.0,
+            "bid_price": 25.88,
+            "ask_price": 25.9,
+            "quote_crossed": false,
+            "quote_locked": false
+          },
+          {
+            "trade_id": "4039",
+            "transaction_ts": null,
+            "publish_ts": "2026-08-13 02:34:13.559160+00:00",
+            "price": 25.86,
+            "qty": 37.0,
+            "bid_price": 25.9,
+            "ask_price": 25.92,
+            "quote_crossed": false,
+            "quote_locked": false
+          },
+          {
+            "trade_id": "4040",
+            "transaction_ts": null,
+            "publish_ts": "2026-08-13 02:34:14.281500+00:00",
+            "price": 25.94,
+            "qty": 50.0,
+            "bid_price": 25.88,
+            "ask_price": 25.92,
+            "quote_crossed": false,
+            "quote_locked": false
+          },
+          {
+            "trade_id": "4042",
+            "transaction_ts": null,
+            "publish_ts": "2026-08-13 02:34:28.065850+00:00",
+            "price": 25.7,
+            "qty": 8.0,
+            "bid_price": 25.9,
+            "ask_price": 25.92,
+            "quote_crossed": false,
+            "quote_locked": false
+          },
+          {
+            "trade_id": "4073",
+            "transaction_ts": null,
+            "publish_ts": "2026-08-13 02:37:44.589800+00:00",
+            "price": 25.68,
+            "qty": 8.0,
+            "bid_price": 25.88,
+            "ask_price": 25.9,
+            "quote_crossed": false,
+            "quote_locked": false
+          },
+          {
+            "trade_id": "4112",
+            "transaction_ts": null,
+            "publish_ts": "2026-08-13 02:39:28.796970+00:00",
+            "price": 25.68,
+            "qty": 75.0,
+            "bid_price": 25.9,
+            "ask_price": 25.92,
+            "quote_crossed": false,
+            "quote_locked": false
+          },
+          {
+            "trade_id": "4417",
+            "transaction_ts": null,
+            "publish_ts": "2026-08-13 02:56:06.563970+00:00",
+            "price": 25.6,
+            "qty": 5.0,
+            "bid_price": 26.1,
+            "ask_price": 25.92,
+            "quote_crossed": true,
+            "quote_locked": false
+          },
+          {
+            "trade_id": "4422",
+            "transaction_ts": null,
+            "publish_ts": "2026-08-13 02:57:48.748140+00:00",
+            "price": 25.74,
+            "qty": 8.0,
+            "bid_price": 25.94,
+            "ask_price": 25.96,
+            "quote_crossed": false,
+            "quote_locked": false
+          },
+          {
+            "trade_id": "4423",
+            "transaction_ts": null,
+            "publish_ts": "2026-08-13 02:59:17.484750+00:00",
+            "price": 25.74,
+            "qty": 445.0,
+            "bid_price": 25.94,
+            "ask_price": 25.96,
+            "quote_crossed": false,
+            "quote_locked": false
+          },
+          {
+            "trade_id": "4463",
+            "transaction_ts": null,
+            "publish_ts": "2026-08-13 03:02:31.544550+00:00",
+            "price": 25.8,
+            "qty": 34.0,
+            "bid_price": 25.94,
+            "ask_price": 25.96,
+            "quote_crossed": false,
+            "quote_locked": false
+          },
+          {
+            "trade_id": "4464",
+            "transaction_ts": null,
+            "publish_ts": "2026-08-13 03:02:32.288940+00:00",
+            "price": 25.74,
+            "qty": 8.0,
+            "bid_price": 25.94,
+            "ask_price": 25.96,
+            "quote_crossed": false,
+            "quote_locked": false
+          },
+          {
+            "trade_id": "4644",
+            "transaction_ts": null,
+            "publish_ts": "2026-08-13 03:14:17.052450+00:00",
+            "price": 25.74,
+            "qty": 8.0,
+            "bid_price": 25.92,
+            "ask_price": 25.94,
+            "quote_crossed": false,
+            "quote_locked": false
+          },
+          {
+            "trade_id": "4875",
+            "transaction_ts": null,
+            "publish_ts": "2026-08-13 03:22:45.441780+00:00",
+            "price": 25.62,
+            "qty": 20.0,
+            "bid_price": 25.92,
+            "ask_price": 25.94,
+            "quote_crossed": false,
+            "quote_locked": false
+          },
+          {
+            "trade_id": "4878",
+            "transaction_ts": null,
+            "publish_ts": "2026-08-13 03:24:11.963630+00:00",
+            "price": 25.72,
+            "qty": 8.0,
+            "bid_price": 25.92,
+            "ask_price": 25.94,
+            "quote_crossed": false,
+            "quote_locked": false
+          },
+          {
+            "trade_id": "5059",
+            "transaction_ts": null,
+            "publish_ts": "2026-08-13 03:31:59.967870+00:00",
+            "price": 25.74,
+            "qty": 266.0,
+            "bid_price": 25.94,
+            "ask_price": 25.96,
+            "quote_crossed": false,
+            "quote_locked": false
+          },
+          {
+            "trade_id": "5060",
+            "transaction_ts": null,
+            "publish_ts": "2026-08-13 03:32:05.214700+00:00",
+            "price": 25.74,
+            "qty": 8.0,
+            "bid_price": 25.94,
+            "ask_price": 25.96,
+            "quote_crossed": false,
+            "quote_locked": false
+          },
+          {
+            "trade_id": "5061",
+            "transaction_ts": null,
+            "publish_ts": "2026-08-13 03:32:44.339380+00:00",
+            "price": 25.9,
+            "qty": 236.0,
+            "bid_price": 25.94,
+            "ask_price": 25.96,
+            "quote_crossed": false,
+            "quote_locked": false
+          },
+          {
+            "trade_id": "5114",
+            "transaction_ts": null,
+            "publish_ts": "2026-08-13 03:38:30.019200+00:00",
+            "price": 25.64,
+            "qty": 20.0,
+            "bid_price": 25.94,
+            "ask_price": 25.96,
+            "quote_crossed": false,
+            "quote_locked": false
+          },
+          {
+            "trade_id": "5115",
+            "transaction_ts": null,
+            "publish_ts": "2026-08-13 03:39:08.830680+00:00",
+            "price": 25.64,
+            "qty": 20.0,
+            "bid_price": 25.94,
+            "ask_price": 25.96,
+            "quote_crossed": false,
+            "quote_locked": false
+          },
+          {
+            "trade_id": "5234",
+            "transaction_ts": null,
+            "publish_ts": "2026-08-13 03:52:02.488870+00:00",
+            "price": 25.64,
+            "qty": 20.0,
+            "bid_price": 25.94,
+            "ask_price": 25.96,
+            "quote_crossed": false,
+            "quote_locked": false
+          },
+          {
+            "trade_id": "5238",
+            "transaction_ts": null,
+            "publish_ts": "2026-08-13 03:59:06.254000+00:00",
+            "price": 25.74,
+            "qty": 5.0,
+            "bid_price": 25.94,
+            "ask_price": 25.96,
+            "quote_crossed": false,
+            "quote_locked": false
+          },
+          {
+            "trade_id": "5489",
+            "transaction_ts": null,
+            "publish_ts": "2026-08-13 05:04:18.079360+00:00",
+            "price": 25.94,
+            "qty": 159.0,
+            "bid_price": 25.96,
+            "ask_price": 25.98,
+            "quote_crossed": false,
+            "quote_locked": false
+          },
+          {
+            "trade_id": "5588",
+            "transaction_ts": null,
+            "publish_ts": "2026-08-13 05:06:56.042010+00:00",
+            "price": 24.0,
+            "qty": 5.0,
+            "bid_price": 26.1,
+            "ask_price": 25.92,
+            "quote_crossed": true,
+            "quote_locked": false
+          },
+          {
+            "trade_id": "5589",
+            "transaction_ts": null,
+            "publish_ts": "2026-08-13 05:06:58.566990+00:00",
+            "price": 25.92,
+            "qty": 1.0,
+            "bid_price": 25.98,
+            "ask_price": 26.0,
+            "quote_crossed": false,
+            "quote_locked": false
+          },
+          {
+            "trade_id": "5590",
+            "transaction_ts": null,
+            "publish_ts": "2026-08-13 05:07:00.980830+00:00",
+            "price": 26.1,
+            "qty": 6.0,
+            "bid_price": 25.98,
+            "ask_price": 25.92,
+            "quote_crossed": true,
+            "quote_locked": false
+          },
+          {
+            "trade_id": "5699",
+            "transaction_ts": null,
+            "publish_ts": "2026-08-13 05:12:34.227760+00:00",
+            "price": 25.74,
+            "qty": 75.0,
+            "bid_price": 26.0,
+            "ask_price": 26.02,
+            "quote_crossed": false,
+            "quote_locked": false
+          },
+          {
+            "trade_id": "5702",
+            "transaction_ts": null,
+            "publish_ts": "2026-08-13 05:13:15.365410+00:00",
+            "price": 25.8,
+            "qty": 8.0,
+            "bid_price": 26.0,
+            "ask_price": 26.02,
+            "quote_crossed": false,
+            "quote_locked": false
+          },
+          {
+            "trade_id": "5715",
+            "transaction_ts": null,
+            "publish_ts": "2026-08-13 05:16:28.566810+00:00",
+            "price": 25.86,
+            "qty": 8.0,
+            "bid_price": 26.0,
+            "ask_price": 26.02,
+            "quote_crossed": false,
+            "quote_locked": false
+          },
+          {
+            "trade_id": "5717",
+            "transaction_ts": null,
+            "publish_ts": "2026-08-13 05:17:24.388670+00:00",
+            "price": 25.92,
+            "qty": 4.0,
+            "bid_price": 26.0,
+            "ask_price": 26.02,
+            "quote_crossed": false,
+            "quote_locked": false
+          },
+          {
+            "trade_id": "5718",
+            "transaction_ts": null,
+            "publish_ts": "2026-08-13 05:17:25.283070+00:00",
+            "price": 25.96,
+            "qty": 222.0,
+            "bid_price": 25.98,
+            "ask_price": 25.96,
+            "quote_crossed": true,
+            "quote_locked": false
+          },
+          {
+            "trade_id": "5719",
+            "transaction_ts": null,
+            "publish_ts": "2026-08-13 05:17:26.036320+00:00",
+            "price": 25.96,
+            "qty": 100.0,
+            "bid_price": 25.98,
+            "ask_price": 26.0,
+            "quote_crossed": false,
+            "quote_locked": false
+          },
+          {
+            "trade_id": "5757",
+            "transaction_ts": null,
+            "publish_ts": "2026-08-13 05:21:31.996780+00:00",
+            "price": 25.7,
+            "qty": 20.0,
+            "bid_price": 26.0,
+            "ask_price": 26.02,
+            "quote_crossed": false,
+            "quote_locked": false
+          },
+          {
+            "trade_id": "6148",
+            "transaction_ts": null,
+            "publish_ts": "2026-08-13 05:52:04.327140+00:00",
+            "price": 25.72,
+            "qty": 8.0,
+            "bid_price": 25.92,
+            "ask_price": 25.94,
+            "quote_crossed": false,
+            "quote_locked": false
+          },
+          {
+            "trade_id": "6346",
+            "transaction_ts": null,
+            "publish_ts": "2026-08-13 06:01:25.932180+00:00",
+            "price": 25.62,
+            "qty": 20.0,
+            "bid_price": 25.92,
+            "ask_price": 25.94,
+            "quote_crossed": false,
+            "quote_locked": false
+          },
+          {
+            "trade_id": "6584",
+            "transaction_ts": null,
+            "publish_ts": "2026-08-13 06:13:13.734450+00:00",
+            "price": 25.92,
+            "qty": 176.0,
+            "bid_price": 25.94,
+            "ask_price": 25.96,
+            "quote_crossed": false,
+            "quote_locked": false
+          },
+          {
+            "trade_id": "6813",
+            "transaction_ts": null,
+            "publish_ts": "2026-08-13 06:29:21.105990+00:00",
+            "price": 25.68,
+            "qty": 8.0,
+            "bid_price": 25.88,
+            "ask_price": 25.9,
+            "quote_crossed": false,
+            "quote_locked": false
+          },
+          {
+            "trade_id": "7197",
+            "transaction_ts": null,
+            "publish_ts": "2026-08-13 06:36:18.659970+00:00",
+            "price": 25.66,
+            "qty": 8.0,
+            "bid_price": 25.86,
+            "ask_price": 25.88,
+            "quote_crossed": false,
+            "quote_locked": false
+          },
+          {
+            "trade_id": "8809",
+            "transaction_ts": null,
+            "publish_ts": "2026-08-13 07:14:08.338560+00:00",
+            "price": 25.64,
+            "qty": 8.0,
+            "bid_price": 25.84,
+            "ask_price": 25.86,
+            "quote_crossed": false,
+            "quote_locked": false
+          },
+          {
+            "trade_id": "9120",
+            "transaction_ts": null,
+            "publish_ts": "2026-08-13 07:27:01.913180+00:00",
+            "price": 25.66,
+            "qty": 400.0,
+            "bid_price": 25.86,
+            "ask_price": 25.88,
+            "quote_crossed": false,
+            "quote_locked": false
+          },
+          {
+            "trade_id": "9152",
+            "transaction_ts": null,
+            "publish_ts": "2026-08-13 07:31:03.517080+00:00",
+            "price": 25.66,
+            "qty": 43.0,
+            "bid_price": 25.86,
+            "ask_price": 25.88,
+            "quote_crossed": false,
+            "quote_locked": false
+          },
+          {
+            "trade_id": "9439",
+            "transaction_ts": null,
+            "publish_ts": "2026-08-13 07:45:49.398970+00:00",
+            "price": 25.58,
+            "qty": 120.0,
+            "bid_price": 25.86,
+            "ask_price": 25.88,
+            "quote_crossed": false,
+            "quote_locked": false
+          },
+          {
+            "trade_id": "9500",
+            "transaction_ts": null,
+            "publish_ts": "2026-08-13 07:52:48.774490+00:00",
+            "price": 25.68,
+            "qty": 8.0,
+            "bid_price": 25.88,
+            "ask_price": 25.9,
+            "quote_crossed": false,
+            "quote_locked": false
+          },
+          {
+            "trade_id": "9553",
+            "transaction_ts": null,
+            "publish_ts": "2026-08-13 07:56:28.661570+00:00",
+            "price": 25.94,
+            "qty": 10.0,
+            "bid_price": 25.86,
+            "ask_price": 25.88,
+            "quote_crossed": false,
+            "quote_locked": false
+          },
+          {
+            "trade_id": "9554",
+            "transaction_ts": null,
+            "publish_ts": "2026-08-13 07:56:29.585670+00:00",
+            "price": 25.94,
+            "qty": 100.0,
+            "bid_price": 25.9,
+            "ask_price": 25.86,
+            "quote_crossed": true,
+            "quote_locked": false
+          }
+        ]
+      }
+    },
+    "asof_ties": {
+      "trades_on_an_exact_quote_timestamp": 3804,
+      "quote_timestamps_with_conflicting_quotes": 519,
+      "convention": "backward asof, <= semantics; polars keeps the last row at a tied key"
+    }
+  },
+  "side_recovery": {
+    "rule": "at ask -> Buy, at bid -> Sell, else vs prevailing mid; ties unclassified",
+    "joined_trades": 8153,
+    "printed_at_bid_or_ask": 7780,
+    "printed_at_ask": 3931,
+    "printed_at_bid": 3889,
+    "recovered": {
+      "Buy": 3932,
+      "Sell": 3850,
+      "unclassified": 371
+    },
+    "buy": 3932,
+    "sell": 3850,
+    "unclassified": 371,
+    "buy_pct_of_classified": 50.52685684913904,
+    "labelled_side_counts": [
+      {
+        "value": "Buy",
+        "n": 9666
+      }
+    ]
+  },
+  "missing_venue_time": {
+    "missing": {
+      "cohort": "null_transaction_ts",
+      "n": 1513,
+      "board_lot": 500,
+      "odd_lot_n": 77,
+      "odd_lot_pct": 5.089226701916721,
+      "pct_of_rows": 15.652803641630458,
+      "volume": 207658307.0,
+      "pct_of_volume": 38.15348983066072,
+      "qty_median": 50000.0,
+      "qty_mean": 137249.37673496365,
+      "qty_max": 1459500.0,
+      "distinct_prices": 26,
+      "price_min": 24.0,
+      "price_max": 26.1,
+      "price_std": 0.08121103250535303
+    },
+    "present": {
+      "cohort": "has_transaction_ts",
+      "n": 8153,
+      "board_lot": 500,
+      "odd_lot_n": 0,
+      "odd_lot_pct": 0.0,
+      "pct_of_rows": 84.34719635836954,
+      "volume": 336612500.0,
+      "pct_of_volume": 61.84651016933928,
+      "qty_median": 15000.0,
+      "qty_mean": 41286.949589108306,
+      "qty_max": 1228500.0,
+      "distinct_prices": 13,
+      "price_min": 25.78,
+      "price_max": 26.02,
+      "price_std": 0.037649539467880265
+    },
+    "qty_median_ratio": 3.3333333333333335,
+    "price_std_ratio": 2.157025919922238,
+    "publish_ts_nulls_in_cohort": 0,
+    "by_publish_session_phase": [
+      {
+        "value": "continuous",
+        "n": 1512
+      },
+      {
+        "value": "opening_auction",
+        "n": 1
+      }
+    ],
+    "by_ingress_hour": [
+      {
+        "value": 1,
+        "n": 391
+      },
+      {
+        "value": 2,
+        "n": 283
+      },
+      {
+        "value": 6,
+        "n": 250
+      },
+      {
+        "value": 5,
+        "n": 231
+      },
+      {
+        "value": 7,
+        "n": 217
+      },
+      {
+        "value": 3,
+        "n": 141
+      }
+    ],
+    "qty_value_counts_top": [
+      {
+        "value": 2000.0,
+        "n": 193
+      },
+      {
+        "value": 45000.0,
+        "n": 69
+      },
+      {
+        "value": 121500.0,
+        "n": 38
+      },
+      {
+        "value": 121000.0,
+        "n": 35
+      },
+      {
+        "value": 500.0,
+        "n": 34
+      },
+      {
+        "value": 606000.0,
+        "n": 30
+      },
+      {
+        "value": 50000.0,
+        "n": 23
+      },
+      {
+        "value": 192500.0,
+        "n": 18
+      },
+      {
+        "value": 1500.0,
+        "n": 18
+      },
+      {
+        "value": 8.0,
+        "n": 18
+      }
+    ],
+    "qty_value_counts_present_top": [
+      {
+        "value": 500.0,
+        "n": 1023
+      },
+      {
+        "value": 1000.0,
+        "n": 754
+      },
+      {
+        "value": 16000.0,
+        "n": 667
+      },
+      {
+        "value": 2000.0,
+        "n": 556
+      },
+      {
+        "value": 1500.0,
+        "n": 385
+      },
+      {
+        "value": 45000.0,
+        "n": 326
+      },
+      {
+        "value": 30000.0,
+        "n": 177
+      },
+      {
+        "value": 2500.0,
+        "n": 159
+      },
+      {
+        "value": 3000.0,
+        "n": 132
+      },
+      {
+        "value": 4000.0,
+        "n": 126
+      }
+    ],
+    "clock_identity": {
+      "tob_publish_equals_transaction": 109544,
+      "tob_rows": 109544,
+      "trades_publish_equals_transaction": 8153,
+      "trades_with_both_clocks": 8153
+    }
+  },
+  "trades_by_utc_hour": [
+    {
+      "utc_hour": null,
+      "n_trades": 1513
+    },
+    {
+      "utc_hour": 1,
+      "n_trades": 2123
+    },
+    {
+      "utc_hour": 2,
+      "n_trades": 1627
+    },
+    {
+      "utc_hour": 3,
+      "n_trades": 673
+    },
+    {
+      "utc_hour": 5,
+      "n_trades": 739
+    },
+    {
+      "utc_hour": 6,
+      "n_trades": 2039
+    },
+    {
+      "utc_hour": 7,
+      "n_trades": 913
+    },
+    {
+      "utc_hour": 8,
+      "n_trades": 39
+    }
+  ],
+  "side_counts": [
+    {
+      "side": "Buy",
+      "count": 9666
+    }
+  ],
+  "findings": [
+    {
+      "file": "A_hkex_2800_top_of_book.parquet",
+      "check_id": "crossed_book",
+      "severity": "high",
+      "classification": "pipeline",
+      "metric": {
+        "crossed": 71,
+        "crossed_pct": 0.06481591367615779,
+        "bid_col": "bid_price",
+        "ask_col": "ask_price"
+      },
+      "notes": "Bid above ask on top of book."
+    },
+    {
+      "file": "A_hkex_2800_top_of_book.parquet",
+      "check_id": "locked_book",
+      "severity": "low",
+      "classification": "market",
+      "metric": {
+        "locked": 112,
+        "locked_pct": 0.10224482157365736,
+        "bid_col": "bid_price",
+        "ask_col": "ask_price"
+      },
+      "notes": "Bid equals ask (locked). Often market microstructure on equities."
+    },
+    {
+      "file": "A_hkex_2800_top_of_book.parquet",
+      "check_id": "non_monotonic_ingress_ts",
+      "severity": "high",
+      "classification": "pipeline",
+      "metric": {
+        "backward_jumps": 41,
+        "rows": 109544,
+        "worst_step_ms": -5332131.047,
+        "median_backward_step_ms": -8.541,
+        "within_1ms": 20
+      },
+      "notes": "41 backward jumps in ingress_ts (stored order)."
+    },
+    {
+      "file": "A_hkex_2800_top_of_book.parquet",
+      "check_id": "clock_skew_ingress_ts_transaction_ts",
+      "severity": "info",
+      "classification": "unclear",
+      "metric": {
+        "ingress": "ingress_ts",
+        "venue": "transaction_ts",
+        "venue_unit_hint": "datetime",
+        "n": 109544,
+        "median_s": 0.033081,
+        "p50_s": 0.033081,
+        "p99_s": 0.051337,
+        "min_s": 0.028000999999999998,
+        "max_s": 5333.363136,
+        "negative_count": 0,
+        "negative_pct": 0.0
+      },
+      "notes": "Ingress vs venue clock skew within expected capture delay."
+    },
+    {
+      "file": "A_hkex_2800_top_of_book.parquet",
+      "check_id": "clock_skew_ingress_ts_publish_ts",
+      "severity": "info",
+      "classification": "unclear",
+      "metric": {
+        "ingress": "ingress_ts",
+        "venue": "publish_ts",
+        "venue_unit_hint": "datetime",
+        "n": 109544,
+        "median_s": 0.033081,
+        "p50_s": 0.033081,
+        "p99_s": 0.051337,
+        "min_s": 0.028000999999999998,
+        "max_s": 5333.363136,
+        "negative_count": 0,
+        "negative_pct": 0.0
+      },
+      "notes": "Ingress vs venue clock skew within expected capture delay."
+    },
+    {
+      "file": "A_hkex_2800_trades.parquet",
+      "check_id": "null_clock_transaction_ts",
+      "severity": "medium",
+      "classification": "pipeline",
+      "metric": {
+        "column": "transaction_ts",
+        "nulls": 1513,
+        "null_pct": 15.652803641630458,
+        "rows": 9666
+      },
+      "notes": "transaction_ts null on 15.6528% of rows (> 1.0% alert threshold)."
+    },
+    {
+      "file": "A_hkex_2800_trades.parquet",
+      "check_id": "non_monotonic_ingress_ts",
+      "severity": "medium",
+      "classification": "pipeline",
+      "metric": {
+        "backward_jumps": 4,
+        "rows": 9666,
+        "worst_step_ms": -25252334.45,
+        "median_backward_step_ms": -0.001,
+        "within_1ms": 3
+      },
+      "notes": "4 backward jumps in ingress_ts (stored order)."
+    },
+    {
+      "file": "A_hkex_2800_trades.parquet",
+      "check_id": "non_monotonic_publish_ts",
+      "severity": "medium",
+      "classification": "pipeline",
+      "metric": {
+        "backward_jumps": 1,
+        "rows": 9666,
+        "worst_step_ms": -25252352.72,
+        "median_backward_step_ms": -25252352.72,
+        "within_1ms": 0
+      },
+      "notes": "1 backward jumps in publish_ts (stored order)."
+    },
+    {
+      "file": "A_hkex_2800_trades.parquet",
+      "check_id": "clock_skew_ingress_ts_transaction_ts",
+      "severity": "info",
+      "classification": "unclear",
+      "metric": {
+        "ingress": "ingress_ts",
+        "venue": "transaction_ts",
+        "venue_unit_hint": "datetime",
+        "n": 8153,
+        "median_s": 0.033393,
+        "p50_s": 0.033393,
+        "p99_s": 0.049747,
+        "min_s": 0.028048,
+        "max_s": 0.072333,
+        "negative_count": 0,
+        "negative_pct": 0.0
+      },
+      "notes": "Ingress vs venue clock skew within expected capture delay."
+    },
+    {
+      "file": "A_hkex_2800_trades.parquet",
+      "check_id": "clock_skew_ingress_ts_publish_ts",
+      "severity": "info",
+      "classification": "unclear",
+      "metric": {
+        "ingress": "ingress_ts",
+        "venue": "publish_ts",
+        "venue_unit_hint": "datetime",
+        "n": 9666,
+        "median_s": 0.033294,
+        "p50_s": 0.033294,
+        "p99_s": 0.049635,
+        "min_s": 0.028048,
+        "max_s": 0.072333,
+        "negative_count": 0,
+        "negative_pct": 0.0
+      },
+      "notes": "Ingress vs venue clock skew within expected capture delay."
+    }
+  ]
+}

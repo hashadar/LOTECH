@@ -1,0 +1,1751 @@
+[
+  {
+    "file": "A_hkex_2800_top_of_book.parquet",
+    "rows": 109544,
+    "columns": [
+      "instrument",
+      "ingress_ts",
+      "transaction_ts",
+      "publish_ts",
+      "seq_id",
+      "bid_price",
+      "bid_qty",
+      "ask_price",
+      "ask_qty"
+    ],
+    "expected_columns": [
+      "ingress_ts",
+      "transaction_ts",
+      "publish_ts"
+    ],
+    "absent_columns": [],
+    "partition_column": null,
+    "schema": {
+      "instrument": "String",
+      "ingress_ts": "Datetime(time_unit='us', time_zone='UTC')",
+      "transaction_ts": "Datetime(time_unit='us', time_zone='UTC')",
+      "publish_ts": "Datetime(time_unit='us', time_zone='UTC')",
+      "seq_id": "Int64",
+      "bid_price": "Float64",
+      "bid_qty": "Float64",
+      "ask_price": "Float64",
+      "ask_qty": "Float64"
+    },
+    "nulls": [
+      {
+        "column": "instrument",
+        "nulls": 0,
+        "null_pct": 0.0
+      },
+      {
+        "column": "ingress_ts",
+        "nulls": 0,
+        "null_pct": 0.0
+      },
+      {
+        "column": "transaction_ts",
+        "nulls": 0,
+        "null_pct": 0.0
+      },
+      {
+        "column": "publish_ts",
+        "nulls": 0,
+        "null_pct": 0.0
+      },
+      {
+        "column": "seq_id",
+        "nulls": 0,
+        "null_pct": 0.0
+      },
+      {
+        "column": "bid_price",
+        "nulls": 1,
+        "null_pct": 0.0009128751917037902
+      },
+      {
+        "column": "bid_qty",
+        "nulls": 1,
+        "null_pct": 0.0009128751917037902
+      },
+      {
+        "column": "ask_price",
+        "nulls": 2,
+        "null_pct": 0.0018257503834075803
+      },
+      {
+        "column": "ask_qty",
+        "nulls": 2,
+        "null_pct": 0.0018257503834075803
+      }
+    ],
+    "distinct": {
+      "instrument": 1,
+      "seq_id": 109544
+    },
+    "ts_units": {
+      "ingress_ts": "datetime",
+      "transaction_ts": "datetime",
+      "publish_ts": "datetime"
+    },
+    "gaps": {
+      "ingress_ts": {
+        "gap_unit": "s",
+        "partition_by": null,
+        "n_gaps": 109543,
+        "median_gap_s": 0.00011999999999999999,
+        "p999_gap_s": 18.07574,
+        "max_gap_s": 596.182767,
+        "min_gap_s": -5332.131047,
+        "large_gap_threshold_s": 60.0,
+        "large_gap_count": 66,
+        "negative_gap_count": 41,
+        "source_unit_hint": "datetime"
+      },
+      "transaction_ts": {
+        "gap_unit": "s",
+        "partition_by": null,
+        "n_gaps": 109543,
+        "median_gap_s": 0.00061,
+        "p999_gap_s": 12.49954,
+        "max_gap_s": 1500.99386,
+        "min_gap_s": 0.0,
+        "large_gap_threshold_s": 60.0,
+        "large_gap_count": 12,
+        "negative_gap_count": 0,
+        "source_unit_hint": "datetime"
+      },
+      "publish_ts": {
+        "gap_unit": "s",
+        "partition_by": null,
+        "n_gaps": 109543,
+        "median_gap_s": 0.00061,
+        "p999_gap_s": 12.49954,
+        "max_gap_s": 1500.99386,
+        "min_gap_s": 0.0,
+        "large_gap_threshold_s": 60.0,
+        "large_gap_count": 12,
+        "negative_gap_count": 0,
+        "source_unit_hint": "datetime"
+      }
+    },
+    "spread": {
+      "spread_median": 0.019999999999999574,
+      "spread_p99": 0.03999999999999915,
+      "spread_max": 1.6799999999999997,
+      "negative_spreads": 71
+    },
+    "findings": [
+      {
+        "file": "A_hkex_2800_top_of_book.parquet",
+        "check_id": "crossed_book",
+        "severity": "high",
+        "classification": "pipeline",
+        "metric": {
+          "crossed": 71,
+          "crossed_pct": 0.06481591367615779,
+          "bid_col": "bid_price",
+          "ask_col": "ask_price"
+        },
+        "notes": "Bid above ask on top of book."
+      },
+      {
+        "file": "A_hkex_2800_top_of_book.parquet",
+        "check_id": "locked_book",
+        "severity": "low",
+        "classification": "market",
+        "metric": {
+          "locked": 112,
+          "locked_pct": 0.10224482157365736,
+          "bid_col": "bid_price",
+          "ask_col": "ask_price"
+        },
+        "notes": "Bid equals ask (locked). Often market microstructure on equities."
+      },
+      {
+        "file": "A_hkex_2800_top_of_book.parquet",
+        "check_id": "non_monotonic_ingress_ts",
+        "severity": "high",
+        "classification": "pipeline",
+        "metric": {
+          "backward_jumps": 41,
+          "rows": 109544,
+          "worst_step_ms": -5332131.047,
+          "median_backward_step_ms": -8.541,
+          "within_1ms": 20
+        },
+        "notes": "41 backward jumps in ingress_ts (stored order)."
+      },
+      {
+        "file": "A_hkex_2800_top_of_book.parquet",
+        "check_id": "clock_skew_ingress_ts_transaction_ts",
+        "severity": "info",
+        "classification": "unclear",
+        "metric": {
+          "ingress": "ingress_ts",
+          "venue": "transaction_ts",
+          "venue_unit_hint": "datetime",
+          "n": 109544,
+          "median_s": 0.033081,
+          "p50_s": 0.033081,
+          "p99_s": 0.051337,
+          "min_s": 0.028000999999999998,
+          "max_s": 5333.363136,
+          "negative_count": 0,
+          "negative_pct": 0.0
+        },
+        "notes": "Ingress vs venue clock skew within expected capture delay."
+      },
+      {
+        "file": "A_hkex_2800_top_of_book.parquet",
+        "check_id": "clock_skew_ingress_ts_publish_ts",
+        "severity": "info",
+        "classification": "unclear",
+        "metric": {
+          "ingress": "ingress_ts",
+          "venue": "publish_ts",
+          "venue_unit_hint": "datetime",
+          "n": 109544,
+          "median_s": 0.033081,
+          "p50_s": 0.033081,
+          "p99_s": 0.051337,
+          "min_s": 0.028000999999999998,
+          "max_s": 5333.363136,
+          "negative_count": 0,
+          "negative_pct": 0.0
+        },
+        "notes": "Ingress vs venue clock skew within expected capture delay."
+      }
+    ]
+  },
+  {
+    "file": "A_hkex_2800_trades.parquet",
+    "rows": 9666,
+    "columns": [
+      "instrument",
+      "ingress_ts",
+      "transaction_ts",
+      "publish_ts",
+      "trade_id",
+      "price",
+      "qty",
+      "side",
+      "other_data"
+    ],
+    "expected_columns": [
+      "ingress_ts",
+      "transaction_ts",
+      "publish_ts"
+    ],
+    "absent_columns": [],
+    "partition_column": null,
+    "schema": {
+      "instrument": "String",
+      "ingress_ts": "Datetime(time_unit='us', time_zone='UTC')",
+      "transaction_ts": "Datetime(time_unit='us', time_zone='UTC')",
+      "publish_ts": "Datetime(time_unit='us', time_zone='UTC')",
+      "trade_id": "String",
+      "price": "Float64",
+      "qty": "Float64",
+      "side": "String",
+      "other_data": "String"
+    },
+    "nulls": [
+      {
+        "column": "instrument",
+        "nulls": 0,
+        "null_pct": 0.0
+      },
+      {
+        "column": "ingress_ts",
+        "nulls": 0,
+        "null_pct": 0.0
+      },
+      {
+        "column": "transaction_ts",
+        "nulls": 1513,
+        "null_pct": 15.652803641630458
+      },
+      {
+        "column": "publish_ts",
+        "nulls": 0,
+        "null_pct": 0.0
+      },
+      {
+        "column": "trade_id",
+        "nulls": 0,
+        "null_pct": 0.0
+      },
+      {
+        "column": "price",
+        "nulls": 0,
+        "null_pct": 0.0
+      },
+      {
+        "column": "qty",
+        "nulls": 0,
+        "null_pct": 0.0
+      },
+      {
+        "column": "side",
+        "nulls": 0,
+        "null_pct": 0.0
+      },
+      {
+        "column": "other_data",
+        "nulls": 9666,
+        "null_pct": 100.0
+      }
+    ],
+    "distinct": {
+      "instrument": 1,
+      "side": 1,
+      "trade_id": 9666
+    },
+    "ts_units": {
+      "ingress_ts": "datetime",
+      "transaction_ts": "datetime",
+      "publish_ts": "datetime"
+    },
+    "gaps": {
+      "ingress_ts": {
+        "gap_unit": "s",
+        "partition_by": null,
+        "n_gaps": 9665,
+        "median_gap_s": 0.061302999999999996,
+        "p999_gap_s": 334.67821399999997,
+        "max_gap_s": 3730.073065,
+        "min_gap_s": -25252.33445,
+        "large_gap_threshold_s": 60.0,
+        "large_gap_count": 157,
+        "negative_gap_count": 4,
+        "source_unit_hint": "datetime"
+      },
+      "transaction_ts": {
+        "gap_unit": "s",
+        "partition_by": null,
+        "n_gaps": 8152,
+        "median_gap_s": 0.03406,
+        "p999_gap_s": 187.5082,
+        "max_gap_s": 3730.07925,
+        "min_gap_s": 0.0,
+        "large_gap_threshold_s": 60.0,
+        "large_gap_count": 66,
+        "negative_gap_count": 0,
+        "source_unit_hint": "datetime"
+      },
+      "publish_ts": {
+        "gap_unit": "s",
+        "partition_by": null,
+        "n_gaps": 9665,
+        "median_gap_s": 0.06432,
+        "p999_gap_s": 334.67598,
+        "max_gap_s": 3730.07925,
+        "min_gap_s": -25252.35272,
+        "large_gap_threshold_s": 60.0,
+        "large_gap_count": 157,
+        "negative_gap_count": 1,
+        "source_unit_hint": "datetime"
+      }
+    },
+    "spread": {},
+    "findings": [
+      {
+        "file": "A_hkex_2800_trades.parquet",
+        "check_id": "null_clock_transaction_ts",
+        "severity": "medium",
+        "classification": "pipeline",
+        "metric": {
+          "column": "transaction_ts",
+          "nulls": 1513,
+          "null_pct": 15.652803641630458,
+          "rows": 9666
+        },
+        "notes": "transaction_ts null on 15.6528% of rows (> 1.0% alert threshold)."
+      },
+      {
+        "file": "A_hkex_2800_trades.parquet",
+        "check_id": "non_monotonic_ingress_ts",
+        "severity": "medium",
+        "classification": "pipeline",
+        "metric": {
+          "backward_jumps": 4,
+          "rows": 9666,
+          "worst_step_ms": -25252334.45,
+          "median_backward_step_ms": -0.001,
+          "within_1ms": 3
+        },
+        "notes": "4 backward jumps in ingress_ts (stored order)."
+      },
+      {
+        "file": "A_hkex_2800_trades.parquet",
+        "check_id": "non_monotonic_publish_ts",
+        "severity": "medium",
+        "classification": "pipeline",
+        "metric": {
+          "backward_jumps": 1,
+          "rows": 9666,
+          "worst_step_ms": -25252352.72,
+          "median_backward_step_ms": -25252352.72,
+          "within_1ms": 0
+        },
+        "notes": "1 backward jumps in publish_ts (stored order)."
+      },
+      {
+        "file": "A_hkex_2800_trades.parquet",
+        "check_id": "clock_skew_ingress_ts_transaction_ts",
+        "severity": "info",
+        "classification": "unclear",
+        "metric": {
+          "ingress": "ingress_ts",
+          "venue": "transaction_ts",
+          "venue_unit_hint": "datetime",
+          "n": 8153,
+          "median_s": 0.033393,
+          "p50_s": 0.033393,
+          "p99_s": 0.049747,
+          "min_s": 0.028048,
+          "max_s": 0.072333,
+          "negative_count": 0,
+          "negative_pct": 0.0
+        },
+        "notes": "Ingress vs venue clock skew within expected capture delay."
+      },
+      {
+        "file": "A_hkex_2800_trades.parquet",
+        "check_id": "clock_skew_ingress_ts_publish_ts",
+        "severity": "info",
+        "classification": "unclear",
+        "metric": {
+          "ingress": "ingress_ts",
+          "venue": "publish_ts",
+          "venue_unit_hint": "datetime",
+          "n": 9666,
+          "median_s": 0.033294,
+          "p50_s": 0.033294,
+          "p99_s": 0.049635,
+          "min_s": 0.028048,
+          "max_s": 0.072333,
+          "negative_count": 0,
+          "negative_pct": 0.0
+        },
+        "notes": "Ingress vs venue clock skew within expected capture delay."
+      }
+    ]
+  },
+  {
+    "file": "B_dreamdex_weth_top_of_book.parquet",
+    "rows": 6988,
+    "columns": [
+      "instrument",
+      "ingress_ts",
+      "transaction_ts",
+      "publish_ts",
+      "seq_id",
+      "bid_price",
+      "bid_qty",
+      "ask_price",
+      "ask_qty"
+    ],
+    "expected_columns": [
+      "ingress_ts",
+      "transaction_ts",
+      "publish_ts"
+    ],
+    "absent_columns": [],
+    "partition_column": null,
+    "schema": {
+      "instrument": "String",
+      "ingress_ts": "Datetime(time_unit='us', time_zone='UTC')",
+      "transaction_ts": "Datetime(time_unit='us', time_zone='UTC')",
+      "publish_ts": "Datetime(time_unit='us', time_zone='UTC')",
+      "seq_id": "Int64",
+      "bid_price": "Float64",
+      "bid_qty": "Float64",
+      "ask_price": "Float64",
+      "ask_qty": "Float64"
+    },
+    "nulls": [
+      {
+        "column": "instrument",
+        "nulls": 0,
+        "null_pct": 0.0
+      },
+      {
+        "column": "ingress_ts",
+        "nulls": 0,
+        "null_pct": 0.0
+      },
+      {
+        "column": "transaction_ts",
+        "nulls": 6988,
+        "null_pct": 100.0
+      },
+      {
+        "column": "publish_ts",
+        "nulls": 6988,
+        "null_pct": 100.0
+      },
+      {
+        "column": "seq_id",
+        "nulls": 0,
+        "null_pct": 0.0
+      },
+      {
+        "column": "bid_price",
+        "nulls": 1540,
+        "null_pct": 22.037779049799656
+      },
+      {
+        "column": "bid_qty",
+        "nulls": 1540,
+        "null_pct": 22.037779049799656
+      },
+      {
+        "column": "ask_price",
+        "nulls": 0,
+        "null_pct": 0.0
+      },
+      {
+        "column": "ask_qty",
+        "nulls": 0,
+        "null_pct": 0.0
+      }
+    ],
+    "distinct": {
+      "instrument": 1,
+      "seq_id": 6988
+    },
+    "ts_units": {
+      "ingress_ts": "datetime",
+      "transaction_ts": "datetime",
+      "publish_ts": "datetime"
+    },
+    "gaps": {
+      "ingress_ts": {
+        "gap_unit": "s",
+        "partition_by": null,
+        "n_gaps": 6987,
+        "median_gap_s": 0.396466,
+        "p999_gap_s": 60.301406,
+        "max_gap_s": 105.649896,
+        "min_gap_s": 4e-06,
+        "large_gap_threshold_s": 60.0,
+        "large_gap_count": 8,
+        "negative_gap_count": 0,
+        "source_unit_hint": "datetime"
+      },
+      "transaction_ts": {},
+      "publish_ts": {}
+    },
+    "spread": {
+      "spread_median": 0.5699999999999363,
+      "spread_p99": 2.4899999999997817,
+      "spread_max": 5.0499999999999545,
+      "negative_spreads": 0
+    },
+    "findings": [
+      {
+        "file": "B_dreamdex_weth_top_of_book.parquet",
+        "check_id": "null_clock_transaction_ts",
+        "severity": "high",
+        "classification": "pipeline",
+        "metric": {
+          "column": "transaction_ts",
+          "nulls": 6988,
+          "null_pct": 100.0,
+          "rows": 6988
+        },
+        "notes": "transaction_ts null on 100.0000% of rows (> 1.0% alert threshold)."
+      },
+      {
+        "file": "B_dreamdex_weth_top_of_book.parquet",
+        "check_id": "null_clock_publish_ts",
+        "severity": "high",
+        "classification": "pipeline",
+        "metric": {
+          "column": "publish_ts",
+          "nulls": 6988,
+          "null_pct": 100.0,
+          "rows": 6988
+        },
+        "notes": "publish_ts null on 100.0000% of rows (> 1.0% alert threshold)."
+      }
+    ]
+  },
+  {
+    "file": "C_nasdaq_top_of_book_20_symbols.parquet",
+    "rows": 3752799,
+    "columns": [
+      "instrument",
+      "ingress_ts",
+      "transaction_ts",
+      "publish_ts",
+      "seq_id",
+      "bid_price",
+      "bid_qty",
+      "ask_price",
+      "ask_qty"
+    ],
+    "expected_columns": [
+      "ingress_ts",
+      "transaction_ts",
+      "publish_ts"
+    ],
+    "absent_columns": [],
+    "partition_column": "instrument",
+    "schema": {
+      "instrument": "String",
+      "ingress_ts": "Datetime(time_unit='us', time_zone='UTC')",
+      "transaction_ts": "Datetime(time_unit='us', time_zone='UTC')",
+      "publish_ts": "Datetime(time_unit='us', time_zone='UTC')",
+      "seq_id": "Int64",
+      "bid_price": "Float64",
+      "bid_qty": "Float64",
+      "ask_price": "Float64",
+      "ask_qty": "Float64"
+    },
+    "nulls": [
+      {
+        "column": "instrument",
+        "nulls": 0,
+        "null_pct": 0.0
+      },
+      {
+        "column": "ingress_ts",
+        "nulls": 0,
+        "null_pct": 0.0
+      },
+      {
+        "column": "transaction_ts",
+        "nulls": 0,
+        "null_pct": 0.0
+      },
+      {
+        "column": "publish_ts",
+        "nulls": 0,
+        "null_pct": 0.0
+      },
+      {
+        "column": "seq_id",
+        "nulls": 0,
+        "null_pct": 0.0
+      },
+      {
+        "column": "bid_price",
+        "nulls": 0,
+        "null_pct": 0.0
+      },
+      {
+        "column": "bid_qty",
+        "nulls": 0,
+        "null_pct": 0.0
+      },
+      {
+        "column": "ask_price",
+        "nulls": 0,
+        "null_pct": 0.0
+      },
+      {
+        "column": "ask_qty",
+        "nulls": 0,
+        "null_pct": 0.0
+      }
+    ],
+    "distinct": {
+      "instrument": 18,
+      "seq_id": 3674668
+    },
+    "ts_units": {
+      "ingress_ts": "datetime",
+      "transaction_ts": "datetime",
+      "publish_ts": "datetime"
+    },
+    "gaps": {
+      "ingress_ts": {
+        "gap_unit": "s",
+        "partition_by": null,
+        "n_gaps": 3752798,
+        "median_gap_s": 0.0,
+        "p999_gap_s": 0.22267299999999998,
+        "max_gap_s": 1.73365,
+        "min_gap_s": -1.73365,
+        "large_gap_threshold_s": 60.0,
+        "large_gap_count": 0,
+        "negative_gap_count": 461372,
+        "source_unit_hint": "datetime"
+      },
+      "transaction_ts": {
+        "gap_unit": "s",
+        "partition_by": null,
+        "n_gaps": 3752798,
+        "median_gap_s": 0.0,
+        "p999_gap_s": 0.078,
+        "max_gap_s": 0.294,
+        "min_gap_s": 0.0,
+        "large_gap_threshold_s": 60.0,
+        "large_gap_count": 0,
+        "negative_gap_count": 0,
+        "source_unit_hint": "datetime"
+      },
+      "publish_ts": {
+        "gap_unit": "s",
+        "partition_by": null,
+        "n_gaps": 3752798,
+        "median_gap_s": 0.0,
+        "p999_gap_s": 0.078,
+        "max_gap_s": 0.294,
+        "min_gap_s": -0.21,
+        "large_gap_threshold_s": 60.0,
+        "large_gap_count": 0,
+        "negative_gap_count": 1313,
+        "source_unit_hint": "datetime"
+      },
+      "ingress_ts__over_instrument": {
+        "gap_unit": "s",
+        "partition_by": "instrument",
+        "n_gaps": 3752781,
+        "median_gap_s": 0.0,
+        "p999_gap_s": 3.7226779999999997,
+        "max_gap_s": 119.66977299999999,
+        "min_gap_s": -0.8097479999999999,
+        "large_gap_threshold_s": 60.0,
+        "large_gap_count": 34,
+        "negative_gap_count": 12514,
+        "source_unit_hint": "datetime"
+      },
+      "transaction_ts__over_instrument": {
+        "gap_unit": "s",
+        "partition_by": "instrument",
+        "n_gaps": 3752781,
+        "median_gap_s": 0.0,
+        "p999_gap_s": 3.718,
+        "max_gap_s": 119.645,
+        "min_gap_s": 0.0,
+        "large_gap_threshold_s": 60.0,
+        "large_gap_count": 34,
+        "negative_gap_count": 0,
+        "source_unit_hint": "datetime"
+      },
+      "publish_ts__over_instrument": {
+        "gap_unit": "s",
+        "partition_by": "instrument",
+        "n_gaps": 3752781,
+        "median_gap_s": 0.0,
+        "p999_gap_s": 3.718,
+        "max_gap_s": 119.64399999999999,
+        "min_gap_s": -0.209,
+        "large_gap_threshold_s": 60.0,
+        "large_gap_count": 34,
+        "negative_gap_count": 1259,
+        "source_unit_hint": "datetime"
+      }
+    },
+    "spread": {
+      "spread_median": 0.029999999999972715,
+      "spread_p99": 0.36000000000001364,
+      "spread_max": 10.170000000000002,
+      "negative_spreads": 1030
+    },
+    "findings": [
+      {
+        "file": "C_nasdaq_top_of_book_20_symbols.parquet",
+        "check_id": "crossed_book",
+        "severity": "high",
+        "classification": "pipeline",
+        "metric": {
+          "crossed": 1030,
+          "crossed_pct": 0.027446180837289714,
+          "bid_col": "bid_price",
+          "ask_col": "ask_price"
+        },
+        "notes": "Bid above ask on top of book."
+      },
+      {
+        "file": "C_nasdaq_top_of_book_20_symbols.parquet",
+        "check_id": "locked_book",
+        "severity": "low",
+        "classification": "market",
+        "metric": {
+          "locked": 26814,
+          "locked_pct": 0.7145066922049382,
+          "bid_col": "bid_price",
+          "ask_col": "ask_price"
+        },
+        "notes": "Bid equals ask (locked). Often market microstructure on equities."
+      },
+      {
+        "file": "C_nasdaq_top_of_book_20_symbols.parquet",
+        "check_id": "non_monotonic_ingress_ts",
+        "severity": "high",
+        "classification": "pipeline",
+        "metric": {
+          "backward_jumps": 461372,
+          "rows": 3752799,
+          "worst_step_ms": -1733.65,
+          "median_backward_step_ms": -32.484,
+          "within_1ms": 14557
+        },
+        "notes": "461372 backward jumps in ingress_ts (stored order)."
+      },
+      {
+        "file": "C_nasdaq_top_of_book_20_symbols.parquet",
+        "check_id": "non_monotonic_ingress_ts_over_instrument",
+        "severity": "high",
+        "classification": "pipeline",
+        "metric": {
+          "backward_jumps": 12514,
+          "rows": 3752799,
+          "partition_by": "instrument",
+          "worst_step_ms": -809.748,
+          "median_backward_step_ms": -0.002,
+          "within_1ms": 11050
+        },
+        "notes": "12514 backward jumps in ingress_ts within instrument (stored order)."
+      },
+      {
+        "file": "C_nasdaq_top_of_book_20_symbols.parquet",
+        "check_id": "non_monotonic_publish_ts",
+        "severity": "high",
+        "classification": "pipeline",
+        "metric": {
+          "backward_jumps": 1313,
+          "rows": 3752799,
+          "worst_step_ms": -210.0,
+          "median_backward_step_ms": -1.0,
+          "within_1ms": 720
+        },
+        "notes": "1313 backward jumps in publish_ts (stored order)."
+      },
+      {
+        "file": "C_nasdaq_top_of_book_20_symbols.parquet",
+        "check_id": "non_monotonic_publish_ts_over_instrument",
+        "severity": "high",
+        "classification": "pipeline",
+        "metric": {
+          "backward_jumps": 1259,
+          "rows": 3752799,
+          "partition_by": "instrument",
+          "worst_step_ms": -209.0,
+          "median_backward_step_ms": -2.0,
+          "within_1ms": 610
+        },
+        "notes": "1259 backward jumps in publish_ts within instrument (stored order)."
+      },
+      {
+        "file": "C_nasdaq_top_of_book_20_symbols.parquet",
+        "check_id": "clock_skew_ingress_ts_transaction_ts",
+        "severity": "info",
+        "classification": "unclear",
+        "metric": {
+          "ingress": "ingress_ts",
+          "venue": "transaction_ts",
+          "venue_unit_hint": "datetime",
+          "n": 3752799,
+          "median_s": 0.08799599999999999,
+          "p50_s": 0.08799599999999999,
+          "p99_s": 0.286057,
+          "min_s": 0.006643,
+          "max_s": 2.8960269999999997,
+          "negative_count": 0,
+          "negative_pct": 0.0
+        },
+        "notes": "Ingress vs venue clock skew within expected capture delay."
+      },
+      {
+        "file": "C_nasdaq_top_of_book_20_symbols.parquet",
+        "check_id": "clock_skew_ingress_ts_publish_ts",
+        "severity": "info",
+        "classification": "unclear",
+        "metric": {
+          "ingress": "ingress_ts",
+          "venue": "publish_ts",
+          "venue_unit_hint": "datetime",
+          "n": 3752799,
+          "median_s": 0.087823,
+          "p50_s": 0.087823,
+          "p99_s": 0.285942,
+          "min_s": 0.006643,
+          "max_s": 2.8960269999999997,
+          "negative_count": 0,
+          "negative_pct": 0.0
+        },
+        "notes": "Ingress vs venue clock skew within expected capture delay."
+      }
+    ]
+  },
+  {
+    "file": "D_binance_btcusdt_orderbook_incremental.parquet",
+    "rows": 17994,
+    "columns": [
+      "instrument",
+      "ingress_ts",
+      "transaction_ts",
+      "publish_ts",
+      "seq_id",
+      "bid_prices",
+      "bid_qtys",
+      "ask_prices",
+      "ask_qtys",
+      "snapshot"
+    ],
+    "expected_columns": [
+      "ingress_ts",
+      "transaction_ts",
+      "publish_ts"
+    ],
+    "absent_columns": [],
+    "partition_column": null,
+    "schema": {
+      "instrument": "String",
+      "ingress_ts": "Datetime(time_unit='us', time_zone='UTC')",
+      "transaction_ts": "Datetime(time_unit='us', time_zone='UTC')",
+      "publish_ts": "Datetime(time_unit='us', time_zone='UTC')",
+      "seq_id": "Int64",
+      "bid_prices": "List(Float64)",
+      "bid_qtys": "List(Float64)",
+      "ask_prices": "List(Float64)",
+      "ask_qtys": "List(Float64)",
+      "snapshot": "Boolean"
+    },
+    "nulls": [
+      {
+        "column": "instrument",
+        "nulls": 0,
+        "null_pct": 0.0
+      },
+      {
+        "column": "ingress_ts",
+        "nulls": 0,
+        "null_pct": 0.0
+      },
+      {
+        "column": "transaction_ts",
+        "nulls": 17994,
+        "null_pct": 100.0
+      },
+      {
+        "column": "publish_ts",
+        "nulls": 0,
+        "null_pct": 0.0
+      },
+      {
+        "column": "seq_id",
+        "nulls": 0,
+        "null_pct": 0.0
+      },
+      {
+        "column": "bid_prices",
+        "nulls": 0,
+        "null_pct": 0.0
+      },
+      {
+        "column": "bid_qtys",
+        "nulls": 0,
+        "null_pct": 0.0
+      },
+      {
+        "column": "ask_prices",
+        "nulls": 0,
+        "null_pct": 0.0
+      },
+      {
+        "column": "ask_qtys",
+        "nulls": 0,
+        "null_pct": 0.0
+      },
+      {
+        "column": "snapshot",
+        "nulls": 0,
+        "null_pct": 0.0
+      }
+    ],
+    "distinct": {
+      "instrument": 1,
+      "seq_id": 17994
+    },
+    "ts_units": {
+      "ingress_ts": "datetime",
+      "transaction_ts": "datetime",
+      "publish_ts": "datetime"
+    },
+    "gaps": {
+      "ingress_ts": {
+        "gap_unit": "s",
+        "partition_by": null,
+        "n_gaps": 17993,
+        "median_gap_s": 0.09999899999999999,
+        "p999_gap_s": 0.102743,
+        "max_gap_s": 0.20096999999999998,
+        "min_gap_s": 0.08179299999999999,
+        "large_gap_threshold_s": 60.0,
+        "large_gap_count": 0,
+        "negative_gap_count": 0,
+        "source_unit_hint": "datetime"
+      },
+      "transaction_ts": {},
+      "publish_ts": {
+        "gap_unit": "s",
+        "partition_by": null,
+        "n_gaps": 17993,
+        "median_gap_s": 0.09999799999999999,
+        "p999_gap_s": 0.102347,
+        "max_gap_s": 0.200878,
+        "min_gap_s": 0.09004,
+        "large_gap_threshold_s": 60.0,
+        "large_gap_count": 0,
+        "negative_gap_count": 0,
+        "source_unit_hint": "datetime"
+      }
+    },
+    "spread": {},
+    "findings": [
+      {
+        "file": "D_binance_btcusdt_orderbook_incremental.parquet",
+        "check_id": "null_clock_transaction_ts",
+        "severity": "high",
+        "classification": "pipeline",
+        "metric": {
+          "column": "transaction_ts",
+          "nulls": 17994,
+          "null_pct": 100.0,
+          "rows": 17994
+        },
+        "notes": "transaction_ts null on 100.0000% of rows (> 1.0% alert threshold)."
+      },
+      {
+        "file": "D_binance_btcusdt_orderbook_incremental.parquet",
+        "check_id": "clock_skew_ingress_ts_publish_ts",
+        "severity": "info",
+        "classification": "unclear",
+        "metric": {
+          "ingress": "ingress_ts",
+          "venue": "publish_ts",
+          "venue_unit_hint": "datetime",
+          "n": 17994,
+          "median_s": 0.000499,
+          "p50_s": 0.000499,
+          "p99_s": 0.000781,
+          "min_s": 0.00024599999999999996,
+          "max_s": 0.01914,
+          "negative_count": 0,
+          "negative_pct": 0.0
+        },
+        "notes": "Ingress vs venue clock skew within expected capture delay."
+      }
+    ]
+  },
+  {
+    "file": "F_binance_ethusdt_top_of_book.parquet",
+    "rows": 235270,
+    "columns": [
+      "instrument",
+      "ingress_ts",
+      "seq_id",
+      "bid_price",
+      "bid_qty",
+      "ask_price",
+      "ask_qty"
+    ],
+    "expected_columns": [
+      "ingress_ts",
+      "transaction_ts",
+      "publish_ts"
+    ],
+    "absent_columns": [
+      "transaction_ts",
+      "publish_ts"
+    ],
+    "partition_column": null,
+    "schema": {
+      "instrument": "String",
+      "ingress_ts": "Datetime(time_unit='us', time_zone='UTC')",
+      "seq_id": "Int64",
+      "bid_price": "Float64",
+      "bid_qty": "Float64",
+      "ask_price": "Float64",
+      "ask_qty": "Float64"
+    },
+    "nulls": [
+      {
+        "column": "instrument",
+        "nulls": 0,
+        "null_pct": 0.0
+      },
+      {
+        "column": "ingress_ts",
+        "nulls": 0,
+        "null_pct": 0.0
+      },
+      {
+        "column": "seq_id",
+        "nulls": 0,
+        "null_pct": 0.0
+      },
+      {
+        "column": "bid_price",
+        "nulls": 0,
+        "null_pct": 0.0
+      },
+      {
+        "column": "bid_qty",
+        "nulls": 0,
+        "null_pct": 0.0
+      },
+      {
+        "column": "ask_price",
+        "nulls": 0,
+        "null_pct": 0.0
+      },
+      {
+        "column": "ask_qty",
+        "nulls": 0,
+        "null_pct": 0.0
+      }
+    ],
+    "distinct": {
+      "instrument": 1,
+      "seq_id": 235270
+    },
+    "ts_units": {
+      "ingress_ts": "datetime"
+    },
+    "gaps": {
+      "ingress_ts": {
+        "gap_unit": "s",
+        "partition_by": null,
+        "n_gaps": 235269,
+        "median_gap_s": 1.3e-05,
+        "p999_gap_s": 1.8040429999999998,
+        "max_gap_s": 3.169022,
+        "min_gap_s": 0.0,
+        "large_gap_threshold_s": 60.0,
+        "large_gap_count": 0,
+        "negative_gap_count": 0,
+        "source_unit_hint": "datetime"
+      }
+    },
+    "spread": {
+      "spread_median": 0.009999999999990905,
+      "spread_p99": 0.049999999999954525,
+      "spread_max": 0.8900000000001,
+      "negative_spreads": 0
+    },
+    "findings": [
+      {
+        "file": "F_binance_ethusdt_top_of_book.parquet",
+        "check_id": "missing_column_transaction_ts",
+        "severity": "high",
+        "classification": "pipeline",
+        "metric": {
+          "column": "transaction_ts",
+          "expected_columns": [
+            "ingress_ts",
+            "transaction_ts",
+            "publish_ts"
+          ]
+        },
+        "notes": "Column transaction_ts is absent from the schema, not present-and-null."
+      },
+      {
+        "file": "F_binance_ethusdt_top_of_book.parquet",
+        "check_id": "missing_column_publish_ts",
+        "severity": "high",
+        "classification": "pipeline",
+        "metric": {
+          "column": "publish_ts",
+          "expected_columns": [
+            "ingress_ts",
+            "transaction_ts",
+            "publish_ts"
+          ]
+        },
+        "notes": "Column publish_ts is absent from the schema, not present-and-null."
+      }
+    ]
+  },
+  {
+    "file": "G_bitfinex_btcusd_trades.parquet",
+    "rows": 642,
+    "columns": [
+      "instrument",
+      "ingress_ts",
+      "transaction_ts",
+      "publish_ts",
+      "trade_id",
+      "price",
+      "qty",
+      "side",
+      "other_data"
+    ],
+    "expected_columns": [
+      "ingress_ts",
+      "transaction_ts",
+      "publish_ts"
+    ],
+    "absent_columns": [],
+    "partition_column": null,
+    "schema": {
+      "instrument": "String",
+      "ingress_ts": "Int64",
+      "transaction_ts": "Int64",
+      "publish_ts": "Int64",
+      "trade_id": "String",
+      "price": "Float64",
+      "qty": "Float64",
+      "side": "String",
+      "other_data": "String"
+    },
+    "nulls": [
+      {
+        "column": "instrument",
+        "nulls": 0,
+        "null_pct": 0.0
+      },
+      {
+        "column": "ingress_ts",
+        "nulls": 0,
+        "null_pct": 0.0
+      },
+      {
+        "column": "transaction_ts",
+        "nulls": 0,
+        "null_pct": 0.0
+      },
+      {
+        "column": "publish_ts",
+        "nulls": 0,
+        "null_pct": 0.0
+      },
+      {
+        "column": "trade_id",
+        "nulls": 0,
+        "null_pct": 0.0
+      },
+      {
+        "column": "price",
+        "nulls": 0,
+        "null_pct": 0.0
+      },
+      {
+        "column": "qty",
+        "nulls": 0,
+        "null_pct": 0.0
+      },
+      {
+        "column": "side",
+        "nulls": 0,
+        "null_pct": 0.0
+      },
+      {
+        "column": "other_data",
+        "nulls": 642,
+        "null_pct": 100.0
+      }
+    ],
+    "distinct": {
+      "instrument": 1,
+      "side": 2,
+      "trade_id": 321
+    },
+    "ts_units": {
+      "ingress_ts": "us",
+      "transaction_ts": "us",
+      "publish_ts": "us"
+    },
+    "gaps": {
+      "ingress_ts": {
+        "gap_unit": "s",
+        "partition_by": null,
+        "n_gaps": 641,
+        "median_gap_s": 0.041026,
+        "p999_gap_s": 34.481615999999995,
+        "max_gap_s": 38.027677,
+        "min_gap_s": -0.09018899999999999,
+        "large_gap_threshold_s": 60.0,
+        "large_gap_count": 0,
+        "negative_gap_count": 178,
+        "source_unit_hint": "us"
+      },
+      "transaction_ts": {
+        "gap_unit": "s",
+        "partition_by": null,
+        "n_gaps": 641,
+        "median_gap_s": 0.0,
+        "p999_gap_s": 34.537,
+        "max_gap_s": 38.083,
+        "min_gap_s": 0.0,
+        "large_gap_threshold_s": 60.0,
+        "large_gap_count": 0,
+        "negative_gap_count": 0,
+        "source_unit_hint": "us"
+      },
+      "publish_ts": {
+        "gap_unit": "s",
+        "partition_by": null,
+        "n_gaps": 641,
+        "median_gap_s": 0.04,
+        "p999_gap_s": 34.479,
+        "max_gap_s": 38.028,
+        "min_gap_s": -0.09,
+        "large_gap_threshold_s": 60.0,
+        "large_gap_count": 0,
+        "negative_gap_count": 178,
+        "source_unit_hint": "us"
+      }
+    },
+    "spread": {},
+    "findings": [
+      {
+        "file": "G_bitfinex_btcusd_trades.parquet",
+        "check_id": "non_monotonic_ingress_ts",
+        "severity": "high",
+        "classification": "pipeline",
+        "metric": {
+          "backward_jumps": 178,
+          "rows": 642,
+          "worst_step": -90189,
+          "median_backward_step": -46543.5
+        },
+        "notes": "178 backward jumps in ingress_ts (stored order)."
+      },
+      {
+        "file": "G_bitfinex_btcusd_trades.parquet",
+        "check_id": "non_monotonic_publish_ts",
+        "severity": "high",
+        "classification": "pipeline",
+        "metric": {
+          "backward_jumps": 178,
+          "rows": 642,
+          "worst_step": -90000,
+          "median_backward_step": -46500.0
+        },
+        "notes": "178 backward jumps in publish_ts (stored order)."
+      },
+      {
+        "file": "G_bitfinex_btcusd_trades.parquet",
+        "check_id": "duplicate_keys_instrument_trade_id",
+        "severity": "medium",
+        "classification": "pipeline",
+        "metric": {
+          "duplicate_groups": 321,
+          "extra_rows": 321
+        },
+        "notes": "Duplicate key groups on ['instrument', 'trade_id']."
+      },
+      {
+        "file": "G_bitfinex_btcusd_trades.parquet",
+        "check_id": "clock_skew_ingress_ts_transaction_ts",
+        "severity": "info",
+        "classification": "unclear",
+        "metric": {
+          "ingress": "ingress_ts",
+          "venue": "transaction_ts",
+          "venue_unit_hint": "us",
+          "n": 642,
+          "median_s": 0.034548999999999996,
+          "p50_s": 0.034566,
+          "p99_s": 0.106818,
+          "min_s": 0.016651,
+          "max_s": 0.123279,
+          "negative_count": 0,
+          "negative_pct": 0.0
+        },
+        "notes": "Ingress vs venue clock skew within expected capture delay."
+      },
+      {
+        "file": "G_bitfinex_btcusd_trades.parquet",
+        "check_id": "clock_skew_ingress_ts_publish_ts",
+        "severity": "info",
+        "classification": "unclear",
+        "metric": {
+          "ingress": "ingress_ts",
+          "venue": "publish_ts",
+          "venue_unit_hint": "us",
+          "n": 642,
+          "median_s": 0.0166865,
+          "p50_s": 0.01669,
+          "p99_s": 0.030912,
+          "min_s": 0.015474,
+          "max_s": 0.043364,
+          "negative_count": 0,
+          "negative_pct": 0.0
+        },
+        "notes": "Ingress vs venue clock skew within expected capture delay."
+      }
+    ]
+  },
+  {
+    "file": "H_gateio_btcusdt_perp_trades.parquet",
+    "rows": 9359,
+    "columns": [
+      "instrument",
+      "ingress_ts",
+      "transaction_ts",
+      "publish_ts",
+      "trade_id",
+      "price",
+      "qty",
+      "side",
+      "other_data"
+    ],
+    "expected_columns": [
+      "ingress_ts",
+      "transaction_ts",
+      "publish_ts"
+    ],
+    "absent_columns": [],
+    "partition_column": null,
+    "schema": {
+      "instrument": "String",
+      "ingress_ts": "Int64",
+      "transaction_ts": "Int64",
+      "publish_ts": "Int64",
+      "trade_id": "String",
+      "price": "Float64",
+      "qty": "Float64",
+      "side": "String",
+      "other_data": "String"
+    },
+    "nulls": [
+      {
+        "column": "instrument",
+        "nulls": 0,
+        "null_pct": 0.0
+      },
+      {
+        "column": "ingress_ts",
+        "nulls": 0,
+        "null_pct": 0.0
+      },
+      {
+        "column": "transaction_ts",
+        "nulls": 0,
+        "null_pct": 0.0
+      },
+      {
+        "column": "publish_ts",
+        "nulls": 0,
+        "null_pct": 0.0
+      },
+      {
+        "column": "trade_id",
+        "nulls": 0,
+        "null_pct": 0.0
+      },
+      {
+        "column": "price",
+        "nulls": 0,
+        "null_pct": 0.0
+      },
+      {
+        "column": "qty",
+        "nulls": 0,
+        "null_pct": 0.0
+      },
+      {
+        "column": "side",
+        "nulls": 0,
+        "null_pct": 0.0
+      },
+      {
+        "column": "other_data",
+        "nulls": 9359,
+        "null_pct": 100.0
+      }
+    ],
+    "distinct": {
+      "instrument": 1,
+      "side": 2,
+      "trade_id": 9359
+    },
+    "ts_units": {
+      "ingress_ts": "us",
+      "transaction_ts": "us",
+      "publish_ts": "us"
+    },
+    "gaps": {
+      "ingress_ts": {
+        "gap_unit": "s",
+        "partition_by": null,
+        "n_gaps": 9358,
+        "median_gap_s": 0.012500999999999998,
+        "p999_gap_s": 8.507488,
+        "max_gap_s": 14.03459,
+        "min_gap_s": 3e-06,
+        "large_gap_threshold_s": 60.0,
+        "large_gap_count": 0,
+        "negative_gap_count": 0,
+        "source_unit_hint": "us"
+      },
+      "transaction_ts": {
+        "gap_unit": "s",
+        "partition_by": null,
+        "n_gaps": 9358,
+        "median_gap_s": 0.013,
+        "p999_gap_s": 8.507,
+        "max_gap_s": 14.035,
+        "min_gap_s": 0.0,
+        "large_gap_threshold_s": 60.0,
+        "large_gap_count": 0,
+        "negative_gap_count": 0,
+        "source_unit_hint": "us"
+      },
+      "publish_ts": {
+        "gap_unit": "s",
+        "partition_by": null,
+        "n_gaps": 9358,
+        "median_gap_s": 0.013,
+        "p999_gap_s": 8.507,
+        "max_gap_s": 14.033999999999999,
+        "min_gap_s": -0.020999999999999998,
+        "large_gap_threshold_s": 60.0,
+        "large_gap_count": 0,
+        "negative_gap_count": 8,
+        "source_unit_hint": "us"
+      }
+    },
+    "spread": {},
+    "findings": [
+      {
+        "file": "H_gateio_btcusdt_perp_trades.parquet",
+        "check_id": "non_monotonic_publish_ts",
+        "severity": "medium",
+        "classification": "pipeline",
+        "metric": {
+          "backward_jumps": 8,
+          "rows": 9359,
+          "worst_step": -21000,
+          "median_backward_step": -2500.0
+        },
+        "notes": "8 backward jumps in publish_ts (stored order)."
+      },
+      {
+        "file": "H_gateio_btcusdt_perp_trades.parquet",
+        "check_id": "clock_skew_ingress_ts_transaction_ts",
+        "severity": "info",
+        "classification": "unclear",
+        "metric": {
+          "ingress": "ingress_ts",
+          "venue": "transaction_ts",
+          "venue_unit_hint": "us",
+          "n": 9359,
+          "median_s": 0.001821,
+          "p50_s": 0.001821,
+          "p99_s": 0.029727999999999997,
+          "min_s": 0.000601,
+          "max_s": 0.378812,
+          "negative_count": 0,
+          "negative_pct": 0.0
+        },
+        "notes": "Ingress vs venue clock skew within expected capture delay."
+      },
+      {
+        "file": "H_gateio_btcusdt_perp_trades.parquet",
+        "check_id": "clock_skew_ingress_ts_publish_ts",
+        "severity": "info",
+        "classification": "unclear",
+        "metric": {
+          "ingress": "ingress_ts",
+          "venue": "publish_ts",
+          "venue_unit_hint": "us",
+          "n": 9359,
+          "median_s": 0.0012,
+          "p50_s": 0.0012,
+          "p99_s": 0.022085,
+          "min_s": 0.00033,
+          "max_s": 0.378803,
+          "negative_count": 0,
+          "negative_pct": 0.0
+        },
+        "notes": "Ingress vs venue clock skew within expected capture delay."
+      }
+    ]
+  },
+  {
+    "file": "H_gateio_btcusdt_perp_instrument_static.parquet",
+    "rows": 1,
+    "columns": [
+      "instrument",
+      "ingress_ts",
+      "publish_ts",
+      "snapshot",
+      "scale",
+      "exchange_symbol",
+      "trading_state",
+      "outcome",
+      "quantity_multiplier",
+      "price_tick_size",
+      "qty_step_size",
+      "min_order_qty",
+      "max_order_qty",
+      "min_order_value",
+      "expiry_time",
+      "strike",
+      "present",
+      "other_data"
+    ],
+    "expected_columns": [
+      "ingress_ts",
+      "transaction_ts",
+      "publish_ts"
+    ],
+    "absent_columns": [
+      "transaction_ts"
+    ],
+    "partition_column": null,
+    "schema": {
+      "instrument": "String",
+      "ingress_ts": "Int64",
+      "publish_ts": "Int64",
+      "snapshot": "Boolean",
+      "scale": "Int64",
+      "exchange_symbol": "String",
+      "trading_state": "String",
+      "outcome": "String",
+      "quantity_multiplier": "Float64",
+      "price_tick_size": "String",
+      "qty_step_size": "String",
+      "min_order_qty": "Float64",
+      "max_order_qty": "Float64",
+      "min_order_value": "Float64",
+      "expiry_time": "Int64",
+      "strike": "Float64",
+      "present": "Boolean",
+      "other_data": "String"
+    },
+    "nulls": [
+      {
+        "column": "instrument",
+        "nulls": 0,
+        "null_pct": 0.0
+      },
+      {
+        "column": "ingress_ts",
+        "nulls": 0,
+        "null_pct": 0.0
+      },
+      {
+        "column": "publish_ts",
+        "nulls": 1,
+        "null_pct": 100.0
+      },
+      {
+        "column": "snapshot",
+        "nulls": 0,
+        "null_pct": 0.0
+      },
+      {
+        "column": "scale",
+        "nulls": 1,
+        "null_pct": 100.0
+      },
+      {
+        "column": "exchange_symbol",
+        "nulls": 0,
+        "null_pct": 0.0
+      },
+      {
+        "column": "trading_state",
+        "nulls": 0,
+        "null_pct": 0.0
+      },
+      {
+        "column": "outcome",
+        "nulls": 1,
+        "null_pct": 100.0
+      },
+      {
+        "column": "quantity_multiplier",
+        "nulls": 0,
+        "null_pct": 0.0
+      },
+      {
+        "column": "price_tick_size",
+        "nulls": 0,
+        "null_pct": 0.0
+      },
+      {
+        "column": "qty_step_size",
+        "nulls": 0,
+        "null_pct": 0.0
+      },
+      {
+        "column": "min_order_qty",
+        "nulls": 0,
+        "null_pct": 0.0
+      },
+      {
+        "column": "max_order_qty",
+        "nulls": 0,
+        "null_pct": 0.0
+      },
+      {
+        "column": "min_order_value",
+        "nulls": 1,
+        "null_pct": 100.0
+      },
+      {
+        "column": "expiry_time",
+        "nulls": 1,
+        "null_pct": 100.0
+      },
+      {
+        "column": "strike",
+        "nulls": 1,
+        "null_pct": 100.0
+      },
+      {
+        "column": "present",
+        "nulls": 0,
+        "null_pct": 0.0
+      },
+      {
+        "column": "other_data",
+        "nulls": 1,
+        "null_pct": 100.0
+      }
+    ],
+    "distinct": {
+      "instrument": 1
+    },
+    "ts_units": {
+      "ingress_ts": "us",
+      "publish_ts": "empty"
+    },
+    "gaps": {
+      "ingress_ts": {},
+      "publish_ts": {}
+    },
+    "spread": {},
+    "findings": [
+      {
+        "file": "H_gateio_btcusdt_perp_instrument_static.parquet",
+        "check_id": "missing_column_transaction_ts",
+        "severity": "high",
+        "classification": "pipeline",
+        "metric": {
+          "column": "transaction_ts",
+          "expected_columns": [
+            "ingress_ts",
+            "transaction_ts",
+            "publish_ts"
+          ]
+        },
+        "notes": "Column transaction_ts is absent from the schema, not present-and-null."
+      },
+      {
+        "file": "H_gateio_btcusdt_perp_instrument_static.parquet",
+        "check_id": "null_clock_publish_ts",
+        "severity": "high",
+        "classification": "pipeline",
+        "metric": {
+          "column": "publish_ts",
+          "nulls": 1,
+          "null_pct": 100.0,
+          "rows": 1
+        },
+        "notes": "publish_ts null on 100.0000% of rows (> 1.0% alert threshold)."
+      }
+    ]
+  }
+]

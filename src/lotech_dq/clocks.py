@@ -32,12 +32,23 @@ def skew_stats(
     """Distribution of ingress - venue clock (in inferred venue units converted to seconds)."""
     if ingress_col not in df.columns or venue_col not in df.columns:
         return {}
+    if df[venue_col].null_count() == df.height or df[ingress_col].null_count() == df.height:
+        return {}
 
     work = ensure_datetime(ensure_datetime(df, ingress_col), venue_col)
     work = to_datetime(to_datetime(work, ingress_col), venue_col)
     i_dt, v_dt = f"{ingress_col}_dt", f"{venue_col}_dt"
     if i_dt not in work.columns or v_dt not in work.columns:
         return {}
+    # a naive and an aware column have no supertype; force both to UTC before subtracting
+    work = work.with_columns(
+        [
+            pl.col(c).dt.replace_time_zone("UTC")
+            if work.schema[c] == pl.Datetime(time_unit="us")
+            else pl.col(c).dt.convert_time_zone("UTC")
+            for c in (i_dt, v_dt)
+        ]
+    )
 
     unit = infer_ts_unit(df[venue_col])
     # after from_epoch, cast Int64 is microseconds for us datetime — use duration in seconds

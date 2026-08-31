@@ -1,0 +1,414 @@
+{
+  "window": {
+    "ingress_min": "2026-08-13 14:00:00.014628+00:00",
+    "ingress_max": "2026-08-13 14:29:59.915000+00:00",
+    "duration_min": 29.998339533333333,
+    "instrument": [
+      "BTC-USDT:SPOT"
+    ],
+    "rows": 17994
+  },
+  "snapshot_flag": {
+    "true_count": 0,
+    "null_count": 0,
+    "dtype": "Boolean"
+  },
+  "level_stats": {
+    "median_n_lvl": 14.0,
+    "max_n_lvl": 1207,
+    "p99_n_lvl": 307.0
+  },
+  "replay_primary": {
+    "policy": "snapshot flag only; level-count candidates validated against deletes; first row seeded",
+    "integrity": {
+      "crossed_states": 8997,
+      "crossed_episodes": 1,
+      "locked_states": 0,
+      "empty_bid_events": 0,
+      "empty_ask_events": 0,
+      "negative_qty_levels_rejected": 0,
+      "deletes_applied": 166105,
+      "deletes_missed": 41796,
+      "deletes_total": 207901,
+      "deletes_missed_pct": 20.10379940452427,
+      "level_upserts": 351797,
+      "updates_applied": 17994,
+      "snapshot_rows_flagged": 0,
+      "snapshot_rows_heuristic_accepted": 0,
+      "snapshot_rows_heuristic_rejected": 460,
+      "heuristic_rejected_delete_entries": 75568,
+      "delta_rows": 17993,
+      "seq_id_gaps": 1241659,
+      "snapshot_col_true_count": 0,
+      "first_row_treated_as_snapshot": true,
+      "first_row_seeded_levels": 21,
+      "messages_internally_crossed": 1,
+      "snapshot_level_threshold": 200,
+      "validate_snapshots": true,
+      "snapshot_col_nulls": 0,
+      "first_row_delete_entries": 8,
+      "crossed_pct": 50.0
+    },
+    "crossed_episodes_detail": [
+      {
+        "messages": 8997,
+        "start_index": 8997,
+        "end_index": 17993,
+        "start_ts": "2026-08-13 14:15:00.015055+00:00",
+        "end_ts": "2026-08-13 14:29:59.915000+00:00",
+        "first_seq_id": 98502143047,
+        "worst_spread": -390.3399999999965,
+        "duration_s": 899.899945
+      }
+    ],
+    "final_book_levels": 3515
+  },
+  "replay_threshold_200_unvalidated": {
+    "policy": "as shipped: any message with >=200 levels clears and replaces the book",
+    "integrity": {
+      "crossed_states": 154,
+      "crossed_episodes": 1,
+      "locked_states": 0,
+      "empty_bid_events": 0,
+      "empty_ask_events": 0,
+      "negative_qty_levels_rejected": 0,
+      "deletes_applied": 79796,
+      "deletes_missed": 128105,
+      "deletes_total": 207901,
+      "deletes_missed_pct": 61.6182702343904,
+      "level_upserts": 351797,
+      "updates_applied": 17994,
+      "snapshot_rows_flagged": 0,
+      "snapshot_rows_heuristic_accepted": 460,
+      "snapshot_rows_heuristic_rejected": 0,
+      "heuristic_rejected_delete_entries": 0,
+      "delta_rows": 17533,
+      "seq_id_gaps": 1241659,
+      "snapshot_col_true_count": 0,
+      "first_row_treated_as_snapshot": true,
+      "first_row_seeded_levels": 21,
+      "messages_internally_crossed": 1,
+      "snapshot_level_threshold": 200,
+      "validate_snapshots": false,
+      "snapshot_col_nulls": 0,
+      "first_row_delete_entries": 8,
+      "crossed_pct": 0.8558408358341669
+    },
+    "crossed_episodes_detail": [
+      {
+        "messages": 154,
+        "start_index": 8997,
+        "end_index": 9150,
+        "start_ts": "2026-08-13 14:15:00.015055+00:00",
+        "end_ts": "2026-08-13 14:15:15.315142+00:00",
+        "first_seq_id": 98502143047,
+        "worst_spread": -318.27999999999884,
+        "duration_s": 15.300087
+      }
+    ]
+  },
+  "healthy_mid_range": {
+    "note": "uncrossed states only; taking the range over all rows puts the crossed mid in as the floor",
+    "primary_uncrossed_mid_min": 63686.005000000005,
+    "primary_uncrossed_mid_max": 63846.165,
+    "primary_uncrossed_spread_median": 0.010000000002037268,
+    "threshold200_uncrossed_mid_min": 63686.005000000005,
+    "threshold200_uncrossed_mid_max": 63884.065,
+    "threshold200_uncrossed_spread_median": 0.010000000002037268,
+    "threshold200_all_rows_mid_min": 63652.86,
+    "threshold200_all_rows_mid_max": 63884.065
+  },
+  "snapshot_threshold_sweep": [
+    {
+      "threshold": null,
+      "snapshots_taken": 0,
+      "crossed_states": 8997,
+      "crossed_pct": 50.0,
+      "crossed_episodes": 1,
+      "deletes_missed": 41796,
+      "deletes_missed_pct": 20.10379940452427,
+      "first_crossed_index": 8997,
+      "first_crossed_seq_id": 98502143047
+    },
+    {
+      "threshold": 20,
+      "snapshots_taken": 6385,
+      "crossed_states": 2,
+      "crossed_pct": 0.011114816049794375,
+      "crossed_episodes": 1,
+      "deletes_missed": 197385,
+      "deletes_missed_pct": 94.94182327165333,
+      "first_crossed_index": 8997,
+      "first_crossed_seq_id": 98502143047
+    },
+    {
+      "threshold": 50,
+      "snapshots_taken": 2322,
+      "crossed_states": 59,
+      "crossed_pct": 0.3278870734689341,
+      "crossed_episodes": 1,
+      "deletes_missed": 177771,
+      "deletes_missed_pct": 85.50752521632893,
+      "first_crossed_index": 8997,
+      "first_crossed_seq_id": 98502143047
+    },
+    {
+      "threshold": 100,
+      "snapshots_taken": 1135,
+      "crossed_states": 71,
+      "crossed_pct": 0.3945759697677003,
+      "crossed_episodes": 1,
+      "deletes_missed": 158888,
+      "deletes_missed_pct": 76.42483682137171,
+      "first_crossed_index": 8997,
+      "first_crossed_seq_id": 98502143047
+    },
+    {
+      "threshold": 150,
+      "snapshots_taken": 701,
+      "crossed_states": 71,
+      "crossed_pct": 0.3945759697677003,
+      "crossed_episodes": 1,
+      "deletes_missed": 143133,
+      "deletes_missed_pct": 68.84671069403225,
+      "first_crossed_index": 8997,
+      "first_crossed_seq_id": 98502143047
+    },
+    {
+      "threshold": 200,
+      "snapshots_taken": 460,
+      "crossed_states": 154,
+      "crossed_pct": 0.8558408358341669,
+      "crossed_episodes": 1,
+      "deletes_missed": 128105,
+      "deletes_missed_pct": 61.6182702343904,
+      "first_crossed_index": 8997,
+      "first_crossed_seq_id": 98502143047
+    },
+    {
+      "threshold": 250,
+      "snapshots_taken": 306,
+      "crossed_states": 154,
+      "crossed_pct": 0.8558408358341669,
+      "crossed_episodes": 1,
+      "deletes_missed": 113778,
+      "deletes_missed_pct": 54.72700949009385,
+      "first_crossed_index": 8997,
+      "first_crossed_seq_id": 98502143047
+    },
+    {
+      "threshold": 300,
+      "snapshots_taken": 193,
+      "crossed_states": 214,
+      "crossed_pct": 1.1892853173279982,
+      "crossed_episodes": 1,
+      "deletes_missed": 98251,
+      "deletes_missed_pct": 47.2585509449209,
+      "first_crossed_index": 8997,
+      "first_crossed_seq_id": 98502143047
+    },
+    {
+      "threshold": 400,
+      "snapshots_taken": 99,
+      "crossed_states": 466,
+      "crossed_pct": 2.5897521396020897,
+      "crossed_episodes": 1,
+      "deletes_missed": 79853,
+      "deletes_missed_pct": 38.40914666115122,
+      "first_crossed_index": 8997,
+      "first_crossed_seq_id": 98502143047
+    },
+    {
+      "threshold": 500,
+      "snapshots_taken": 40,
+      "crossed_states": 476,
+      "crossed_pct": 2.6453262198510616,
+      "crossed_episodes": 1,
+      "deletes_missed": 62730,
+      "deletes_missed_pct": 30.173015040812697,
+      "first_crossed_index": 8997,
+      "first_crossed_seq_id": 98502143047
+    },
+    {
+      "threshold": 1000,
+      "snapshots_taken": 1,
+      "crossed_states": 3756,
+      "crossed_pct": 20.873624541513838,
+      "crossed_episodes": 1,
+      "deletes_missed": 42967,
+      "deletes_missed_pct": 20.667048258546135,
+      "first_crossed_index": 8997,
+      "first_crossed_seq_id": 98502143047
+    }
+  ],
+  "heuristic_validation": {
+    "threshold": 200,
+    "messages_at_or_over_threshold": 460,
+    "of_which_contain_deletes": 460,
+    "delete_entries_inside_them": 75568,
+    "deletes_applied": 79796,
+    "deletes_missed": 128105,
+    "deletes_total": 207901,
+    "deletes_missed_pct": 61.6182702343904,
+    "missed_deletes_with_float_near_miss": 0,
+    "verdict": "every message the heuristic would treat as a snapshot carries delete instructions, so none of them is a snapshot"
+  },
+  "message_diagnostics": {
+    "messages": 17994,
+    "messages_internally_crossed": 1,
+    "internally_crossed_detail": [
+      {
+        "index": 8997,
+        "seq_id": 98502143047,
+        "ingress_ts": "2026-08-13 14:15:00.015055+00:00",
+        "local_best_bid": 63810.79,
+        "local_best_ask": 63493.72,
+        "local_spread": -317.0699999999997,
+        "n_levels": 23,
+        "sub_market_ask_levels": [
+          {
+            "price": 63493.72,
+            "qty": 0.00418,
+            "times_seen_as_ask_in_file": 1,
+            "times_seen_as_bid_in_file": 0
+          },
+          {
+            "price": 63498.42,
+            "qty": 0.00784,
+            "times_seen_as_ask_in_file": 1,
+            "times_seen_as_bid_in_file": 0
+          },
+          {
+            "price": 63499.95,
+            "qty": 0.00784,
+            "times_seen_as_ask_in_file": 1,
+            "times_seen_as_bid_in_file": 0
+          },
+          {
+            "price": 63504.82,
+            "qty": 0.36806,
+            "times_seen_as_ask_in_file": 1,
+            "times_seen_as_bid_in_file": 0
+          },
+          {
+            "price": 63507.12,
+            "qty": 0.78445,
+            "times_seen_as_ask_in_file": 1,
+            "times_seen_as_bid_in_file": 0
+          },
+          {
+            "price": 63589.75,
+            "qty": 0.00493,
+            "times_seen_as_ask_in_file": 1,
+            "times_seen_as_bid_in_file": 4
+          }
+        ]
+      }
+    ],
+    "neighbouring_messages": [
+      {
+        "index": 8993,
+        "seq_id": 98502142992,
+        "local_best_bid": 63812.0,
+        "local_best_ask": null
+      },
+      {
+        "index": 8994,
+        "seq_id": 98502143009,
+        "local_best_bid": 63812.0,
+        "local_best_ask": 63812.01
+      },
+      {
+        "index": 8995,
+        "seq_id": 98502143014,
+        "local_best_bid": 63812.0,
+        "local_best_ask": 63812.01
+      },
+      {
+        "index": 8996,
+        "seq_id": 98502143026,
+        "local_best_bid": 63812.0,
+        "local_best_ask": 63812.01
+      },
+      {
+        "index": 8997,
+        "seq_id": 98502143047,
+        "local_best_bid": 63810.79,
+        "local_best_ask": 63493.72
+      },
+      {
+        "index": 8998,
+        "seq_id": 98502143081,
+        "local_best_bid": 63812.0,
+        "local_best_ask": 63812.01
+      },
+      {
+        "index": 8999,
+        "seq_id": 98502143257,
+        "local_best_bid": 63812.0,
+        "local_best_ask": 63812.01
+      },
+      {
+        "index": 9000,
+        "seq_id": 98502143306,
+        "local_best_bid": 63812.0,
+        "local_best_ask": 63812.01
+      },
+      {
+        "index": 9001,
+        "seq_id": 98502143326,
+        "local_best_bid": 63812.0,
+        "local_best_ask": 63812.01
+      }
+    ],
+    "distinct_prices": 40554,
+    "prices_not_exact_2dp": 0
+  },
+  "seq_id": {
+    "gap_sum": 1241659,
+    "median_step": 22.0,
+    "p99_step_nearest": 1007.0,
+    "max_step": 2630
+  },
+  "artefacts": {
+    "top_of_book_series": "D_top_of_book_series.parquet",
+    "top_of_book_series_threshold200": "D_top_of_book_series_threshold200.parquet",
+    "final_book": "D_final_book.csv",
+    "figure": "D_binance_l2_mid_spread.png"
+  },
+  "profile_findings": [
+    {
+      "file": "D_binance_btcusdt_orderbook_incremental.parquet",
+      "check_id": "null_clock_transaction_ts",
+      "severity": "high",
+      "classification": "pipeline",
+      "metric": {
+        "column": "transaction_ts",
+        "nulls": 17994,
+        "null_pct": 100.0,
+        "rows": 17994
+      },
+      "notes": "transaction_ts null on 100.0000% of rows (> 1.0% alert threshold)."
+    },
+    {
+      "file": "D_binance_btcusdt_orderbook_incremental.parquet",
+      "check_id": "clock_skew_ingress_ts_publish_ts",
+      "severity": "info",
+      "classification": "unclear",
+      "metric": {
+        "ingress": "ingress_ts",
+        "venue": "publish_ts",
+        "venue_unit_hint": "datetime",
+        "n": 17994,
+        "median_s": 0.000499,
+        "p50_s": 0.000499,
+        "p99_s": 0.000781,
+        "min_s": 0.00024599999999999996,
+        "max_s": 0.01914,
+        "negative_count": 0,
+        "negative_pct": 0.0
+      },
+      "notes": "Ingress vs venue clock skew within expected capture delay."
+    }
+  ]
+}

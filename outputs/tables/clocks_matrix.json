@@ -1,0 +1,271 @@
+{
+  "expected_columns": [
+    "ingress_ts",
+    "transaction_ts",
+    "publish_ts"
+  ],
+  "note": "status=absent means the column is not in the parquet schema; present_all_null means it exists and every row is null.",
+  "files": [
+    {
+      "file": "A_hkex_2800_top_of_book.parquet",
+      "rows": 109544,
+      "ingress_ts": {
+        "status": "present",
+        "dtype": "Datetime(time_unit='us', time_zone='UTC')",
+        "nulls": 0,
+        "null_pct": 0.0,
+        "unit": "datetime"
+      },
+      "transaction_ts": {
+        "status": "present",
+        "dtype": "Datetime(time_unit='us', time_zone='UTC')",
+        "nulls": 0,
+        "null_pct": 0.0,
+        "unit": "datetime"
+      },
+      "publish_ts": {
+        "status": "present",
+        "dtype": "Datetime(time_unit='us', time_zone='UTC')",
+        "nulls": 0,
+        "null_pct": 0.0,
+        "unit": "datetime"
+      },
+      "dtype_family": [
+        "Datetime(time_unit='us', time_zone='UTC')"
+      ],
+      "mixed_clock_dtypes": false
+    },
+    {
+      "file": "A_hkex_2800_trades.parquet",
+      "rows": 9666,
+      "ingress_ts": {
+        "status": "present",
+        "dtype": "Datetime(time_unit='us', time_zone='UTC')",
+        "nulls": 0,
+        "null_pct": 0.0,
+        "unit": "datetime"
+      },
+      "transaction_ts": {
+        "status": "present",
+        "dtype": "Datetime(time_unit='us', time_zone='UTC')",
+        "nulls": 1513,
+        "null_pct": 15.652803641630458,
+        "unit": "datetime"
+      },
+      "publish_ts": {
+        "status": "present",
+        "dtype": "Datetime(time_unit='us', time_zone='UTC')",
+        "nulls": 0,
+        "null_pct": 0.0,
+        "unit": "datetime"
+      },
+      "dtype_family": [
+        "Datetime(time_unit='us', time_zone='UTC')"
+      ],
+      "mixed_clock_dtypes": false
+    },
+    {
+      "file": "B_dreamdex_weth_top_of_book.parquet",
+      "rows": 6988,
+      "ingress_ts": {
+        "status": "present",
+        "dtype": "Datetime(time_unit='us', time_zone='UTC')",
+        "nulls": 0,
+        "null_pct": 0.0,
+        "unit": "datetime"
+      },
+      "transaction_ts": {
+        "status": "present_all_null",
+        "dtype": "Datetime(time_unit='us', time_zone='UTC')",
+        "nulls": 6988,
+        "null_pct": 100.0,
+        "unit": "datetime"
+      },
+      "publish_ts": {
+        "status": "present_all_null",
+        "dtype": "Datetime(time_unit='us', time_zone='UTC')",
+        "nulls": 6988,
+        "null_pct": 100.0,
+        "unit": "datetime"
+      },
+      "dtype_family": [
+        "Datetime(time_unit='us', time_zone='UTC')"
+      ],
+      "mixed_clock_dtypes": false
+    },
+    {
+      "file": "C_nasdaq_top_of_book_20_symbols.parquet",
+      "rows": 3752799,
+      "ingress_ts": {
+        "status": "present",
+        "dtype": "Datetime(time_unit='us', time_zone='UTC')",
+        "nulls": 0,
+        "null_pct": 0.0,
+        "unit": "datetime"
+      },
+      "transaction_ts": {
+        "status": "present",
+        "dtype": "Datetime(time_unit='us', time_zone='UTC')",
+        "nulls": 0,
+        "null_pct": 0.0,
+        "unit": "datetime"
+      },
+      "publish_ts": {
+        "status": "present",
+        "dtype": "Datetime(time_unit='us', time_zone='UTC')",
+        "nulls": 0,
+        "null_pct": 0.0,
+        "unit": "datetime"
+      },
+      "dtype_family": [
+        "Datetime(time_unit='us', time_zone='UTC')"
+      ],
+      "mixed_clock_dtypes": false
+    },
+    {
+      "file": "D_binance_btcusdt_orderbook_incremental.parquet",
+      "rows": 17994,
+      "ingress_ts": {
+        "status": "present",
+        "dtype": "Datetime(time_unit='us', time_zone='UTC')",
+        "nulls": 0,
+        "null_pct": 0.0,
+        "unit": "datetime"
+      },
+      "transaction_ts": {
+        "status": "present_all_null",
+        "dtype": "Datetime(time_unit='us', time_zone='UTC')",
+        "nulls": 17994,
+        "null_pct": 100.0,
+        "unit": "datetime"
+      },
+      "publish_ts": {
+        "status": "present",
+        "dtype": "Datetime(time_unit='us', time_zone='UTC')",
+        "nulls": 0,
+        "null_pct": 0.0,
+        "unit": "datetime"
+      },
+      "dtype_family": [
+        "Datetime(time_unit='us', time_zone='UTC')"
+      ],
+      "mixed_clock_dtypes": false
+    },
+    {
+      "file": "F_binance_ethusdt_top_of_book.parquet",
+      "rows": 235270,
+      "ingress_ts": {
+        "status": "present",
+        "dtype": "Datetime(time_unit='us', time_zone='UTC')",
+        "nulls": 0,
+        "null_pct": 0.0,
+        "unit": "datetime"
+      },
+      "transaction_ts": {
+        "status": "absent",
+        "dtype": null,
+        "nulls": null,
+        "null_pct": null,
+        "unit": null
+      },
+      "publish_ts": {
+        "status": "absent",
+        "dtype": null,
+        "nulls": null,
+        "null_pct": null,
+        "unit": null
+      },
+      "dtype_family": [
+        "Datetime(time_unit='us', time_zone='UTC')"
+      ],
+      "mixed_clock_dtypes": false
+    },
+    {
+      "file": "G_bitfinex_btcusd_trades.parquet",
+      "rows": 642,
+      "ingress_ts": {
+        "status": "present",
+        "dtype": "Int64",
+        "nulls": 0,
+        "null_pct": 0.0,
+        "unit": "us"
+      },
+      "transaction_ts": {
+        "status": "present",
+        "dtype": "Int64",
+        "nulls": 0,
+        "null_pct": 0.0,
+        "unit": "us"
+      },
+      "publish_ts": {
+        "status": "present",
+        "dtype": "Int64",
+        "nulls": 0,
+        "null_pct": 0.0,
+        "unit": "us"
+      },
+      "dtype_family": [
+        "Int64"
+      ],
+      "mixed_clock_dtypes": false
+    },
+    {
+      "file": "H_gateio_btcusdt_perp_trades.parquet",
+      "rows": 9359,
+      "ingress_ts": {
+        "status": "present",
+        "dtype": "Int64",
+        "nulls": 0,
+        "null_pct": 0.0,
+        "unit": "us"
+      },
+      "transaction_ts": {
+        "status": "present",
+        "dtype": "Int64",
+        "nulls": 0,
+        "null_pct": 0.0,
+        "unit": "us"
+      },
+      "publish_ts": {
+        "status": "present",
+        "dtype": "Int64",
+        "nulls": 0,
+        "null_pct": 0.0,
+        "unit": "us"
+      },
+      "dtype_family": [
+        "Int64"
+      ],
+      "mixed_clock_dtypes": false
+    },
+    {
+      "file": "H_gateio_btcusdt_perp_instrument_static.parquet",
+      "rows": 1,
+      "ingress_ts": {
+        "status": "present",
+        "dtype": "Int64",
+        "nulls": 0,
+        "null_pct": 0.0,
+        "unit": "us"
+      },
+      "transaction_ts": {
+        "status": "absent",
+        "dtype": null,
+        "nulls": null,
+        "null_pct": null,
+        "unit": null
+      },
+      "publish_ts": {
+        "status": "present_all_null",
+        "dtype": "Int64",
+        "nulls": 1,
+        "null_pct": 100.0,
+        "unit": "empty"
+      },
+      "dtype_family": [
+        "Int64"
+      ],
+      "mixed_clock_dtypes": false
+    }
+  ]
+}

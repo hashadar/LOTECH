@@ -1,0 +1,29 @@
+# Local data manifest
+
+- `A_hkex_2800_top_of_book.parquet` — 1322550 bytes, 109544 rows (expected 109544) [OK]
+  - sha256: `5f4297231f0a7185f6219a6ac798df4a082fd50211175d4d06e28c6b92a47172`
+  - columns: instrument, ingress_ts, transaction_ts, publish_ts, seq_id, bid_price, bid_qty, ask_price, ask_qty
+- `A_hkex_2800_trades.parquet` — 135388 bytes, 9666 rows (expected 9666) [OK]
+  - sha256: `f32fdabd1ccd6313929b5997294c262186e224d0c90030202cb16f6c68515a52`
+  - columns: instrument, ingress_ts, transaction_ts, publish_ts, trade_id, price, qty, side, other_data
+- `B_dreamdex_weth_top_of_book.parquet` — 65681 bytes, 6988 rows (expected 6988) [OK]
+  - sha256: `20c0ac91bc301b636787262b12082372016e65db892278f32b20f7ddbad63916`
+  - columns: instrument, ingress_ts, transaction_ts, publish_ts, seq_id, bid_price, bid_qty, ask_price, ask_qty
+- `C_nasdaq_top_of_book_20_symbols.parquet` — 38234624 bytes, 3752799 rows (expected 3752799) [OK]
+  - sha256: `5d644bf81d2c638d27c0ce45042059a3601fa42872b070a12f2f77059c19b696`
+  - columns: instrument, ingress_ts, transaction_ts, publish_ts, seq_id, bid_price, bid_qty, ask_price, ask_qty
+- `D_binance_btcusdt_orderbook_incremental.parquet` — 2691390 bytes, 17994 rows (expected 17994) [OK]
+  - sha256: `fea2406ba2e9ab1173039449981329ed4f1e81bfcb468c9c015e0b96ef387e26`
+  - columns: instrument, ingress_ts, transaction_ts, publish_ts, seq_id, bid_prices, bid_qtys, ask_prices, ask_qtys, snapshot
+- `F_binance_ethusdt_top_of_book.parquet` — 1831658 bytes, 235270 rows (expected 235270) [OK]
+  - sha256: `4b3b489fddbc2d0359173c5ac4c0b8b803f05e26fbf480d85ae3bfa55db16ad4`
+  - columns: instrument, ingress_ts, seq_id, bid_price, bid_qty, ask_price, ask_qty
+- `G_bitfinex_btcusd_trades.parquet` — 12033 bytes, 642 rows (expected 642) [OK]
+  - sha256: `aed426920e2dc18b4047ce4d23b2278ca3c7f08c67547b826816a0dd1ee6a4eb`
+  - columns: instrument, ingress_ts, transaction_ts, publish_ts, trade_id, price, qty, side, other_data
+- `H_gateio_btcusdt_perp_trades.parquet` — 114187 bytes, 9359 rows (expected 9359) [OK]
+  - sha256: `c0dc1b3cdb329f604876a20ba58905959bc1853051568022e1cf971b1f249340`
+  - columns: instrument, ingress_ts, transaction_ts, publish_ts, trade_id, price, qty, side, other_data
+- `H_gateio_btcusdt_perp_instrument_static.parquet` — 5681 bytes, 1 rows (expected 1) [OK]
+  - sha256: `1f41f2045e13ac567049d25fcd5ded1efad32d12d6f4e0cf4469dbe274382887`
+  - columns: instrument, ingress_ts, publish_ts, snapshot, scale, exchange_symbol, trading_state, outcome, quantity_multiplier, price_tick_size, qty_step_size, min_order_qty, max_order_qty, min_order_value, expiry_time, strike, present, other_data

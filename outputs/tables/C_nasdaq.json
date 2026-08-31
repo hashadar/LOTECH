@@ -1,0 +1,987 @@
+{
+  "rows": 3752799,
+  "n_instruments": 18,
+  "instruments": [
+    "AAEQ-USD:SPOT",
+    "AAPL-USD:SPOT",
+    "AMD-USD:SPOT",
+    "AMZN-USD:SPOT",
+    "ATRO-USD:SPOT",
+    "BOTZ-USD:SPOT",
+    "GPIX-USD:SPOT",
+    "INTC-USD:SPOT",
+    "LRGE-USD:SPOT",
+    "MSFT-USD:SPOT",
+    "NVDA-USD:SPOT",
+    "QMOM-USD:SPOT",
+    "QQQ-USD:SPOT",
+    "SMH-USD:SPOT",
+    "TIGO-USD:SPOT",
+    "TLT-USD:SPOT",
+    "TSLA-USD:SPOT",
+    "WYNN-USD:SPOT"
+  ],
+  "window": {
+    "ingress_min": "2026-08-13 14:00:00.002693+00:00",
+    "ingress_max": "2026-08-13 15:59:59.999957+00:00",
+    "transaction_min": "2026-08-13 13:59:59.878000+00:00",
+    "transaction_max": "2026-08-13 15:59:59.931000+00:00"
+  },
+  "global_skew": {
+    "ingress": "ingress_ts",
+    "venue": "transaction_ts",
+    "venue_unit_hint": "datetime",
+    "n": 3752799,
+    "median_s": 0.08799599999999999,
+    "p50_s": 0.08799599999999999,
+    "p99_s": 0.286057,
+    "min_s": 0.006643,
+    "max_s": 2.8960269999999997,
+    "negative_count": 0,
+    "negative_pct": 0.0
+  },
+  "crossed_total": 1030,
+  "locked_total": 26814,
+  "cross_structure": {
+    "crossed_n": 1030,
+    "nulls_in_bid_price": 0,
+    "nulls_in_ask_price": 0,
+    "burst": {
+      "peak_second_utc": "2026-08-13 15:27:42+00:00",
+      "peak_second_crosses": 229,
+      "peak_second_pct": 22.233009708737864,
+      "peak_second_distinct_symbols": 7,
+      "three_second_window_crosses": 296,
+      "three_second_window_pct": 28.7378640776699,
+      "three_second_window_symbols": [
+        {
+          "instrument": "AAPL-USD:SPOT",
+          "len": 139
+        },
+        {
+          "instrument": "QQQ-USD:SPOT",
+          "len": 112
+        },
+        {
+          "instrument": "TLT-USD:SPOT",
+          "len": 21
+        },
+        {
+          "instrument": "NVDA-USD:SPOT",
+          "len": 8
+        },
+        {
+          "instrument": "INTC-USD:SPOT",
+          "len": 5
+        },
+        {
+          "instrument": "TSLA-USD:SPOT",
+          "len": 5
+        },
+        {
+          "instrument": "BOTZ-USD:SPOT",
+          "len": 3
+        },
+        {
+          "instrument": "AMZN-USD:SPOT",
+          "len": 2
+        },
+        {
+          "instrument": "AMD-USD:SPOT",
+          "len": 1
+        }
+      ],
+      "top_seconds": [
+        {
+          "second": "2026-08-13 15:27:42+00:00",
+          "n": 229,
+          "symbols": 7
+        },
+        {
+          "second": "2026-08-13 14:42:16+00:00",
+          "n": 80,
+          "symbols": 1
+        },
+        {
+          "second": "2026-08-13 15:27:43+00:00",
+          "n": 66,
+          "symbols": 4
+        },
+        {
+          "second": "2026-08-13 15:16:14+00:00",
+          "n": 37,
+          "symbols": 1
+        },
+        {
+          "second": "2026-08-13 14:46:18+00:00",
+          "n": 35,
+          "symbols": 1
+        }
+      ],
+      "top_minutes": [
+        {
+          "minute": "2026-08-13 15:27:00+00:00",
+          "n": 297,
+          "symbols": 9
+        },
+        {
+          "minute": "2026-08-13 14:42:00+00:00",
+          "n": 83,
+          "symbols": 3
+        },
+        {
+          "minute": "2026-08-13 14:45:00+00:00",
+          "n": 45,
+          "symbols": 3
+        },
+        {
+          "minute": "2026-08-13 14:46:00+00:00",
+          "n": 38,
+          "symbols": 3
+        },
+        {
+          "minute": "2026-08-13 15:16:00+00:00",
+          "n": 38,
+          "symbols": 1
+        }
+      ],
+      "crosses_in_first_minute": 27
+    },
+    "sizes": {
+      "bid_qty_median": 100.0,
+      "bid_qty_min": 40.0,
+      "ask_qty_median": 100.0,
+      "ask_qty_min": 40.0,
+      "rows_with_ask_qty_le_2": 0,
+      "rows_with_bid_qty_le_2": 0,
+      "distinct_ask_prices": 299,
+      "most_repeated_ask_level": [
+        {
+          "instrument": "AAPL-USD:SPOT",
+          "ask_price": 303.7,
+          "len": 47
+        },
+        {
+          "instrument": "INTC-USD:SPOT",
+          "ask_price": 106.17,
+          "len": 35
+        },
+        {
+          "instrument": "AAPL-USD:SPOT",
+          "ask_price": 303.69,
+          "len": 21
+        },
+        {
+          "instrument": "QQQ-USD:SPOT",
+          "ask_price": 732.83,
+          "len": 16
+        },
+        {
+          "instrument": "AAPL-USD:SPOT",
+          "ask_price": 303.75,
+          "len": 15
+        }
+      ]
+    },
+    "inversion": {
+      "median": 0.010000000000047748,
+      "max": 0.20999999999997954,
+      "one_cent_n": 544,
+      "one_cent_pct": 52.81553398058253,
+      "le_five_cents_pct": 91.74757281553399,
+      "worst_instrument": "AMD-USD:SPOT",
+      "worst_cents": 21,
+      "cent_histogram": [
+        {
+          "cents": 1,
+          "n": 544
+        },
+        {
+          "cents": 2,
+          "n": 224
+        },
+        {
+          "cents": 3,
+          "n": 85
+        },
+        {
+          "cents": 4,
+          "n": 57
+        },
+        {
+          "cents": 5,
+          "n": 35
+        },
+        {
+          "cents": 6,
+          "n": 24
+        },
+        {
+          "cents": 7,
+          "n": 22
+        },
+        {
+          "cents": 8,
+          "n": 14
+        },
+        {
+          "cents": 9,
+          "n": 5
+        },
+        {
+          "cents": 10,
+          "n": 4
+        },
+        {
+          "cents": 11,
+          "n": 4
+        },
+        {
+          "cents": 12,
+          "n": 4
+        },
+        {
+          "cents": 13,
+          "n": 2
+        },
+        {
+          "cents": 16,
+          "n": 4
+        },
+        {
+          "cents": 18,
+          "n": 1
+        },
+        {
+          "cents": 21,
+          "n": 1
+        }
+      ]
+    },
+    "sequencing": {
+      "share_transaction_ts_with_previous_quote": 881,
+      "share_transaction_ts_pct": 85.53398058252426,
+      "prices_unchanged_from_previous_quote": 341,
+      "followed_by_another_crossed_quote": 566,
+      "n_runs": 464,
+      "median_run_length": 1.0,
+      "max_run_length": 32
+    }
+  },
+  "locked_by_symbol": [
+    {
+      "instrument": "BOTZ-USD:SPOT",
+      "rows": 18318,
+      "locked_n": 1474,
+      "locked_pct": 8.046729992357244
+    },
+    {
+      "instrument": "TLT-USD:SPOT",
+      "rows": 117813,
+      "locked_n": 5585,
+      "locked_pct": 4.740563435274545
+    },
+    {
+      "instrument": "GPIX-USD:SPOT",
+      "rows": 23800,
+      "locked_n": 1045,
+      "locked_pct": 4.390756302521008
+    },
+    {
+      "instrument": "INTC-USD:SPOT",
+      "rows": 720879,
+      "locked_n": 6913,
+      "locked_pct": 0.9589681486074639
+    },
+    {
+      "instrument": "NVDA-USD:SPOT",
+      "rows": 618876,
+      "locked_n": 4226,
+      "locked_pct": 0.6828508457267692
+    },
+    {
+      "instrument": "ATRO-USD:SPOT",
+      "rows": 3602,
+      "locked_n": 23,
+      "locked_pct": 0.6385341476957246
+    },
+    {
+      "instrument": "QQQ-USD:SPOT",
+      "rows": 1010088,
+      "locked_n": 5311,
+      "locked_pct": 0.5257957722495465
+    },
+    {
+      "instrument": "AAPL-USD:SPOT",
+      "rows": 326952,
+      "locked_n": 1359,
+      "locked_pct": 0.41565734419731337
+    },
+    {
+      "instrument": "TSLA-USD:SPOT",
+      "rows": 168559,
+      "locked_n": 462,
+      "locked_pct": 0.27408800479357376
+    },
+    {
+      "instrument": "MSFT-USD:SPOT",
+      "rows": 73584,
+      "locked_n": 115,
+      "locked_pct": 0.15628397477712547
+    },
+    {
+      "instrument": "AMZN-USD:SPOT",
+      "rows": 278284,
+      "locked_n": 204,
+      "locked_pct": 0.07330640640496759
+    },
+    {
+      "instrument": "SMH-USD:SPOT",
+      "rows": 180049,
+      "locked_n": 65,
+      "locked_pct": 0.036101283539480916
+    },
+    {
+      "instrument": "AMD-USD:SPOT",
+      "rows": 123670,
+      "locked_n": 30,
+      "locked_pct": 0.02425810625050538
+    },
+    {
+      "instrument": "WYNN-USD:SPOT",
+      "rows": 26827,
+      "locked_n": 2,
+      "locked_pct": 0.007455175755768443
+    },
+    {
+      "instrument": "AAEQ-USD:SPOT",
+      "rows": 3593,
+      "locked_n": 0,
+      "locked_pct": 0.0
+    },
+    {
+      "instrument": "TIGO-USD:SPOT",
+      "rows": 42581,
+      "locked_n": 0,
+      "locked_pct": 0.0
+    },
+    {
+      "instrument": "LRGE-USD:SPOT",
+      "rows": 8283,
+      "locked_n": 0,
+      "locked_pct": 0.0
+    },
+    {
+      "instrument": "QMOM-USD:SPOT",
+      "rows": 7041,
+      "locked_n": 0,
+      "locked_pct": 0.0
+    }
+  ],
+  "crossed_by_symbol": [
+    {
+      "instrument": "AAPL-USD:SPOT",
+      "rows": 326952,
+      "crossed_n": 233,
+      "crossed_pct": 0.07126428344221782
+    },
+    {
+      "instrument": "QQQ-USD:SPOT",
+      "rows": 1010088,
+      "crossed_n": 221,
+      "crossed_pct": 0.021879281805149652
+    },
+    {
+      "instrument": "INTC-USD:SPOT",
+      "rows": 720879,
+      "crossed_n": 194,
+      "crossed_pct": 0.026911589878467816
+    },
+    {
+      "instrument": "TSLA-USD:SPOT",
+      "rows": 168559,
+      "crossed_n": 158,
+      "crossed_pct": 0.09373572458308367
+    },
+    {
+      "instrument": "NVDA-USD:SPOT",
+      "rows": 618876,
+      "crossed_n": 96,
+      "crossed_pct": 0.015511992709363426
+    },
+    {
+      "instrument": "AMZN-USD:SPOT",
+      "rows": 278284,
+      "crossed_n": 41,
+      "crossed_pct": 0.01473315030688074
+    },
+    {
+      "instrument": "SMH-USD:SPOT",
+      "rows": 180049,
+      "crossed_n": 33,
+      "crossed_pct": 0.01832834395081339
+    },
+    {
+      "instrument": "AMD-USD:SPOT",
+      "rows": 123670,
+      "crossed_n": 23,
+      "crossed_pct": 0.018597881458720787
+    },
+    {
+      "instrument": "TLT-USD:SPOT",
+      "rows": 117813,
+      "crossed_n": 21,
+      "crossed_pct": 0.01782485803773777
+    },
+    {
+      "instrument": "MSFT-USD:SPOT",
+      "rows": 73584,
+      "crossed_n": 7,
+      "crossed_pct": 0.009512937595129375
+    },
+    {
+      "instrument": "BOTZ-USD:SPOT",
+      "rows": 18318,
+      "crossed_n": 3,
+      "crossed_pct": 0.016377333770062234
+    },
+    {
+      "instrument": "ATRO-USD:SPOT",
+      "rows": 3602,
+      "crossed_n": 0,
+      "crossed_pct": 0.0
+    },
+    {
+      "instrument": "AAEQ-USD:SPOT",
+      "rows": 3593,
+      "crossed_n": 0,
+      "crossed_pct": 0.0
+    },
+    {
+      "instrument": "TIGO-USD:SPOT",
+      "rows": 42581,
+      "crossed_n": 0,
+      "crossed_pct": 0.0
+    },
+    {
+      "instrument": "LRGE-USD:SPOT",
+      "rows": 8283,
+      "crossed_n": 0,
+      "crossed_pct": 0.0
+    },
+    {
+      "instrument": "WYNN-USD:SPOT",
+      "rows": 26827,
+      "crossed_n": 0,
+      "crossed_pct": 0.0
+    },
+    {
+      "instrument": "GPIX-USD:SPOT",
+      "rows": 23800,
+      "crossed_n": 0,
+      "crossed_pct": 0.0
+    },
+    {
+      "instrument": "QMOM-USD:SPOT",
+      "rows": 7041,
+      "crossed_n": 0,
+      "crossed_pct": 0.0
+    }
+  ],
+  "instruments_with_crosses": 11,
+  "clock_ordering": {
+    "file_order_is": "transaction_ts order (0 backward venue-clock steps globally)",
+    "transaction_ts": {
+      "backward_global": 0,
+      "backward_per_instrument": 0,
+      "reduction_pct": null
+    },
+    "publish_ts": {
+      "backward_global": 1313,
+      "backward_per_instrument": 1259,
+      "reduction_pct": 4.1127189642041095,
+      "median_backward_ms": -2.0,
+      "worst_backward_ms": -209.0,
+      "within_1ms": 610,
+      "worse_than_500ms": 0
+    },
+    "ingress_ts": {
+      "backward_global": 461372,
+      "backward_per_instrument": 12514,
+      "reduction_pct": 97.28765508093252,
+      "median_backward_ms": -0.002,
+      "worst_backward_ms": -809.748,
+      "within_1ms": 11050,
+      "worse_than_500ms": 32
+    },
+    "publish_vs_transaction": {
+      "publish_after_transaction": 628438,
+      "publish_before_transaction": 0,
+      "publish_equals_transaction": 3124361
+    }
+  },
+  "seq_id_structure": {
+    "distinct_seq_id_global": 3674668,
+    "global_collision_groups": 77135,
+    "duplicate_groups_per_instrument": 0,
+    "backward_steps_per_instrument_file_order": 158337,
+    "band_grouping_rule": "consecutive min(seq_id) values within 200,000 of each other",
+    "bands": [
+      {
+        "instruments": [
+          "BOTZ-USD:SPOT",
+          "AMZN-USD:SPOT",
+          "AAEQ-USD:SPOT",
+          "AAPL-USD:SPOT",
+          "AMD-USD:SPOT",
+          "ATRO-USD:SPOT"
+        ],
+        "seq_min": 18211379,
+        "n_instruments": 6,
+        "rows": 754419,
+        "seq_max": 52561055,
+        "distinct_seq_id": 754419,
+        "duplicate_groups_within_band": 0,
+        "step_median": 5.0,
+        "backward_steps_in_file_order": 35239
+      },
+      {
+        "instruments": [
+          "TLT-USD:SPOT",
+          "TSLA-USD:SPOT",
+          "WYNN-USD:SPOT",
+          "TIGO-USD:SPOT",
+          "INTC-USD:SPOT",
+          "GPIX-USD:SPOT"
+        ],
+        "seq_min": 23799234,
+        "n_instruments": 6,
+        "rows": 1100459,
+        "seq_max": 69030582,
+        "distinct_seq_id": 1094906,
+        "duplicate_groups_within_band": 5553,
+        "step_median": 5.0,
+        "backward_steps_in_file_order": 97023
+      },
+      {
+        "instruments": [
+          "MSFT-USD:SPOT",
+          "LRGE-USD:SPOT",
+          "NVDA-USD:SPOT"
+        ],
+        "seq_min": 24747839,
+        "n_instruments": 3,
+        "rows": 700743,
+        "seq_max": 65899093,
+        "distinct_seq_id": 700743,
+        "duplicate_groups_within_band": 0,
+        "step_median": 11.0,
+        "backward_steps_in_file_order": 34708
+      },
+      {
+        "instruments": [
+          "SMH-USD:SPOT",
+          "QQQ-USD:SPOT",
+          "QMOM-USD:SPOT"
+        ],
+        "seq_min": 35264529,
+        "n_instruments": 3,
+        "rows": 1197178,
+        "seq_max": 98957333,
+        "distinct_seq_id": 1197178,
+        "duplicate_groups_within_band": 0,
+        "step_median": 13.0,
+        "backward_steps_in_file_order": 69578
+      }
+    ],
+    "band_sizes": [
+      6,
+      6,
+      3,
+      3
+    ],
+    "bands_with_zero_collisions": 3,
+    "per_instrument": [
+      {
+        "instrument": "BOTZ-USD:SPOT",
+        "rows": 18318,
+        "seq_min": 18211379,
+        "seq_max": 52556037,
+        "seq_distinct": 18318,
+        "step_median": 65.0,
+        "backward_steps": 254
+      },
+      {
+        "instrument": "AMZN-USD:SPOT",
+        "rows": 278284,
+        "seq_min": 18211709,
+        "seq_max": 52561055,
+        "seq_distinct": 278284,
+        "step_median": 3.0,
+        "backward_steps": 9505
+      },
+      {
+        "instrument": "AAEQ-USD:SPOT",
+        "rows": 3593,
+        "seq_min": 18212787,
+        "seq_max": 52557498,
+        "seq_distinct": 3593,
+        "step_median": 1560.0,
+        "backward_steps": 27
+      },
+      {
+        "instrument": "AAPL-USD:SPOT",
+        "rows": 326952,
+        "seq_min": 18213958,
+        "seq_max": 52560156,
+        "seq_distinct": 326952,
+        "step_median": 5.0,
+        "backward_steps": 13366
+      },
+      {
+        "instrument": "AMD-USD:SPOT",
+        "rows": 123670,
+        "seq_min": 18215791,
+        "seq_max": 52560951,
+        "seq_distinct": 123670,
+        "step_median": 18.0,
+        "backward_steps": 5258
+      },
+      {
+        "instrument": "ATRO-USD:SPOT",
+        "rows": 3602,
+        "seq_min": 18251442,
+        "seq_max": 52510592,
+        "seq_distinct": 3602,
+        "step_median": 16.0,
+        "backward_steps": 29
+      },
+      {
+        "instrument": "TLT-USD:SPOT",
+        "rows": 117813,
+        "seq_min": 23799234,
+        "seq_max": 64765782,
+        "seq_distinct": 117813,
+        "step_median": 10.0,
+        "backward_steps": 4640
+      },
+      {
+        "instrument": "TSLA-USD:SPOT",
+        "rows": 168559,
+        "seq_min": 23799869,
+        "seq_max": 64766046,
+        "seq_distinct": 168559,
+        "step_median": 17.0,
+        "backward_steps": 8365
+      },
+      {
+        "instrument": "WYNN-USD:SPOT",
+        "rows": 26827,
+        "seq_min": 23856492,
+        "seq_max": 64736187,
+        "seq_distinct": 26827,
+        "step_median": 3.0,
+        "backward_steps": 1442
+      },
+      {
+        "instrument": "TIGO-USD:SPOT",
+        "rows": 42581,
+        "seq_min": 23880729,
+        "seq_max": 64723385,
+        "seq_distinct": 42581,
+        "step_median": 1.0,
+        "backward_steps": 1291
+      },
+      {
+        "instrument": "INTC-USD:SPOT",
+        "rows": 720879,
+        "seq_min": 23928177,
+        "seq_max": 69030582,
+        "seq_distinct": 720879,
+        "step_median": 6.0,
+        "backward_steps": 32083
+      },
+      {
+        "instrument": "GPIX-USD:SPOT",
+        "rows": 23800,
+        "seq_min": 23928217,
+        "seq_max": 69027283,
+        "seq_distinct": 23800,
+        "step_median": 151.0,
+        "backward_steps": 450
+      },
+      {
+        "instrument": "MSFT-USD:SPOT",
+        "rows": 73584,
+        "seq_min": 24747839,
+        "seq_max": 65898974,
+        "seq_distinct": 73584,
+        "step_median": 19.0,
+        "backward_steps": 3166
+      },
+      {
+        "instrument": "LRGE-USD:SPOT",
+        "rows": 8283,
+        "seq_min": 24748051,
+        "seq_max": 65749146,
+        "seq_distinct": 8283,
+        "step_median": 120.0,
+        "backward_steps": 85
+      },
+      {
+        "instrument": "NVDA-USD:SPOT",
+        "rows": 618876,
+        "seq_min": 24748100,
+        "seq_max": 65899093,
+        "seq_distinct": 618876,
+        "step_median": 11.0,
+        "backward_steps": 28378
+      },
+      {
+        "instrument": "SMH-USD:SPOT",
+        "rows": 180049,
+        "seq_min": 35264529,
+        "seq_max": 98957199,
+        "seq_distinct": 180049,
+        "step_median": 43.0,
+        "backward_steps": 5907
+      },
+      {
+        "instrument": "QQQ-USD:SPOT",
+        "rows": 1010088,
+        "seq_min": 35264561,
+        "seq_max": 98957333,
+        "seq_distinct": 1010088,
+        "step_median": 13.0,
+        "backward_steps": 44067
+      },
+      {
+        "instrument": "QMOM-USD:SPOT",
+        "rows": 7041,
+        "seq_min": 35266373,
+        "seq_max": 98952439,
+        "seq_distinct": 7041,
+        "step_median": 3734.5,
+        "backward_steps": 24
+      }
+    ],
+    "note": "seq_id is unique per instrument but steps backwards within instrument in file order, so it is not usable as a per-instrument ordering key. The bands are clusters of starting value, not disjoint ranges: the observed intervals overlap. Groups of symbols sharing a counter origin and a step size are what a per-channel counter looks like, and the channel is not a column in the file."
+  },
+  "worst_symbols_by_anomaly_score": [
+    {
+      "instrument": "TSLA-USD:SPOT",
+      "rows": 168559,
+      "crossed_n": 158,
+      "locked_n": 462,
+      "spread_median": 0.060000000000002274,
+      "spread_p99": 0.13999999999998636,
+      "spread_max": 0.37000000000000455,
+      "gap_median_s": 0.0,
+      "gap_max_s": 6.308,
+      "gaps_over_60s": 0,
+      "skew_median_s": 0.09994299999999999,
+      "skew_p99_s": 0.384358,
+      "neg_skew_n": 0,
+      "tx_min": "2026-08-13 14:00:00.001000+00:00",
+      "tx_max": "2026-08-13 15:59:59.772000+00:00",
+      "crossed_pct": 0.09373572458308367,
+      "locked_pct": 0.27408800479357376,
+      "legacy_anomaly_score": 0.46867862291541834,
+      "anomaly_score": 4.686786229154183
+    },
+    {
+      "instrument": "AAPL-USD:SPOT",
+      "rows": 326952,
+      "crossed_n": 233,
+      "locked_n": 1359,
+      "spread_median": 0.03000000000002956,
+      "spread_p99": 0.060000000000002274,
+      "spread_max": 0.12000000000000455,
+      "gap_median_s": 0.0,
+      "gap_max_s": 4.226,
+      "gaps_over_60s": 0,
+      "skew_median_s": 0.0852565,
+      "skew_p99_s": 1.2334509999999999,
+      "neg_skew_n": 0,
+      "tx_min": "2026-08-13 14:00:00.022000+00:00",
+      "tx_max": "2026-08-13 15:59:59.514000+00:00",
+      "crossed_pct": 0.07126428344221782,
+      "locked_pct": 0.41565734419731337,
+      "legacy_anomaly_score": 0.35632141721108906,
+      "anomaly_score": 3.5632141721108908
+    },
+    {
+      "instrument": "ATRO-USD:SPOT",
+      "rows": 3602,
+      "crossed_n": 0,
+      "locked_n": 23,
+      "spread_median": 0.37000000000000455,
+      "spread_p99": 0.8299999999999983,
+      "spread_max": 1.039999999999992,
+      "gap_median_s": 0.003,
+      "gap_max_s": 89.387,
+      "gaps_over_60s": 7,
+      "skew_median_s": 0.085612,
+      "skew_p99_s": 0.182524,
+      "neg_skew_n": 0,
+      "tx_min": "2026-08-13 14:00:01.398000+00:00",
+      "tx_max": "2026-08-13 15:59:46.832000+00:00",
+      "crossed_pct": 0.0,
+      "locked_pct": 0.6385341476957246,
+      "legacy_anomaly_score": 7.0,
+      "anomaly_score": 1.943364797334814
+    }
+  ],
+  "worst_symbols_by_legacy_score": [
+    {
+      "instrument": "TIGO-USD:SPOT",
+      "rows": 42581,
+      "crossed_n": 0,
+      "locked_n": 0,
+      "spread_median": 0.20000000000000284,
+      "spread_p99": 0.37999999999999545,
+      "spread_max": 0.75,
+      "gap_median_s": 0.0,
+      "gap_max_s": 119.645,
+      "gaps_over_60s": 18,
+      "skew_median_s": 0.06254,
+      "skew_p99_s": 0.155726,
+      "neg_skew_n": 0,
+      "tx_min": "2026-08-13 14:00:02.887000+00:00",
+      "tx_max": "2026-08-13 15:59:50.326000+00:00",
+      "crossed_pct": 0.0,
+      "locked_pct": 0.0,
+      "legacy_anomaly_score": 18.0,
+      "anomaly_score": 0.4227237500293558
+    },
+    {
+      "instrument": "ATRO-USD:SPOT",
+      "rows": 3602,
+      "crossed_n": 0,
+      "locked_n": 23,
+      "spread_median": 0.37000000000000455,
+      "spread_p99": 0.8299999999999983,
+      "spread_max": 1.039999999999992,
+      "gap_median_s": 0.003,
+      "gap_max_s": 89.387,
+      "gaps_over_60s": 7,
+      "skew_median_s": 0.085612,
+      "skew_p99_s": 0.182524,
+      "neg_skew_n": 0,
+      "tx_min": "2026-08-13 14:00:01.398000+00:00",
+      "tx_max": "2026-08-13 15:59:46.832000+00:00",
+      "crossed_pct": 0.0,
+      "locked_pct": 0.6385341476957246,
+      "legacy_anomaly_score": 7.0,
+      "anomaly_score": 1.943364797334814
+    },
+    {
+      "instrument": "WYNN-USD:SPOT",
+      "rows": 26827,
+      "crossed_n": 0,
+      "locked_n": 2,
+      "spread_median": 0.09999999999999432,
+      "spread_p99": 0.23000000000000398,
+      "spread_max": 0.3999999999999915,
+      "gap_median_s": 0.0,
+      "gap_max_s": 75.24,
+      "gaps_over_60s": 5,
+      "skew_median_s": 0.06109,
+      "skew_p99_s": 2.820763,
+      "neg_skew_n": 0,
+      "tx_min": "2026-08-13 14:00:01.813000+00:00",
+      "tx_max": "2026-08-13 15:59:54.054000+00:00",
+      "crossed_pct": 0.0,
+      "locked_pct": 0.007455175755768443,
+      "legacy_anomaly_score": 5.0,
+      "anomaly_score": 0.18637939389421104
+    }
+  ],
+  "score_note": "legacy_anomaly_score adds crossed_pct*5 (a rate) to gaps_over_60s (a count), so it is the gap count and ranks the illiquid names worst. anomaly_score puts every term on a per-1,000-row basis; the CSV is sorted by it.",
+  "profile_findings": [
+    {
+      "file": "C_nasdaq_top_of_book_20_symbols.parquet",
+      "check_id": "crossed_book",
+      "severity": "high",
+      "classification": "pipeline",
+      "metric": {
+        "crossed": 1030,
+        "crossed_pct": 0.027446180837289714,
+        "bid_col": "bid_price",
+        "ask_col": "ask_price"
+      },
+      "notes": "Bid above ask on top of book."
+    },
+    {
+      "file": "C_nasdaq_top_of_book_20_symbols.parquet",
+      "check_id": "locked_book",
+      "severity": "low",
+      "classification": "market",
+      "metric": {
+        "locked": 26814,
+        "locked_pct": 0.7145066922049382,
+        "bid_col": "bid_price",
+        "ask_col": "ask_price"
+      },
+      "notes": "Bid equals ask (locked). Often market microstructure on equities."
+    },
+    {
+      "file": "C_nasdaq_top_of_book_20_symbols.parquet",
+      "check_id": "non_monotonic_ingress_ts",
+      "severity": "high",
+      "classification": "pipeline",
+      "metric": {
+        "backward_jumps": 461372,
+        "rows": 3752799,
+        "worst_step_ms": -1733.65,
+        "median_backward_step_ms": -32.484,
+        "within_1ms": 14557
+      },
+      "notes": "461372 backward jumps in ingress_ts (stored order)."
+    },
+    {
+      "file": "C_nasdaq_top_of_book_20_symbols.parquet",
+      "check_id": "non_monotonic_ingress_ts_over_instrument",
+      "severity": "high",
+      "classification": "pipeline",
+      "metric": {
+        "backward_jumps": 12514,
+        "rows": 3752799,
+        "partition_by": "instrument",
+        "worst_step_ms": -809.748,
+        "median_backward_step_ms": -0.002,
+        "within_1ms": 11050
+      },
+      "notes": "12514 backward jumps in ingress_ts within instrument (stored order)."
+    },
+    {
+      "file": "C_nasdaq_top_of_book_20_symbols.parquet",
+      "check_id": "non_monotonic_publish_ts",
+      "severity": "high",
+      "classification": "pipeline",
+      "metric": {
+        "backward_jumps": 1313,
+        "rows": 3752799,
+        "worst_step_ms": -210.0,
+        "median_backward_step_ms": -1.0,
+        "within_1ms": 720
+      },
+      "notes": "1313 backward jumps in publish_ts (stored order)."
+    },
+    {
+      "file": "C_nasdaq_top_of_book_20_symbols.parquet",
+      "check_id": "non_monotonic_publish_ts_over_instrument",
+      "severity": "high",
+      "classification": "pipeline",
+      "metric": {
+        "backward_jumps": 1259,
+        "rows": 3752799,
+        "partition_by": "instrument",
+        "worst_step_ms": -209.0,
+        "median_backward_step_ms": -2.0,
+        "within_1ms": 610
+      },
+      "notes": "1259 backward jumps in publish_ts within instrument (stored order)."
+    }
+  ]
+}
