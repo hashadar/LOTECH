@@ -71,11 +71,11 @@
           "len": 8
         },
         {
-          "instrument": "INTC-USD:SPOT",
+          "instrument": "TSLA-USD:SPOT",
           "len": 5
         },
         {
-          "instrument": "TSLA-USD:SPOT",
+          "instrument": "INTC-USD:SPOT",
           "len": 5
         },
         {
@@ -177,8 +177,8 @@
           "len": 16
         },
         {
-          "instrument": "TSLA-USD:SPOT",
-          "ask_price": 334.43,
+          "instrument": "NVDA-USD:SPOT",
+          "ask_price": 225.66,
           "len": 15
         }
       ]
@@ -765,7 +765,7 @@
         "backward_steps": 24
       }
     ],
-    "note": "seq_id is unique per instrument but steps backwards within instrument in file order, so it is not usable as a per-instrument ordering key. The bands are clusters of starting value, not disjoint ranges: the observed intervals overlap. Groups of symbols sharing a counter origin and a step size are what a per-channel counter looks like, and the channel is not a column in the file."
+    "note": "seq_id is unique per instrument but steps backwards within instrument in file order, so it is not usable as a per-instrument ordering key. The bands are clusters of starting value, not disjoint ranges. The observed intervals overlap. Groups of symbols sharing a counter origin and a step size are what a per-channel counter looks like. The channel is not a column in the file."
   },
   "worst_symbols_by_anomaly_score": [
     {
@@ -897,7 +897,7 @@
       "anomaly_score": 0.18637939389421104
     }
   ],
-  "score_note": "legacy_anomaly_score adds crossed_pct*5 (a rate) to gaps_over_60s (a count), so it is the gap count and ranks the illiquid names worst. anomaly_score puts every term on a per-1,000-row basis; the CSV is sorted by it.",
+  "score_note": "legacy_anomaly_score adds crossed_pct*5 (a rate) to gaps_over_60s (a count), so it is the gap count and ranks the illiquid names worst. anomaly_score puts every term on a per-1,000-row basis. The CSV is sorted by it.",
   "profile_findings": [
     {
       "file": "C_nasdaq_top_of_book_20_symbols.parquet",
@@ -923,7 +923,7 @@
         "bid_col": "bid_price",
         "ask_col": "ask_price"
       },
-      "notes": "Bid equals ask (locked). Often market microstructure on equities."
+      "notes": "Bid equals ask (locked). This is often real market behaviour on equities."
     },
     {
       "file": "C_nasdaq_top_of_book_20_symbols.parquet",

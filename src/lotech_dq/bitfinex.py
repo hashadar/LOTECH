@@ -1,8 +1,8 @@
 """Bitfinex public REST v2 access (api-pub), for reconciling G against the venue.
 
-Every failure mode raises. An empty list or a zero returned on a network error would read
-downstream as a venue that traded nothing, which is the one wrong answer a reconciliation
-must never produce.
+Every failure mode raises. An empty list or a zero returned on a network error
+would look like a venue that traded nothing. A reconciliation must never report
+that result from a transport failure.
 """
 from __future__ import annotations
 
@@ -145,8 +145,8 @@ def fetch_trades(
 ) -> list[list]:
     """Every public trade in [start_ms, end_ms] as [ID, MTS, AMOUNT, PRICE], sorted by MTS.
 
-    `limit` is capped by the venue, so a full page means there may be more; page forward
-    on the last MTS and deduplicate on ID rather than trusting a single response.
+    `limit` is capped by the venue, so a full page means there may be more. Page forward
+    on the last MTS and deduplicate on ID. Do not trust a single response to be complete.
     """
     log = [] if log is None else log
     rows: list[list] = []
@@ -194,6 +194,6 @@ def fetch_candles(
     if len(rows) >= limit:
         raise BitfinexError(
             f"{url}: returned {len(rows)} rows against limit={limit}; the response may be "
-            "truncated, so its volume total cannot be trusted"
+            "truncated, so its volume total cannot be used"
         )
     return rows

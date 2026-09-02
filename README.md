@@ -2,10 +2,10 @@
 
 Python + Polars analysis of the LO:TECH market-data quality exercise.
 
-- **Narrative (read this):** [WRITEUP.md](WRITEUP.md)
+- **Findings (read this):** [WRITEUP.md](WRITEUP.md)
 - Brief (reference): [gist](https://gist.github.com/jembishop/6e2aa508cd8c2a19c22515bacf2e86fc)
 
-The write-up is the argument. Scripts and `outputs/tables/` are the exhibits it cites.
+WRITEUP.md is the findings document. Scripts and `outputs/tables/` are the exhibits it cites.
 
 ## Setup
 
@@ -20,13 +20,13 @@ On Windows, `tzdata` is included so Polars UTC timestamps resolve correctly.
 
 ## Data
 
-Parquet files are **not** vendored. Download them (public S3 objects) — **requires network access**:
+Parquet files are not committed in this repository. Download them from the public S3 objects. This step requires network access:
 
 ```powershell
 python scripts/00_download.py
 ```
 
-This writes into `data/` and generates `data/MANIFEST.md` (sizes, row counts, SHA-256).
+The script writes into `data/` and generates `data/MANIFEST.md` (sizes, row counts, SHA-256).
 
 ## Run analyses
 
@@ -42,7 +42,9 @@ python scripts/08_analyse_H_gateio.py
 python scripts/09_exhibits.py
 ```
 
-`07_analyse_G_bitfinex.py` and `08_analyse_H_gateio.py` reconcile against public venue APIs. On first run they fetch live responses and write JSON fixtures under `fixtures/venue/` (committed in this repo). **Network is required once** to populate those fixtures; thereafter both scripts run offline from the cache. The last verified comparisons (difference 0 on volume) are recorded in `outputs/tables/G_bitfinex.json` and `outputs/tables/H_gateio_volume.json`. Every other script is offline once `data/` is populated.
+`07_analyse_G_bitfinex.py` and `08_analyse_H_gateio.py` reconcile against public venue APIs. On first run they fetch live responses and write JSON fixtures under `fixtures/venue/` (committed in this repository). Network is required once to populate those fixtures. After that, both scripts run offline from the cache.
+
+The last verified comparisons (difference 0 on volume) are recorded in `outputs/tables/G_bitfinex.json` and `outputs/tables/H_gateio_volume.json`. Every other script is offline once `data/` is populated.
 
 Outputs:
 
@@ -60,9 +62,9 @@ The three `.parquet` series under `outputs/tables/` are committed (`.gitignore` 
 ## Layout
 
 ```
-WRITEUP.md         submission narrative (findings + links into this tree)
+WRITEUP.md         findings document (findings + links into this tree)
 src/lotech_dq/     shared helpers (checks, clocks, book replay, microprice, volume)
-scripts/           thin runners per file + 09_exhibits.py
+scripts/           one script per file + 09_exhibits.py
 data/              downloaded parquets (gitignored)
 fixtures/venue/    committed venue API fixtures (G, H)
 outputs/           figures + JSON summaries
@@ -71,4 +73,4 @@ outputs/           figures + JSON summaries
 ## Notes
 
 - Derivatives base quantity = `qty * quantity_multiplier` (null multiplier → 1).
-- Do not redistribute the raw market-data files; use the download script.
+- Do not redistribute the raw market-data files. Use the download script.
