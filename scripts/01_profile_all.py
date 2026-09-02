@@ -1,4 +1,4 @@
-"""Profile every parquet with the shared DQ battery."""
+"""Profile every parquet with the shared data-quality checks."""
 from __future__ import annotations
 
 import sys
@@ -27,10 +27,10 @@ def _sample_rows(df: pl.DataFrame, n: int = 2) -> list[dict]:
 
 
 def clock_matrix(frames: dict[str, pl.DataFrame]) -> list[dict]:
-    """Per-file clock coverage, distinguishing an absent column from a null one.
+    """Per-file clock coverage. Distinguishes an absent column from a null column.
 
-    The distinction matters: a null-rate alert cannot fire on a column that is not in
-    the schema, so absence and 100% null are different defects with different fixes.
+    The distinction matters. A null-rate alert cannot run on a column that is not in
+    the schema. Absence and 100% null are different defects with different fixes.
     """
     rows = []
     for filename, df in frames.items():

@@ -67,9 +67,12 @@ def main() -> None:
     for r in results:
         match = r["rows_match"]
         flag = "OK" if match else ("MISMATCH" if match is False else "?")
+        row_word = "row" if r["rows"] == 1 else "rows"
+        expected = r["expected_rows"]
+        expected_word = "row" if expected == 1 else "rows"
         lines.append(
-            f"- `{r['file']}` — {r['bytes']} bytes, {r['rows']} rows "
-            f"(expected {r['expected_rows']}) [{flag}]"
+            f"- `{r['file']}` — {r['bytes']} bytes, {r['rows']} {row_word} "
+            f"(expected {expected} {expected_word}) [{flag}]"
         )
         lines.append(f"  - sha256: `{r['sha256']}`")
         lines.append(f"  - columns: {', '.join(r['columns'])}")
@@ -78,7 +81,7 @@ def main() -> None:
     print(f"wrote {manifest}")
     bad = [r for r in results if r["rows_match"] is False]
     if bad:
-        print("WARNING: row-count mismatches:", [r["file"] for r in bad])
+        print("WARNING: row counts do not match:", [r["file"] for r in bad])
         sys.exit(1)
 
 

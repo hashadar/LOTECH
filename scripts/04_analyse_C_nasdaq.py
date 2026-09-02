@@ -29,7 +29,7 @@ def per_symbol(df: pl.DataFrame) -> pl.DataFrame:
     """Per-instrument quote quality.
 
     Two scores are emitted. `legacy_anomaly_score` adds a rate to a raw count, so it is
-    dominated by the gap count and ranks illiquid names worst; it is kept because the
+    dominated by the gap count and ranks illiquid names worst. It is kept because the
     write-up uses it as the example of a generic score failing. `anomaly_score`
     expresses every term per 1,000 rows so the terms are commensurable.
     """
@@ -87,8 +87,8 @@ def cross_structure(df: pl.DataFrame) -> dict:
     """Temporal, size and sequencing structure of the 1,030 crossed quotes.
 
     The distinguishing facts are that the crosses arrive in a burst across unrelated
-    symbols at once, and that they carry ordinary round-lot sizes -- neither of which a
-    per-symbol consolidation race would produce.
+    symbols at once, and that they carry ordinary round-lot sizes. A per-symbol
+    consolidation race would produce neither of those facts.
     """
     work = df.with_columns(
         (pl.col("bid_price") - pl.col("ask_price")).alias("inversion"),
@@ -212,8 +212,8 @@ def seq_id_structure(df: pl.DataFrame) -> dict:
     """`seq_id` is unique per instrument but is not a per-instrument ordering key.
 
     The instruments fall into a few disjoint value bands with symbol-dependent step
-    sizes, which is what a per-channel counter shared by several symbols looks like.
-    The file does not carry the channel, so the partition key its own `seq_id` is
+    sizes. That is what a per-channel counter shared by several symbols looks like.
+    The file does not carry the channel. The partition key its own `seq_id` is
     defined against is absent.
     """
     per = (
@@ -272,9 +272,9 @@ def seq_id_structure(df: pl.DataFrame) -> dict:
         "note": (
             "seq_id is unique per instrument but steps backwards within instrument in file "
             "order, so it is not usable as a per-instrument ordering key. The bands are "
-            "clusters of starting value, not disjoint ranges: the observed intervals overlap. "
+            "clusters of starting value, not disjoint ranges. The observed intervals overlap. "
             "Groups of symbols sharing a counter origin and a step size are what a per-channel "
-            "counter looks like, and the channel is not a column in the file."
+            "counter looks like. The channel is not a column in the file."
         ),
     }
 
@@ -374,7 +374,7 @@ def main() -> None:
         "score_note": (
             "legacy_anomaly_score adds crossed_pct*5 (a rate) to gaps_over_60s (a count), so it "
             "is the gap count and ranks the illiquid names worst. anomaly_score puts every term "
-            "on a per-1,000-row basis; the CSV is sorted by it."
+            "on a per-1,000-row basis. The CSV is sorted by it."
         ),
         "profile_findings": profile["findings"],
     }

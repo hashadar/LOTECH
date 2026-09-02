@@ -36,7 +36,7 @@ def with_time(top: pl.DataFrame) -> pl.DataFrame:
 
 
 def crossed_episodes(top: pl.DataFrame) -> pl.DataFrame:
-    """Contiguous runs of crossed states, which is what an "event" should mean."""
+    """Contiguous runs of crossed states. That is what an event should mean."""
     flagged = top.with_row_index("i").with_columns(
         (pl.col("crossed") != pl.col("crossed").shift(1)).fill_null(True).cum_sum().alias("run")
     )
@@ -63,7 +63,7 @@ def crossed_episodes(top: pl.DataFrame) -> pl.DataFrame:
 
 
 def threshold_sweep(df: pl.DataFrame) -> list[dict]:
-    """How much of the crossed count is the data and how much is the threshold.
+    """How much of the crossed count is the data, and how much is the threshold.
 
     Run without snapshot validation so the numbers are comparable to the unguarded
     heuristic the shipped code used.
@@ -92,7 +92,7 @@ def threshold_sweep(df: pl.DataFrame) -> list[dict]:
 def message_diagnostics(df: pl.DataFrame) -> dict:
     """Message-local checks that involve no replay state at all.
 
-    An internally crossed message is a source defect by construction: it cannot be
+    An internally crossed message is a source defect by construction. It cannot be
     produced by a reconstruction error, because nothing is reconstructed.
     """
     work = df.sort("seq_id")
@@ -167,10 +167,10 @@ def message_diagnostics(df: pl.DataFrame) -> dict:
 
 
 def heuristic_and_delete_diagnostics(df: pl.DataFrame, threshold: int = 200) -> dict:
-    """Are the heuristic's "snapshots" snapshots, and where do the deletes land?
+    """Are the heuristic's snapshots actually snapshots, and where do the deletes land?
 
     Runs the unguarded threshold-200 policy so the delete accounting is comparable with
-    the shipped output, and indexes the book by scaled price so the float-key hypothesis
+    the existing output. Indexes the book by scaled price so the float-key hypothesis
     can be tested rather than assumed away.
     """
     work = df.sort("seq_id")
@@ -246,7 +246,7 @@ def heuristic_and_delete_diagnostics(df: pl.DataFrame, threshold: int = 200) -> 
 def make_figure(primary: pl.DataFrame, legacy: pl.DataFrame, episode: dict, path: Path) -> None:
     """Time axis, both snapshot policies, and a zoom on the inversion.
 
-    Plotting the two policies together is the point: the difference between the lines is
+    Plotting the two policies together is the point. The difference between the lines is
     what the level-count threshold is choosing, not what the data says.
     """
     fig, axes = plt.subplots(3, 1, figsize=(12, 10))
@@ -294,7 +294,7 @@ def make_figure(primary: pl.DataFrame, legacy: pl.DataFrame, episode: dict, path
     axes[2].set_ylabel("Price (USDT)")
     axes[2].set_xlabel("ingress_ts (UTC)")
     axes[2].set_title(
-        f"Inversion window: {episode['duration_s']:.1f} s, "
+        f"Crossed-book window: {episode['duration_s']:.1f} s, "
         f"{episode['messages']} crossed messages, worst spread {episode['worst_spread']:.2f} USDT",
         fontsize=9,
     )
@@ -371,7 +371,7 @@ def main() -> None:
             "final_book_levels": final_book.height,
         },
         "replay_threshold_200_unvalidated": {
-            "policy": "as shipped: any message with >=200 levels clears and replaces the book",
+            "policy": "unguarded heuristic: any message with >=200 levels clears and replaces the book",
             "integrity": legacy_res["integrity"],
             "crossed_episodes_detail": _rows(legacy_episodes),
         },

@@ -50,8 +50,8 @@ def add_microprice(df: pl.DataFrame) -> pl.DataFrame:
             (pl.col(bs) + pl.col(as_)).alias("size_sum"),
         ]
     ).with_columns(
-        # guard first: the weights are only meaningful once the row is known valid,
-        # so the division never runs on a rejected row
+    # weights are only meaningful once the row is known valid;
+    # the division never runs on a rejected row
         pl.when(undefined)
         .then(None)
         .otherwise(

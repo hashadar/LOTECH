@@ -159,7 +159,7 @@
           "bid_col": "bid_price",
           "ask_col": "ask_price"
         },
-        "notes": "Bid equals ask (locked). Often market microstructure on equities."
+        "notes": "Bid equals ask (locked). This is often real market behaviour on equities."
       },
       {
         "file": "A_hkex_2800_top_of_book.parquet",
@@ -193,7 +193,7 @@
           "negative_count": 0,
           "negative_pct": 0.0
         },
-        "notes": "Ingress vs venue clock skew within expected capture delay."
+        "notes": "Capture latency is within the expected delay."
       },
       {
         "file": "A_hkex_2800_top_of_book.parquet",
@@ -213,7 +213,7 @@
           "negative_count": 0,
           "negative_pct": 0.0
         },
-        "notes": "Ingress vs venue clock skew within expected capture delay."
+        "notes": "Capture latency is within the expected delay."
       }
     ]
   },
@@ -388,7 +388,7 @@
           "median_backward_step_ms": -25252352.72,
           "within_1ms": 0
         },
-        "notes": "1 backward jumps in publish_ts (stored order)."
+        "notes": "1 backward jump in publish_ts (stored order)."
       },
       {
         "file": "A_hkex_2800_trades.parquet",
@@ -408,7 +408,7 @@
           "negative_count": 0,
           "negative_pct": 0.0
         },
-        "notes": "Ingress vs venue clock skew within expected capture delay."
+        "notes": "Capture latency is within the expected delay."
       },
       {
         "file": "A_hkex_2800_trades.parquet",
@@ -428,7 +428,7 @@
           "negative_count": 0,
           "negative_pct": 0.0
         },
-        "notes": "Ingress vs venue clock skew within expected capture delay."
+        "notes": "Capture latency is within the expected delay."
       }
     ]
   },
@@ -771,7 +771,7 @@
           "bid_col": "bid_price",
           "ask_col": "ask_price"
         },
-        "notes": "Bid equals ask (locked). Often market microstructure on equities."
+        "notes": "Bid equals ask (locked). This is often real market behaviour on equities."
       },
       {
         "file": "C_nasdaq_top_of_book_20_symbols.parquet",
@@ -849,7 +849,7 @@
           "negative_count": 0,
           "negative_pct": 0.0
         },
-        "notes": "Ingress vs venue clock skew within expected capture delay."
+        "notes": "Capture latency is within the expected delay."
       },
       {
         "file": "C_nasdaq_top_of_book_20_symbols.parquet",
@@ -869,7 +869,7 @@
           "negative_count": 0,
           "negative_pct": 0.0
         },
-        "notes": "Ingress vs venue clock skew within expected capture delay."
+        "notes": "Capture latency is within the expected delay."
       }
     ]
   },
@@ -1030,7 +1030,7 @@
           "negative_count": 0,
           "negative_pct": 0.0
         },
-        "notes": "Ingress vs venue clock skew within expected capture delay."
+        "notes": "Capture latency is within the expected delay."
       }
     ]
   },
@@ -1350,7 +1350,7 @@
           "negative_count": 0,
           "negative_pct": 0.0
         },
-        "notes": "Ingress vs venue clock skew within expected capture delay."
+        "notes": "Capture latency is within the expected delay."
       },
       {
         "file": "G_bitfinex_btcusd_trades.parquet",
@@ -1370,7 +1370,7 @@
           "negative_count": 0,
           "negative_pct": 0.0
         },
-        "notes": "Ingress vs venue clock skew within expected capture delay."
+        "notes": "Capture latency is within the expected delay."
       }
     ]
   },
@@ -1537,7 +1537,7 @@
           "negative_count": 0,
           "negative_pct": 0.0
         },
-        "notes": "Ingress vs venue clock skew within expected capture delay."
+        "notes": "Capture latency is within the expected delay."
       },
       {
         "file": "H_gateio_btcusdt_perp_trades.parquet",
@@ -1557,7 +1557,7 @@
           "negative_count": 0,
           "negative_pct": 0.0
         },
-        "notes": "Ingress vs venue clock skew within expected capture delay."
+        "notes": "Capture latency is within the expected delay."
       }
     ]
   },

@@ -19,8 +19,8 @@ from lotech_dq.volume import compute_volumes, fetch_gate_candle, select_static_r
 def static_clocks(static: pl.DataFrame) -> dict:
     """Absent versus present-and-null, stated separately.
 
-    A null-rate alert can only fire on a column that exists, so the two failure modes
-    need different checks and the clocks table has to distinguish them.
+    A null-rate alert can only run on a column that exists. The two failure modes
+    need different checks. The clocks table has to distinguish them.
     """
     schema_cols = pl.scan_parquet(data_path("H_static")).collect_schema().names()
     per_column = {}

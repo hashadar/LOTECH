@@ -1,7 +1,7 @@
 """Exhibits for WRITEUP.md: sample rows, localisation, ruled-out alternatives.
 
-Every sample here is paired with the distribution it was drawn from. A `.head(n)` on its
-own has already produced one false generalisation in this write-up.
+Every sample here is paired with the distribution it was drawn from. A `.head(n)`
+on its own has already produced one false generalisation in this write-up.
 """
 from __future__ import annotations
 

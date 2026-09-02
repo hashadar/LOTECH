@@ -15,8 +15,8 @@ from lotech_dq.io import ensure_dirs, load_parquet  # noqa: E402
 from lotech_dq.report import write_table_json  # noqa: E402
 
 # HKEX 2800 session boundaries on 2026-08-13, in UTC. Used to split quote defects by
-# session phase; a locked book means different things in an auction and in continuous
-# trading, where it would simply execute.
+# session phase. A locked book means different things in an auction and in continuous
+# trading. In continuous trading a locked book would execute.
 SESSION = {
     "opening_auction_end": "2026-08-13T01:30:00Z",
     "lunch_start": "2026-08-13T04:00:00Z",
@@ -84,7 +84,7 @@ def gap_table(tob: pl.DataFrame) -> dict:
 def crossed_locked_detail(tob: pl.DataFrame) -> dict:
     """Full distributions for the crossed and locked sets.
 
-    Sample rows cannot stand in for the population here: the shipped narrative
+    Sample rows cannot stand in for the population here. An earlier draft
     generalised an eight-row head into a claim about all 71 crossed rows.
     """
     two_sided = tob.filter(pl.col("bid_price").is_not_null() & pl.col("ask_price").is_not_null())
@@ -151,8 +151,8 @@ def crossed_locked_detail(tob: pl.DataFrame) -> dict:
 def stale_reemission(tob: pl.DataFrame) -> dict:
     """Quote states published more than once, with a fresh capture time each time.
 
-    This is the single mechanism behind both the crossed book and the skew tail, so it
-    is measured over the whole session rather than described from the worst rows.
+    This is the single mechanism behind both the crossed book and the skew tail.
+    It is measured over the whole session rather than described from the worst rows.
     """
     key = ["transaction_ts", "bid_price", "bid_qty", "ask_price", "ask_qty"]
     work = tob.sort("ingress_ts").with_columns(
@@ -256,8 +256,8 @@ def trade_vs_book(tob: pl.DataFrame, trades: pl.DataFrame) -> dict:
     The join key is filtered non-null before the join and the match is carried by an
     explicit indicator from the quote side, so "matched" is not inferred from a price
     being non-null. `inside_spread` is evaluated against [min(bid,ask), max(bid,ask)]
-    because `bid <= price <= ask` is unsatisfiable on a crossed quote and would
-    manufacture a trade-through for every trade that lands on one.
+    because `bid <= price <= ask` is unsatisfiable on a crossed quote. That test would
+    create a trade-through for every trade that lands on a crossed quote.
     """
     tob_key = (
         tob.sort("transaction_ts")
@@ -360,7 +360,7 @@ def trade_vs_book(tob: pl.DataFrame, trades: pl.DataFrame) -> dict:
 def quote_rule_side(tob: pl.DataFrame, trades: pl.DataFrame) -> dict:
     """Lee-Ready quote rule against the prevailing quote.
 
-    The file labels every trade Buy. The book has not been destroyed, so side is
+    The file labels every trade Buy. The top of book is still usable. Side is
     recoverable for the trades that print exactly at a quote.
     """
     tob_key = tob.sort("transaction_ts").select(

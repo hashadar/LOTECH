@@ -64,7 +64,7 @@
     "final_book_levels": 3515
   },
   "replay_threshold_200_unvalidated": {
-    "policy": "as shipped: any message with >=200 levels clears and replaces the book",
+    "policy": "unguarded heuristic: any message with >=200 levels clears and replaces the book",
     "integrity": {
       "crossed_states": 154,
       "crossed_episodes": 1,
@@ -408,7 +408,7 @@
         "negative_count": 0,
         "negative_pct": 0.0
       },
-      "notes": "Ingress vs venue clock skew within expected capture delay."
+      "notes": "Capture latency is within the expected delay."
     }
   ]
 }

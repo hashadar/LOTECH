@@ -13,8 +13,8 @@ from lotech_dq import cache as venue_cache
 def exact_sum(values: Iterable[Any]) -> Decimal:
     """Exact sum via each value's shortest round-trip decimal string.
 
-    Float addition of a few hundred eight-decimal quantities loses the last digit, which is
-    the digit at which a reconciliation has to demonstrate a difference of exactly zero.
+    Float addition of a few hundred eight-decimal quantities loses the last digit.
+    A reconciliation has to demonstrate a difference of exactly zero at that digit.
     """
     total = Decimal(0)
     for value in values:

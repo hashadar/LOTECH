@@ -201,7 +201,7 @@
         "negative_count": 0,
         "negative_pct": 0.0
       },
-      "notes": "Ingress vs venue clock skew within expected capture delay."
+      "notes": "Capture latency is within the expected delay."
     },
     {
       "file": "H_gateio_btcusdt_perp_trades.parquet",
@@ -221,7 +221,7 @@
         "negative_count": 0,
         "negative_pct": 0.0
       },
-      "notes": "Ingress vs venue clock skew within expected capture delay."
+      "notes": "Capture latency is within the expected delay."
     }
   ]
 }
