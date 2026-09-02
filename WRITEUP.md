@@ -1,12 +1,25 @@
-# Market Data Quality — Findings
+# Market Data Quality - Findings
 
-Candidate deliverable for the [LO:TECH take-home](https://gist.github.com/jembishop/6e2aa508cd8c2a19c22515bacf2e86fc). Python + Polars. Every claim comes from [`src/lotech_dq/`](src/lotech_dq) and [`scripts/`](scripts). The numbers are in [`outputs/tables/`](outputs/tables).
+The [LO:TECH take-home](https://gist.github.com/jembishop/6e2aa508cd8c2a19c22515bacf2e86fc) supplies eight parquet files of normalised market data from several venues. The task is to review each file for anomalies, classify whether they come from the capture/normaliser pipeline or from the market itself, and complete the named exercises (DreamDex microprice, Binance L2 replay, Gate.io volume versus public data).
 
-Capture latency is within a normal range. Median capture latency is tens of milliseconds. Gate.io volume matches the public candle with a difference of 0. The Binance ETH book is one tick wide on 97.51% of rows.
+This write-up contains the findings. Python + Polars. All work is in [`src/lotech_dq/`](src/lotech_dq) and [`scripts/`](scripts). The numbers are in [`outputs/tables/`](outputs/tables).
 
-The normaliser contract is not consistent. Clocks, symbol format, uniqueness rules and flags differ by venue. The six defects below would give a client the wrong picture of the market.
+Positives:
+- Capture latency is within a normal range. 
+- Median capture latency is tens of milliseconds. 
+- Gate.io volume matches the public candle with a difference of 0. 
+- The Binance ETH book is one tick wide on 97.51% of rows.
 
-A shared profiler is necessary. It is not sufficient. It classifies C's 461,372 backward `ingress_ts` steps as high-severity pipeline. Most of those steps come from 18 symbols in one file. It classifies G's duplicated file as clean. A monotonicity check that sorts on the column it then differences cannot fail.
+Negatives:
+- The normaliser contract is not consistent. 
+- Clocks, symbol format, uniqueness rules and flags differ by venue. 
+- The six defects below would give a client the wrong picture of the market.
+
+The first pass is a shared profiler ([`01_profile_all.py`](scripts/01_profile_all.py)). It runs the same checks on every file: clocks, nulls, uniqueness, crossed books.
+
+On C (NASDAQ) it reports 461,372 backward `ingress_ts` steps as a high-severity pipeline defect. Most of those steps are 18 symbols written into one file, so capture times interleave. Partition by instrument and the count falls to 12,514 (section 5). Clock monotonicity alone would also have called G (Bitfinex) clean: G's clocks look ordinary, and the real defect is every `trade_id` emitted twice. A uniqueness check is in the suite for that reason.
+
+A monotonicity check that sorts on the column it then differences cannot fail. The profiler therefore measures stored order, not a sorted copy of the column.
 
 Classification uses three classes:
 
@@ -42,13 +55,17 @@ H is the file that matches the venue. The same pipeline can emit a file that rec
 
 ## How this was done
 
-[`00_download.py`](scripts/00_download.py) fetches the eight parquet objects and checks row counts ([`data/MANIFEST.md`](data/MANIFEST.md)). [`01_profile_all.py`](scripts/01_profile_all.py) runs a shared set of checks. It writes [`profile_summary.json`](outputs/tables/profile_summary.json), [`profile_findings.json`](outputs/tables/profile_findings.json), [`schemas.json`](outputs/tables/schemas.json) and [`clocks_matrix.json`](outputs/tables/clocks_matrix.json). Runners `02`–`08` do the per-file deep dives. [`09_exhibits.py`](scripts/09_exhibits.py) collects sample rows into [`exhibits.json`](outputs/tables/exhibits.json).
+> A shared profiler screens every file; per-file runners do the deep dives; G and H are reconciled against committed venue fixtures.
+
+[`00_download.py`](scripts/00_download.py) fetches the eight parquet objects and checks row counts ([`data/MANIFEST.md`](data/MANIFEST.md)). [`01_profile_all.py`](scripts/01_profile_all.py) runs a shared set of checks. It writes [`profile_summary.json`](outputs/tables/profile_summary.json), [`profile_findings.json`](outputs/tables/profile_findings.json), [`schemas.json`](outputs/tables/schemas.json) and [`clocks_matrix.json`](outputs/tables/clocks_matrix.json). Runners `02`-`08` do the per-file deep dives. [`09_exhibits.py`](scripts/09_exhibits.py) collects sample rows into [`exhibits.json`](outputs/tables/exhibits.json).
 
 The two microprice and top-of-book series are committed under `outputs/tables/`: [`B_microprice_series.parquet`](outputs/tables/B_microprice_series.parquet), [`D_top_of_book_series.parquet`](outputs/tables/D_top_of_book_series.parquet), [`D_top_of_book_series_threshold200.parquet`](outputs/tables/D_top_of_book_series_threshold200.parquet). G and H public reconciliations use committed venue fixtures in [`fixtures/venue/`](fixtures/venue/). Network is required once to populate those fixtures. Reproduce: [README.md](README.md).
 
 ---
 
 ## 1. Capture latency
+
+> Capture latency is tens of milliseconds at the median, with no negative on any file; A's backward ingress steps are stale quote re-publications, not late capture.
 
 Median ingress time minus venue time:
 
@@ -65,7 +82,9 @@ One exception is not latency. File A re-publishes stale quote states with a fres
 
 ## 2. G Bitfinex: duplicate trades
 
-**Window** 2026-05-23 12:00:00.913–12:09:50.190 UTC. **642 rows, 321 distinct `trade_id`**, `BTC-USD:SPOT` ([`07_analyse_G_bitfinex.py`](scripts/07_analyse_G_bitfinex.py) → [`G_bitfinex.json`](outputs/tables/G_bitfinex.json)).
+> Every `trade_id` is emitted twice, so as-delivered volume is exactly 2x the Bitfinex public tape.
+
+**Window** 2026-05-23 12:00:00.913-12:09:50.190 UTC. **642 rows, 321 distinct `trade_id`**, `BTC-USD:SPOT` ([`07_analyse_G_bitfinex.py`](scripts/07_analyse_G_bitfinex.py) → [`G_bitfinex.json`](outputs/tables/G_bitfinex.json)).
 
 Every `trade_id` appears exactly twice. There are 321 groups. Every group has size 2. Price, qty, side and `transaction_ts` are identical in each group. `publish_ts` and `ingress_ts` differ in all 321 groups. Opposite-side pairs: **0**. Exhibit, `trade_id=1922482898`: both copies 74,831 / 0.0001 / Sell at venue time 12:00:00.913, published 12:00:00.914 and 12:00:00.963.
 
@@ -73,7 +92,7 @@ Every `trade_id` appears exactly twice. There are 321 groups. Every group has si
 
 A signed-amount convention is ruled out. There are 0 negative qty values and 0 zero qty values. A maker/taker double-print is ruled out. Sides match in all 321 groups. An append of an adjacent window is ruled out. Every id is duplicated, not a suffix.
 
-Pair separation is on `publish_ts` (median **49.0 ms**, range 15–104 ms). Capture latency is identical on both copies. The venue emitted the trade twice. The file is not two capture paths.
+Pair separation is on `publish_ts` (median **49.0 ms**, range 15-104 ms). Capture latency is identical on both copies. The venue emitted the trade twice. The file is not two capture paths.
 
 **Classification: pipeline, high confidence** on the duplication. A client summing `qty` reports **10.89697542 BTC** against a true **5.44848771 BTC**. The ratio is exactly 2×. VWAP survives, because the copies are economically identical. Trade count, last trade and inter-trade timing do not survive. 338 of 641 gaps are exactly zero raw. 17 remain after deduplication. Deduplication on `(instrument, trade_id)` is an implemented check. It reports a finding here with 321 groups.
 
@@ -85,8 +104,8 @@ Reconciled against Bitfinex's own REST tape over the same window ([`src/lotech_d
 |---|---:|---:|---|
 | trades | 642 | 321 | 0 (deduped versus venue) |
 | base volume (BTC) | 10.89697542 | 5.44848771 | 0 (deduped) |
-| notional (USD) | — | 407,630.10018880 | 0 |
-| 1m candle volume (BTC) | — | 5.44848771 | 0 |
+| notional (USD) | - | 407,630.10018880 | 0 |
+| 1m candle volume (BTC) | - | 5.44848771 | 0 |
 
 `as_delivered.overstatement_factor` is **2.0**. `all_diffs_zero` is **true** on the deduplicated file. Trade-id sets are **identical** (321 file, 321 venue, 0 file-only, 0 venue-only). Per-trade match: **321/321** on price, qty and side. The duplication is confirmed externally, not only by internal pairing.
 
@@ -94,7 +113,9 @@ Reconciled against Bitfinex's own REST tape over the same window ([`src/lotech_d
 
 ## 3. A HKEX 2800: side, clocks, and stale quote re-emission
 
-**Window** TOB 2026-08-13 01:00:00.083–08:08:12.709 UTC; trades from 01:20 in venue time. **109,544 TOB + 9,666 trades**, `S|2800-HKD:SPOT` ([`02_analyse_A_hkex.py`](scripts/02_analyse_A_hkex.py) → [`A_hkex.json`](outputs/tables/A_hkex.json)).
+> Every trade is labelled Buy, 15.65% of trades (38.15% of volume) have no venue time, and 71 crossed quotes are stale states re-emitted with a fresh `ingress_ts`.
+
+**Window** TOB 2026-08-13 01:00:00.083-08:08:12.709 UTC; trades from 01:20 in venue time. **109,544 TOB + 9,666 trades**, `S|2800-HKD:SPOT` ([`02_analyse_A_hkex.py`](scripts/02_analyse_A_hkex.py) → [`A_hkex.json`](outputs/tables/A_hkex.json)).
 
 **Side.** 9,666 of 9,666 rows are `side=Buy`. Of 8,153 trades joining the prevailing TOB, Lee-Ready recovers **Buy 3,932 / Sell 3,850**. The recovered counts are almost equal. The recovered split is evidence the label is fixed on every row. **Classification: pipeline.**
 
@@ -106,11 +127,11 @@ The null-venue rows look like off-board or special-lot prints. They appear to us
 
 71 crossed rows. All of them fall in continuous trading. 112 locked rows. All locked rows fall in auction windows. Locked is **market**.
 
-The 71 crossed rows are **30 distinct quote states**. **39 re-emissions** arrive more than 60 s late. Stale states re-publish every 5.8–9.2 minutes with a fresh `ingress_ts`. Worst lag is **5,333 s** on the 26.10 / 24.00 state. That state has 13 emissions from 03:36:36 venue time to 05:05:29 ingress.
+The 71 crossed rows are **30 distinct quote states**. **39 re-emissions** arrive more than 60 s late. Stale states re-publish every 5.8-9.2 minutes with a fresh `ingress_ts`. Worst lag is **5,333 s** on the 26.10 / 24.00 state. That state has 13 emissions from 03:36:36 venue time to 05:05:29 ingress.
 
 The pattern is session-wide, not lunch-only. **19 distinct venue timestamps** have skew above 60 s. A second cluster is in the afternoon (25.94 / 25.86, worst **4,457 s**).
 
-Crossed ask prices span nine levels (24.00–25.96). Most inversions are small. The 13 re-emissions of the 26.10 / 24.00 state add the large inversions. **Classification: pipeline** for re-emission. Locked is **market**.
+Crossed ask prices span nine levels (24.00-25.96). Most inversions are small. The 13 re-emissions of the 26.10 / 24.00 state add the large inversions. **Classification: pipeline** for re-emission. Locked is **market**.
 
 Five TOB gaps exceed 300 s. All of them are session structure:
 
@@ -125,7 +146,9 @@ Those gaps are **market**. Detail in [`A_hkex.json`](outputs/tables/A_hkex.json)
 
 ## 4. D Binance L2: snapshot flag and inverted book
 
-**Window** 2026-08-13 14:00:00.014628–14:29:59.915000 UTC. **17,994 incremental L2 messages**, `BTC-USDT:SPOT` ([`05_analyse_D_binance_l2.py`](scripts/05_analyse_D_binance_l2.py), [`book.py`](src/lotech_dq/book.py) → [`D_binance_l2.json`](outputs/tables/D_binance_l2.json)).
+> `snapshot` is false on every row, and one internally crossed message (spread −317.07 USDT) inverts the replayed book.
+
+**Window** 2026-08-13 14:00:00.014628-14:29:59.915000 UTC. **17,994 incremental L2 messages**, `BTC-USDT:SPOT` ([`05_analyse_D_binance_l2.py`](scripts/05_analyse_D_binance_l2.py), [`book.py`](src/lotech_dq/book.py) → [`D_binance_l2.json`](outputs/tables/D_binance_l2.json)).
 
 `snapshot` is **false on all 17,994 rows**. The column is a mapping defect, not a missing column. `transaction_ts` is 100% null. **Classification: pipeline.**
 
@@ -135,14 +158,14 @@ Those gaps are **market**. Detail in [`A_hkex.json`](outputs/tables/A_hkex.json)
 
 ### Replay policy
 
-With no truthful snapshot flag, a size heuristic (≥ 200 levels) is falsifiable. **All 460 candidates carry `qty == 0` deletes.** Snapshots cannot carry deletes. The file has **207,901 deletes**. 20–95% land on levels never delivered, depending on policy. None of those misses are floating-point near-misses. Crossed-state count moves with policy:
+With no truthful snapshot flag, a size heuristic (≥ 200 levels) is falsifiable. **All 460 candidates carry `qty == 0` deletes.** Snapshots cannot carry deletes. The file has **207,901 deletes**. 20-95% land on levels never delivered, depending on policy. None of those misses are floating-point near-misses. Crossed-state count moves with policy:
 
 | snapshot policy | snapshots | crossed states | deletes missed |
 |---|---:|---:|---:|
 | none | 0 | 8,997 (50.0%) | 41,796 (20.1%) |
 | threshold 200 | 460 | 154 (0.86%) | 128,105 (61.6%) |
 
-Under threshold 200: **154 crossed states**. One contiguous episode **14:15:00.015055 → 14:15:15.315142 UTC** (15.3 s). Worst spread **−318.28 USDT**. The episode ends when a 250-level message clears the book. It does not end when the market stops being crossed. Outside the episode, median spread **0.01 USDT**. Mid range is 63,686–63,884 USDT. Full sweep in [`D_binance_l2.json`](outputs/tables/D_binance_l2.json). Per-message TOB is in [`D_top_of_book_series.parquet`](outputs/tables/D_top_of_book_series.parquet) and [`D_top_of_book_series_threshold200.parquet`](outputs/tables/D_top_of_book_series_threshold200.parquet). Final book is in [`D_final_book.csv`](outputs/tables/D_final_book.csv).
+Under threshold 200: **154 crossed states**. One contiguous episode **14:15:00.015055 → 14:15:15.315142 UTC** (15.3 s). Worst spread **−318.28 USDT**. The episode ends when a 250-level message clears the book. It does not end when the market stops being crossed. Outside the episode, median spread **0.01 USDT**. Mid range is 63,686-63,884 USDT. Full sweep in [`D_binance_l2.json`](outputs/tables/D_binance_l2.json). Per-message TOB is in [`D_top_of_book_series.parquet`](outputs/tables/D_top_of_book_series.parquet) and [`D_top_of_book_series_threshold200.parquet`](outputs/tables/D_top_of_book_series_threshold200.parquet). Final book is in [`D_final_book.csv`](outputs/tables/D_final_book.csv).
 
 ![D Binance BTCUSDT reconstructed top of book, 2026-08-13](outputs/figures/D_binance_l2_mid_spread.png)
 
@@ -150,7 +173,9 @@ Under threshold 200: **154 crossed states**. One contiguous episode **14:15:00.0
 
 ## 5. C NASDAQ: symbol count, symbol format, and crossed NBBO
 
-**Rows** 3,752,799. **18 instruments, not 20.** Window 2026-08-13 14:00–15:59 UTC by capture ([`04_analyse_C_nasdaq.py`](scripts/04_analyse_C_nasdaq.py) → [`C_nasdaq.json`](outputs/tables/C_nasdaq.json)).
+> The file has 18 symbols, not 20, none with the `S|` prefix, and 1,030 crossed NBBO rows that cluster across symbols in the same seconds.
+
+**Rows** 3,752,799. **18 instruments, not 20.** Window 2026-08-13 14:00-15:59 UTC by capture ([`04_analyse_C_nasdaq.py`](scripts/04_analyse_C_nasdaq.py) → [`C_nasdaq.json`](outputs/tables/C_nasdaq.json)).
 
 **Contract.** The brief's equity format is `S|2800-HKD:SPOT`. Every C symbol is `AAPL-USD:SPOT`. There is **no `S|` prefix** and no venue qualifier. The filename says 20 symbols. The file has 18. No manifest ships with the export. Shortfalls are undetectable without an external reference. **Classification: pipeline.**
 
@@ -168,7 +193,9 @@ A zero count was once reported. That result came from sorting on `ingress_ts` be
 
 ## 6. B DreamDex: microprice and null bid
 
-**Window** 2026-08-14 04:00:01.318–10:13:52.425 UTC. **6,988 rows**, `WETH-USDso:SPOT` ([`03_analyse_B_dreamdex.py`](scripts/03_analyse_B_dreamdex.py) → [`B_dreamdex_microprice.json`](outputs/tables/B_dreamdex_microprice.json)).
+> Microprice is undefined on 22% of rows because `bid_price` and `bid_qty` are null together for the last 1.5 h; the class is unclear, with evidence towards pipeline.
+
+**Window** 2026-08-14 04:00:01.318-10:13:52.425 UTC. **6,988 rows**, `WETH-USDso:SPOT` ([`03_analyse_B_dreamdex.py`](scripts/03_analyse_B_dreamdex.py) → [`B_dreamdex_microprice.json`](outputs/tables/B_dreamdex_microprice.json)).
 
 Microprice is **undefined** on **1,540 rows (22.0%)**. `bid_price` and `bid_qty` are null together. 0 crossed books. Median spread **0.57 USDso**. Defined series in [`B_microprice_series.parquet`](outputs/tables/B_microprice_series.parquet).
 
@@ -186,7 +213,9 @@ Inside the last run the ask keeps moving. There are **1,512 price changes**, 550
 
 ## 7. H Gate.io: volume matches the public candle
 
-**Window** 2026-05-23 12:00:00.979–12:59:59.684 UTC. **9,359 trades**, 1 static row ([`08_analyse_H_gateio.py`](scripts/08_analyse_H_gateio.py) → [`H_gateio_volume.json`](outputs/tables/H_gateio_volume.json)).
+> Native-contract and quote volume match the public Gate.io 1h candle with a difference of 0.
+
+**Window** 2026-05-23 12:00:00.979-12:59:59.684 UTC. **9,359 trades**, 1 static row ([`08_analyse_H_gateio.py`](scripts/08_analyse_H_gateio.py) → [`H_gateio_volume.json`](outputs/tables/H_gateio_volume.json)).
 
 | unit | value |
 |---|---:|
@@ -213,7 +242,9 @@ G meets that standard after deduplication. Deduplicated volume matches Bitfinex 
 
 ## 8. F Binance ETH: quote quality and absent clocks
 
-**Window** 2026-08-13 02:00:00.257–03:59:59.695 UTC. **235,270 rows**, `ETH-USDT:SPOT` ([`06_analyse_F_binance_eth.py`](scripts/06_analyse_F_binance_eth.py) → [`F_binance_eth.json`](outputs/tables/F_binance_eth.json)).
+> The book is one tick wide on 97.51% of rows and never crosses, but both venue clocks are absent from the schema.
+
+**Window** 2026-08-13 02:00:00.257-03:59:59.695 UTC. **235,270 rows**, `ETH-USDT:SPOT` ([`06_analyse_F_binance_eth.py`](scripts/06_analyse_F_binance_eth.py) → [`F_binance_eth.json`](outputs/tables/F_binance_eth.json)).
 
 Both venue clocks are absent from the parquet schema. Columns are `instrument, ingress_ts, seq_id, bid_price, bid_qty, ask_price, ask_qty`. An absent column cannot trigger a null-rate alert. The profiler originally reported **no findings** for F. D is the same venue ten hours earlier and kept `publish_ts`. **Classification: pipeline.**
 
@@ -222,6 +253,8 @@ Both venue clocks are absent from the parquet schema. Columns are `instrument, i
 ---
 
 ## 9. Clock and schema contract by file
+
+> Clock presence, null rates, dtypes, symbol format and flags differ by file, so absent columns and 100% null columns are different defects and a single global schema is not enough.
 
 From [`clocks_matrix.json`](outputs/tables/clocks_matrix.json). "Absent" and "present, 100% null" are different defects.
 
@@ -249,12 +282,14 @@ Flags differ. D's `snapshot` is Boolean and false on every row. G's `trade_id` i
 
 ## Pipeline recommendations
 
+> Uniqueness and clock-completeness checks are already built; the remaining priorities are a stateless L2 cross check, truthful snapshot flags, and an export manifest.
+
 Five priorities. Items 1 and 2 are already built in [`checks.py`](src/lotech_dq/checks.py):
 
-1. **Uniqueness** — `(instrument, trade_id)` unique. Reports a finding on G (321 groups). **Built.**
-2. **Clock completeness** — alert on `transaction_ts` null rate above 1% *and* on absent clock columns. Reports a finding on A trades, B, D, F, H static. **Built.**
-3. **Stateless L2 check** — reject any single L2 message whose own bid and ask cross. On D that is one message in 17,994. No replay is required.
-4. **Stateful L2 discipline** — require `snapshot=true` on real snapshots. Never infer from message size (on D every size candidate carries deletes). Report missed deletes as a first-class metric.
-5. **Export completeness** — ship a manifest of the expected instrument universe. C's two missing symbols were detectable only because the count was in the filename.
+1. **Uniqueness** - `(instrument, trade_id)` unique. Reports a finding on G (321 groups). **Built.**
+2. **Clock completeness** - alert on `transaction_ts` null rate above 1% *and* on absent clock columns. Reports a finding on A trades, B, D, F, H static. **Built.**
+3. **Stateless L2 check** - reject any single L2 message whose own bid and ask cross. On D that is one message in 17,994. No replay is required.
+4. **Stateful L2 discipline** - require `snapshot=true` on real snapshots. Never infer from message size (on D every size candidate carries deletes). Report missed deletes as a first-class metric.
+5. **Export completeness** - ship a manifest of the expected instrument universe. C's two missing symbols were detectable only because the count was in the filename.
 
 H shows that correct output is possible. Replay policy is configurable in [`book.py`](src/lotech_dq/book.py). Every policy is disclosed in [`D_binance_l2.json`](outputs/tables/D_binance_l2.json).
