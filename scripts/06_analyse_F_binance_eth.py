@@ -19,8 +19,8 @@ def main() -> None:
     df = load_parquet("F").sort("ingress_ts")
     profile = profile_frame(df, "F_binance_ethusdt_top_of_book.parquet")
 
-    # read the schema straight off the parquet so "absent" is a fact about the file and
-    # not an artefact of a projection somewhere upstream
+    # read the schema straight off the parquet so "absent" is a fact about the file.
+    # It is not an artefact of a projection somewhere upstream
     parquet_columns = pl.scan_parquet(data_path("F")).collect_schema().names()
 
     # dt.total_milliseconds() floors a Duration(us), so sub-millisecond gaps become 0
@@ -59,7 +59,7 @@ def main() -> None:
             "parquet_schema_columns": parquet_columns,
             "expected": list(EXPECTED_COLUMNS),
             "absent_from_parquet_schema": [c for c in EXPECTED_COLUMNS if c not in parquet_columns],
-            "note": "absent from the schema, not present-and-null: a null-rate alert cannot fire on these",
+            "note": "absent from the schema, not present-and-null: a null-rate alert cannot run on these columns",
         },
         "crossed_locked": [f.to_dict() for f in tob_crossed_locked(df)],
         "quote_tightness": {

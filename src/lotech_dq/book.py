@@ -34,8 +34,8 @@ class BookState:
     def apply_side(self, side: str, prices: list[float], qtys: list[float]) -> SideResult:
         """Apply level updates. qty==0 deletes; a delete for an absent level is counted.
 
-        A negative quantity is rejected rather than stored: a live level cannot have
-        negative size, and storing it would corrupt the touch silently.
+        A negative quantity is rejected rather than stored. A live level cannot have
+        negative size. Storing it would corrupt the best bid or best ask with no alert.
         """
         if len(prices) != len(qtys):
             raise ValueError(
@@ -104,7 +104,7 @@ def message_is_internally_crossed(
 ) -> bool:
     """True if one message's own live levels put its best bid above its best ask.
 
-    Stateless: involves no replay state, so it separates a source defect from a
+    Stateless: uses no replay state. This separates a source defect from a
     reconstruction artefact.
     """
     live_bids = [p for p, q in zip(bid_prices, bid_qtys, strict=True) if q]
@@ -123,15 +123,16 @@ def replay_order_book(
     """Replay Binance-style L2 where each row carries bid/ask price/qty lists.
 
     Snapshot detection, in order of authority:
+
     1. `snapshot == True` on the row.
     2. A level-count heuristic (`>= snapshot_level_threshold`) for feeds whose flag is
        unusable. With `validate_snapshots` the candidate is rejected if the message
-       carries any `qty == 0` entry, because a complete picture of the book cannot also
+       carries any `qty == 0` entry. A complete picture of the book cannot also
        carry delete instructions. Rejected candidates are applied as deltas and counted.
     3. The first row, seeded so the replay has somewhere to start (`seed_first_row`).
 
-    `validate_snapshots=False` reproduces the unguarded heuristic, which the threshold
-    sweep needs in order to show how much of the result the threshold is choosing.
+    `validate_snapshots=False` reproduces the unguarded heuristic. The threshold
+    sweep needs that mode to show how much of the result the threshold is choosing.
     """
     required = ["bid_prices", "bid_qtys", "ask_prices", "ask_qtys"]
     missing = [c for c in required if c not in df.columns]

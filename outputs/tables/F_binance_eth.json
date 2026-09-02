@@ -24,7 +24,7 @@
       "transaction_ts",
       "publish_ts"
     ],
-    "note": "absent from the schema, not present-and-null: a null-rate alert cannot fire on these"
+    "note": "absent from the schema, not present-and-null: a null-rate alert cannot run on these columns"
   },
   "crossed_locked": [],
   "quote_tightness": {

@@ -111,9 +111,9 @@ def monotonic_backwards(
 ) -> Finding | None:
     """Backward steps in `col` over the frame's stored order.
 
-    The frame is never sorted on `col`: sorting the column being differenced makes the
-    check vacuous. When `partition_by` is given the diff is taken within each partition,
-    still in stored order.
+    The frame is never sorted on `col`. Sorting the column being differenced makes
+    the check unable to fail. When `partition_by` is given, the diff is taken within
+    each partition, still in stored order.
     """
     if col not in df.columns or df.height < 2:
         return None
@@ -142,13 +142,14 @@ def monotonic_backwards(
     else:
         metric["worst_step"] = bad_frame.select(pl.col("d").min()).item()
         metric["median_backward_step"] = bad_frame.select(pl.col("d").median()).item()
+    jump_word = "jump" if bad == 1 else "jumps"
     return Finding(
         file="",
         check_id=check_id,
         severity="medium" if bad < 10 else "high",
         classification="pipeline",
         metric=metric,
-        notes=f"{bad} backward jumps in {col}{scope} (stored order).",
+        notes=f"{bad} backward {jump_word} in {col}{scope} (stored order).",
     )
 
 
@@ -192,10 +193,10 @@ def gap_stats(
     """Inter-row gaps in `col`, in seconds, over the frame's stored order.
 
     Never sorts on `col`, so a backward step is observable rather than sorted away.
-    `partition_by` gives per-instrument gaps on a multiplexed file, where the
-    unpartitioned figure is an inter-message interval across symbols.
-    `large_gap_threshold_s` is absolute: a quantile of the same distribution would
-    return a fixed fraction of the rows regardless of the data.
+    `partition_by` gives per-instrument gaps on a multiplexed file. Without a
+    partition, the figure is an inter-message interval across symbols.
+    `large_gap_threshold_s` is an absolute threshold. A quantile of the same
+    distribution would return a fixed fraction of the rows regardless of the data.
     """
     if col not in df.columns or df.height < 3:
         return {}
@@ -256,7 +257,7 @@ def price_size_anomalies(df: pl.DataFrame) -> list[Finding]:
                     notes=f"Negative values in {col}.",
                 )
             )
-        # zero prices are suspicious; zero sizes can be valid deletes on L2
+        # zero prices are a defect; zero sizes can be valid deletes on L2
         if zero and ("price" in col.lower() or col in {"price", "bid_price", "ask_price"}):
             findings.append(
                 Finding(
@@ -277,7 +278,7 @@ def tob_crossed_locked(
     ask_col: str = "ask_price",
 ) -> list[Finding]:
     if bid_col not in df.columns or ask_col not in df.columns:
-        # try common aliases
+        # try common column aliases
         aliases = [
             ("bid_px", "ask_px"),
             ("best_bid", "best_ask"),
@@ -326,7 +327,7 @@ def tob_crossed_locked(
                     "bid_col": bid_col,
                     "ask_col": ask_col,
                 },
-                notes="Bid equals ask (locked). Often market microstructure on equities.",
+                notes="Bid equals ask (locked). This is often real market behaviour on equities.",
             )
         )
     return findings
@@ -366,7 +367,7 @@ def missing_columns(
     df: pl.DataFrame,
     expected: tuple[str, ...] = EXPECTED_COLUMNS,
 ) -> list[Finding]:
-    """Absent columns other venues populate. A null-rate check cannot see these."""
+    """Absent columns other venues populate. A null-rate check cannot see an absent column."""
     out: list[Finding] = []
     for col in expected:
         if col in df.columns:

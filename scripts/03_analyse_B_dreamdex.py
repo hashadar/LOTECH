@@ -52,9 +52,9 @@ def ask_only_runs(mp: pl.DataFrame) -> pl.DataFrame:
 def vanishing_bid_evidence(mp: pl.DataFrame, runs: pl.DataFrame) -> dict:
     """Discriminate a dropped bid side in the normaliser from a genuinely one-sided book.
 
-    Three checks the file can settle: whether the bid decays or disappears between two
-    consecutive updates, whether the two bid fields ever go null independently, and
-    whether the capture stalls at the same moment.
+    Three checks the file can settle. Does the bid decay, or does it go null between two
+    consecutive updates? Do the two bid fields ever go null independently? Does capture
+    stall at the same moment?
     """
     longest = runs.head(1).to_dicts()[0]
     start = longest["start"]
@@ -118,9 +118,9 @@ def vanishing_bid_evidence(mp: pl.DataFrame, runs: pl.DataFrame) -> dict:
 def make_figure(mp: pl.DataFrame, runs: pl.DataFrame, path: Path) -> None:
     """Plot on the time axis with explicit limits.
 
-    Row index plus autoscale drops the terminal 1,513-row ask-only run off the right
-    edge, and marking undefined points by scattering `mid` marks nothing, because `mid`
-    is null on exactly those rows. The undefined region is shaded and the surviving ask
+    Row index plus autoscale drops the last 1,513-row ask-only run off the right
+    edge. Marking undefined points by scattering `mid` marks nothing, because `mid`
+    is null on exactly those rows. The undefined region is shaded. The surviving ask
     is drawn through it instead.
     """
     t = mp["ingress_ts"].to_list()
@@ -149,7 +149,7 @@ def make_figure(mp: pl.DataFrame, runs: pl.DataFrame, path: Path) -> None:
 
     ax.set_xlim(t[0], t[-1])
 
-    # a handful of ask prints sit ~5% above the band and flatten everything else
+    # a handful of ask prints sit about 5% above the band and compress the vertical scale
     body = pl.concat(
         [mp.select(pl.col(c).alias("v")) for c in ("mid", "microprice", "ask_price")]
     ).drop_nulls()["v"]
@@ -170,14 +170,16 @@ def make_figure(mp: pl.DataFrame, runs: pl.DataFrame, path: Path) -> None:
 
     longest = runs.head(1).to_dicts()[0]
     ax.annotate(
-        f"bid null from {longest['start']:%H:%M:%S} to end of file ({longest['n']} rows)",
+        f"bid_price null from {longest['start']:%H:%M:%S} to end of file ({longest['n']} rows)",
         xy=(longest["start"], hi),
         xytext=(0.40, 0.94),
         textcoords="axes fraction",
         fontsize=9,
         arrowprops={"arrowstyle": "->", "lw": 0.8},
     )
-    ax.set_title(f"B DreamDex WETH-USDso microprice ({t[0]:%Y-%m-%d %H:%M:%S} - {t[-1]:%H:%M:%S} UTC)")
+    ax.set_title(
+        f"B DreamDex WETH-USDso: microprice ({t[0]:%Y-%m-%d %H:%M:%S} - {t[-1]:%H:%M:%S} UTC)"
+    )
     ax.set_xlabel("ingress_ts (UTC)")
     ax.set_ylabel("Price (USDso)")
     ax.legend(loc="upper left")

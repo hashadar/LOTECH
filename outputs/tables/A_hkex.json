@@ -96,7 +96,7 @@
         "bid_col": "bid_price",
         "ask_col": "ask_price"
       },
-      "notes": "Bid equals ask (locked). Often market microstructure on equities."
+      "notes": "Bid equals ask (locked). This is often real market behaviour on equities."
     }
   ],
   "crossed_locked_detail": {
@@ -126,15 +126,6 @@
         "inversion": 0.08000000000000185
       },
       {
-        "transaction_ts": "2026-08-13 02:56:06.563970+00:00",
-        "bid_price": 26.1,
-        "bid_qty": 6.0,
-        "ask_price": 25.92,
-        "ask_qty": 1.0,
-        "n": 5,
-        "inversion": 0.17999999999999972
-      },
-      {
         "transaction_ts": "2026-08-13 02:03:20.711420+00:00",
         "bid_price": 25.94,
         "bid_qty": 50.0,
@@ -142,6 +133,15 @@
         "ask_qty": 1.0,
         "n": 5,
         "inversion": 0.019999999999999574
+      },
+      {
+        "transaction_ts": "2026-08-13 02:56:06.563970+00:00",
+        "bid_price": 26.1,
+        "bid_qty": 6.0,
+        "ask_price": 25.92,
+        "ask_qty": 1.0,
+        "n": 5,
+        "inversion": 0.17999999999999972
       },
       {
         "transaction_ts": "2026-08-13 07:56:29.585670+00:00",
@@ -162,22 +162,13 @@
         "inversion": 0.060000000000002274
       },
       {
-        "transaction_ts": "2026-08-13 01:49:52.098000+00:00",
-        "bid_price": 25.86,
-        "bid_qty": 80.0,
-        "ask_price": 25.0,
-        "ask_qty": 2.0,
-        "n": 2,
-        "inversion": 0.8599999999999994
-      },
-      {
-        "transaction_ts": "2026-08-13 03:23:39.758690+00:00",
+        "transaction_ts": "2026-08-13 03:34:54.473950+00:00",
         "bid_price": 26.1,
         "bid_qty": 6.0,
-        "ask_price": 25.6,
+        "ask_price": 25.5,
         "ask_qty": 5.0,
         "n": 2,
-        "inversion": 0.5
+        "inversion": 0.6000000000000014
       },
       {
         "transaction_ts": "2026-08-13 05:07:00.980830+00:00",
@@ -189,13 +180,22 @@
         "inversion": 0.05999999999999872
       },
       {
-        "transaction_ts": "2026-08-13 01:57:38.100250+00:00",
-        "bid_price": 25.94,
-        "bid_qty": 50.0,
+        "transaction_ts": "2026-08-13 03:23:39.758690+00:00",
+        "bid_price": 26.1,
+        "bid_qty": 6.0,
+        "ask_price": 25.6,
+        "ask_qty": 5.0,
+        "n": 2,
+        "inversion": 0.5
+      },
+      {
+        "transaction_ts": "2026-08-13 01:49:52.098000+00:00",
+        "bid_price": 25.86,
+        "bid_qty": 80.0,
         "ask_price": 25.0,
         "ask_qty": 2.0,
         "n": 2,
-        "inversion": 0.9400000000000013
+        "inversion": 0.8599999999999994
       }
     ],
     "inversion": {
@@ -222,11 +222,11 @@
           "n": 8
         },
         {
-          "value": 0.06,
+          "value": 0.6,
           "n": 5
         },
         {
-          "value": 0.6,
+          "value": 0.06,
           "n": 5
         },
         {
@@ -250,15 +250,15 @@
           "n": 2
         },
         {
+          "value": 0.36,
+          "n": 1
+        },
+        {
           "value": 0.88,
           "n": 1
         },
         {
           "value": 0.8,
-          "n": 1
-        },
-        {
-          "value": 0.36,
           "n": 1
         }
       ]
@@ -323,11 +323,11 @@
         "n": 4
       },
       {
-        "value": 37.0,
+        "value": 322.0,
         "n": 1
       },
       {
-        "value": 322.0,
+        "value": 37.0,
         "n": 1
       }
     ],
@@ -602,15 +602,15 @@
         "n": 8
       },
       {
-        "value": 5,
-        "n": 7
-      },
-      {
         "value": 6,
         "n": 7
       },
       {
         "value": 3,
+        "n": 7
+      },
+      {
+        "value": 5,
         "n": 7
       },
       {
@@ -2694,15 +2694,15 @@
         "n": 23
       },
       {
+        "value": 1500.0,
+        "n": 18
+      },
+      {
         "value": 8.0,
         "n": 18
       },
       {
         "value": 192500.0,
-        "n": 18
-      },
-      {
-        "value": 1500.0,
         "n": 18
       }
     ],
@@ -2820,7 +2820,7 @@
         "bid_col": "bid_price",
         "ask_col": "ask_price"
       },
-      "notes": "Bid equals ask (locked). Often market microstructure on equities."
+      "notes": "Bid equals ask (locked). This is often real market behaviour on equities."
     },
     {
       "file": "A_hkex_2800_top_of_book.parquet",
@@ -2854,7 +2854,7 @@
         "negative_count": 0,
         "negative_pct": 0.0
       },
-      "notes": "Ingress vs venue clock skew within expected capture delay."
+      "notes": "Capture latency is within the expected delay."
     },
     {
       "file": "A_hkex_2800_top_of_book.parquet",
@@ -2874,7 +2874,7 @@
         "negative_count": 0,
         "negative_pct": 0.0
       },
-      "notes": "Ingress vs venue clock skew within expected capture delay."
+      "notes": "Capture latency is within the expected delay."
     },
     {
       "file": "A_hkex_2800_trades.parquet",
@@ -2915,7 +2915,7 @@
         "median_backward_step_ms": -25252352.72,
         "within_1ms": 0
       },
-      "notes": "1 backward jumps in publish_ts (stored order)."
+      "notes": "1 backward jump in publish_ts (stored order)."
     },
     {
       "file": "A_hkex_2800_trades.parquet",
@@ -2935,7 +2935,7 @@
         "negative_count": 0,
         "negative_pct": 0.0
       },
-      "notes": "Ingress vs venue clock skew within expected capture delay."
+      "notes": "Capture latency is within the expected delay."
     },
     {
       "file": "A_hkex_2800_trades.parquet",
@@ -2955,7 +2955,7 @@
         "negative_count": 0,
         "negative_pct": 0.0
       },
-      "notes": "Ingress vs venue clock skew within expected capture delay."
+      "notes": "Capture latency is within the expected delay."
     }
   ]
 }

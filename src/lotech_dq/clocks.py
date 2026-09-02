@@ -29,7 +29,7 @@ def skew_stats(
     ingress_col: str = "ingress_ts",
     venue_col: str = "transaction_ts",
 ) -> dict[str, Any]:
-    """Distribution of ingress - venue clock (in inferred venue units converted to seconds)."""
+    """Distribution of ingress time minus venue time, converted to seconds."""
     if ingress_col not in df.columns or venue_col not in df.columns:
         return {}
     if df[venue_col].null_count() == df.height or df[ingress_col].null_count() == df.height:
@@ -81,15 +81,15 @@ def skew_finding(file_label: str, stats: dict[str, Any]) -> Finding | None:
     neg_pct = stats.get("negative_pct", 0.0)
     severity = "info"
     classification = "ok"
-    notes = "Ingress vs venue clock skew within expected capture delay."
+    notes = "Capture latency is within the expected delay."
     if med > 5 or neg_pct > 5:
         severity = "medium"
         classification = "pipeline"
-        notes = "Material clock skew or frequent negative latency (venue after ingress)."
+        notes = "Median capture latency is large, or negative latency is frequent."
     if med > 60 or neg_pct > 20:
         severity = "high"
         classification = "pipeline"
-        notes = "Severe clock skew / ordering issues between ingress and venue timestamps."
+        notes = "Median capture latency is severe, or negative latency is frequent."
     return Finding(
         file=file_label,
         check_id=f"clock_skew_{stats.get('ingress')}_{stats.get('venue')}",

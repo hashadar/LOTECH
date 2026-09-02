@@ -233,7 +233,7 @@
       "publish_min": 15.0,
       "publish_max": 104.0
     },
-    "verdict": "every group carries identical economics and identical venue time but two distinct publish_ts and ingress_ts, so the venue republished, it did not retrade"
+    "verdict": "every group carries identical economics and identical venue time but two distinct publish_ts and ingress_ts, so the venue republished; it did not retrade"
   },
   "mechanism": {
     "pairs": 321,
@@ -578,7 +578,7 @@
       "pub2_backward_steps_ordered_by_pub1": 83,
       "ing2_backward_steps_ordered_by_ing1": 86
     },
-    "verdict": "the two copies separate on the venue's publish clock, not on ours: capture latency is the same on both, so the venue emitted the trade twice and a single capture path recorded both. REST exposes only the final persisted record, so the te and tu frames themselves cannot be observed; the timing identifies them"
+    "verdict": "the two copies separate on the venue's publish clock, not on ours: capture latency is the same on both, so the venue emitted the trade twice and a single capture path recorded both. REST exposes only the final persisted record. The original live frames cannot be observed on that endpoint. The timing identifies a venue republish"
   },
   "ordering": {
     "sorted_by_file": {
@@ -665,7 +665,7 @@
         "negative_count": 0,
         "negative_pct": 0.0
       },
-      "notes": "Ingress vs venue clock skew within expected capture delay."
+      "notes": "Capture latency is within the expected delay."
     },
     {
       "file": "G_bitfinex_btcusd_trades.parquet",
@@ -685,7 +685,7 @@
         "negative_count": 0,
         "negative_pct": 0.0
       },
-      "notes": "Ingress vs venue clock skew within expected capture delay."
+      "notes": "Capture latency is within the expected delay."
     }
   ]
 }

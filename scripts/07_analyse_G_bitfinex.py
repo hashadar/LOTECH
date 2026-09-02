@@ -51,7 +51,7 @@ def _diff(ours: Decimal, venue: Decimal) -> str:
 def ordering_matrix(df: pl.DataFrame) -> dict:
     """Backward steps under each candidate stored order.
 
-    Which clock the file is sorted by decides which clock looks broken, so the claim is
+    Which clock the file is sorted by decides which clock looks broken. The claim is
     only meaningful next to the ordering it assumes.
     """
     def _backward(frame: pl.DataFrame, col: str) -> int:
@@ -102,7 +102,7 @@ def duplicate_anatomy(df: pl.DataFrame) -> dict:
         },
         "verdict": (
             "every group carries identical economics and identical venue time but two "
-            "distinct publish_ts and ingress_ts, so the venue republished, it did not retrade"
+            "distinct publish_ts and ingress_ts, so the venue republished; it did not retrade"
         ),
     }
 
@@ -111,10 +111,10 @@ def duplicate_pair_timing(df: pl.DataFrame) -> dict:
     """Which clock the two copies separate on, and what that excludes.
 
     publish_ts is the venue's stamp and ingress_ts is ours, so (ingress - publish) isolates
-    our capture latency: if the second copy arrived down a different pipe those two
+    our capture latency. If the second copy arrived down a different capture path, those two
     latencies differ. The remaining tests are the shapes each alternative mechanism would
-    have to produce — a flush timer is flat and grid-aligned, a replay is confined to one
-    stretch of the window, queueing scales with trade rate.
+    have to produce. A flush timer is flat and grid-aligned. A replay is confined to one
+    stretch of the window. Queueing scales with trade rate.
     """
     us = df.select(
         pl.col("trade_id").cast(pl.Utf8),
@@ -274,8 +274,9 @@ def duplicate_pair_timing(df: pl.DataFrame) -> dict:
         "verdict": (
             "the two copies separate on the venue's publish clock, not on ours: capture "
             "latency is the same on both, so the venue emitted the trade twice and a single "
-            "capture path recorded both. REST exposes only the final persisted record, so "
-            "the te and tu frames themselves cannot be observed; the timing identifies them"
+            "capture path recorded both. REST exposes only the final persisted record. The "
+            "original live frames cannot be observed on that endpoint. The timing identifies "
+            "a venue republish"
         ),
     }
 
@@ -283,9 +284,9 @@ def duplicate_pair_timing(df: pl.DataFrame) -> dict:
 def public_reconciliation(df: pl.DataFrame, deduped: pl.DataFrame) -> dict:
     """Difference the file against Bitfinex's own tape over the same window.
 
-    The trade fetch is deliberately a minute wider than the file window and clipped locally,
-    so neither a `limit` cap nor an off-by-one on start/end can manufacture agreement, and
-    the 1m candles are an independently aggregated second opinion on the same volume.
+    The trade fetch is a minute wider than the file window and clipped locally.
+    Neither a `limit` cap nor an off-by-one on start/end can produce false agreement.
+    The 1m candles are an independently aggregated second opinion on the same volume.
     """
     tx_us = df.select(_us(df, "transaction_ts").alias("tx"))["tx"]
     win_lo = int(tx_us.min()) // 1000  # type: ignore[arg-type]
