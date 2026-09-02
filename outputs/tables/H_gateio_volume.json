@@ -147,12 +147,12 @@
   },
   "side_counts": [
     {
-      "side": "Buy",
-      "count": 4611
-    },
-    {
       "side": "Sell",
       "count": 4748
+    },
+    {
+      "side": "Buy",
+      "count": 4611
     }
   ],
   "neg_qty": 0,

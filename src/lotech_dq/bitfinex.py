@@ -11,6 +11,8 @@ from typing import Any
 
 import httpx
 
+from lotech_dq import cache as venue_cache
+
 BASE_URL = "https://api-pub.bitfinex.com/v2"
 USER_AGENT = "lotech-dq/1.0 (take-home reconciliation)"
 MIN_INTERVAL_S = 3.0  # the endpoint is rate limited; one request per 3 s is well inside it
@@ -52,6 +54,21 @@ def _retry_after_s(response: httpx.Response, fallback: float) -> float:
 
 def _get(url: str, params: dict[str, Any], log: list[dict[str, Any]]) -> list:
     """One GET, retried on transport failure and rate limiting, logged either way."""
+    cache_key = venue_cache.key_for_request(url, params)
+    cached = venue_cache.load("bitfinex", cache_key)
+    if cached is not None:
+        log.append(
+            {
+                "url": url,
+                "params": dict(params),
+                "attempt": 0,
+                "status": 200,
+                "rows": len(cached),
+                "source": "fixture",
+            }
+        )
+        return cached
+
     delay = MIN_INTERVAL_S
     for attempt in range(1, MAX_ATTEMPTS + 1):
         _throttle()
@@ -113,6 +130,7 @@ def _get(url: str, params: dict[str, Any], log: list[dict[str, Any]]) -> list:
 
         entry["rows"] = len(data)
         log.append(entry)
+        venue_cache.save("bitfinex", cache_key, data)
         return data
     raise BitfinexError(f"GET {url} {params}: exhausted {MAX_ATTEMPTS} attempts")
 
